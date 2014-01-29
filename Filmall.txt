@@ -1,0 +1,26 @@
+: = kommentar
+
+Headerfil:
+//Version: {verison på punktform, ex 0.1.0}
+//Author: {ursprunglig och huvudsaklig filägare}
+//Contributors: {andra som redigerat filen}
+
+:skall finnas med i filen under arbete, men flyttas sedan till changelogen för versionen
+//Changelog:
+//+ added	...
+//- removed	...
+//renamed	... to ...
+
+#ifndef INC_{filnamn}_H
+#define INC_{filnamn}_H
+
+#ifdef {versionstyp, ANGLER för motorn, ISHAV för spelet}_{version på def form, ex 0_1_0}
+
+:er kod
+...
+
+#else
+#error {filnamn}.h: Wrong version {version på pkt.form}
+#endif
+
+#endif
