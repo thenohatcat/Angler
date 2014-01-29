@@ -24,3 +24,15 @@ Headerfil:
 #endif
 
 #endif
+
+Impl.fil:
+//Version: {verison på punktform, ex 0.1.0}
+//Author: {ursprunglig och huvudsaklig filägare}
+//Contributors: {andra som redigerat filen}
+
+#ifdef {versionstyp, ANGLER för motorn, ISHAV för spelet}_{version på def form, ex 0_1_0}
+#error {filnamn}.cpp: Wrong version {version på pkt.form}
+#endif
+
+:er kod
+...
