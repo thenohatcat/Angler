@@ -1,5 +1,11 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
 #ifndef INC_KEYBOARD_H
 #define INC_KEYBOARD_H
+
+#ifdef ANGLER_0_1_1
 
 #include <SFML\Window\Keyboard.hpp>
 
@@ -42,5 +48,9 @@ public:
 private:
 	KeyboardState mState;
 };
+
+#else
+#error Keyboard.h: Wrong Version 0.1.1
+#endif
 
 #endif

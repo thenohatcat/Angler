@@ -1,3 +1,11 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
+#ifndef ANGLER_0_1_1
+#error MouseState.cpp: Wrong Version 0.1.1
+#endif
+
 #include "Mouse.h"
 
 MouseState::MouseState()
@@ -44,24 +52,34 @@ bool MouseState::wasButtonDown(sf::Mouse::Button button)
 	return mOldButtons[button];
 }
 
-int MouseState::getX()
+int MouseState::getPosX()
 {
 	return mX;
 }
 
-int MouseState::getY()
+int MouseState::getPosY()
 {
 	return mY;
 }
 
-int MouseState::getOldX()
+sf::Vector2i MouseState::getPos()
+{
+	return sf::Vector2i(mX, mY);
+}
+
+int MouseState::getOldPosX()
 {
 	return mOldX;
 }
 
-int MouseState::getOldY()
+int MouseState::getOldPosY()
 {
 	return mOldY;
+}
+
+sf::Vector2i MouseState::getOldPos()
+{
+	return sf::Vector2i(mOldX, mOldY);
 }
 
 int MouseState::getWheel()

@@ -1,5 +1,21 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors: 
+
+//Changelog:
+//* added mInnerInit() to init()
+//* moved some graphics code from Game::run() to Graphics::begin()
+//* moved window handling to Graphics
+//
+//+ added		loadTexture(sf::Texture*, const char*)
+//- removed		sf::RenderWindow* mWindow
+//+ added		int getWidth()
+//+ added		int getHeight()
+
 #ifndef INC_GAME_H
 #define INC_GAME_H
+
+#ifdef ANGLER_0_1_1
 
 #include "Graphics.h"
 #include "Node.h"
@@ -9,7 +25,7 @@
 
 class Game
 {
-	friend class Graphics;
+	//friend class Graphics;
 
 public:
 	Game();
@@ -24,6 +40,10 @@ public:
 	KeyboardState getKeyboardState();
 	MouseState getMouseState();
 
+	int getWidth(), getHeight();
+
+	void loadTexture(sf::Texture* texture, const char* fileName);
+
 protected:
 	Graphics* mGraphics;
 	Node* mSceneRoot;
@@ -37,13 +57,11 @@ protected:
 
 	virtual void mInnerInit() = 0;
 
+	int mWidth;
+	int mHeight;
+
 	float mGetTime();
 	sf::Clock mGameClock;
-
-	int mHeight;
-	int mWidth;
-
-	sf::RenderWindow *mWindow;
 
 	const char *mTitle;
 	int mNumLayers;
@@ -52,5 +70,9 @@ protected:
 private:
 	void mResize(int width, int height);
 };
+
+#else
+#error Game.h: Wrong Version 0.1.1
+#endif
 
 #endif

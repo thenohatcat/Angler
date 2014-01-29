@@ -1,3 +1,11 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
+#ifndef ANGLER_0_1_1
+#error Keyboard.cpp: Wrong Version 0.1.1
+#endif
+
 #include "Keyboard.h"
 
 Keyboard::Keyboard()
