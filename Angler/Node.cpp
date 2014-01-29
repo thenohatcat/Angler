@@ -1,11 +1,3 @@
-//Version: 0.1.1
-//Author: Jakob Pipping
-//Contributors:
-
-#ifndef ANGLER_0_1_1
-#error Node.cpp: Wrong Version 0.1.1
-#endif
-
 #include "Node.h"
 
 Node::Node()
@@ -62,9 +54,4 @@ void Node::mUpdateChildren(Game* context, float time, float deltaTime)
 	{
 		(*i)->update(context, time, deltaTime);
 	}
-}
-
-Node* Node::getParent()
-{
-	return mParent;
 }

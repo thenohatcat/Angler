@@ -1,14 +1,5 @@
-//Version: 0.1.1
-//Author: Jakob Pipping
-//Contributors:
-
-//Changelog:
-//+ added		Node* getParent()
-
 #ifndef INC_NODE_H
 #define INC_NODE_H
-
-#ifdef ANGLER_0_1_1
 
 #include <vector>
 
@@ -32,8 +23,6 @@ public:
 
 	virtual void update(Game *context, float time, float deltaTime);
 
-	Node *getParent();
-
 protected:
 	Node(Node *parent);
 
@@ -47,9 +36,5 @@ protected:
 private:
 	NodeVector mChildren;
 };
-
-#else
-#error Node.h: Wrong Version 0.1.1
-#endif
 
 #endif

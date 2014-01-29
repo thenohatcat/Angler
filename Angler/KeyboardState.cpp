@@ -1,11 +1,3 @@
-//Version: 0.1.1
-//Author: Jakob Pipping
-//Contributors:
-
-#ifndef ANGLER_0_1_1
-#error KeyboardState.cpp: Wrong Version 0.1.1
-#endif
-
 #include "Keyboard.h"
 
 KeyboardState::KeyboardState()

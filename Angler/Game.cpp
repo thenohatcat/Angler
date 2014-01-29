@@ -1,38 +1,28 @@
-//Version: 0.1.1
-//Author: Jakob Pipping
-//Contributors:
-
-#ifndef ANGLER_0_1_1
-#error Game.cpp: Wrong Version 0.1.1
-#endif
-
 #include "Game.h"
 
 #include <iostream>
 
 Game::Game()
-	: mWidth(800), mHeight(600)
+	: mWidth(800), mHeight(600), mSceneRoot(new Node()), mKeyboard(new Keyboard()),
+	mMouse(new Mouse())
 {
 
 }
 
 Game::~Game()
 {
-	mGraphics->mWindow->close();
+	mWindow->close();
 
 	delete mGraphics;
+	delete mWindow;
 }
 
 void Game::init()
 {
-	mGraphics = new Graphics(this, mNumLayers);
-	mGraphics->createWindow(mWidth, mHeight, mTitle, false);
+	mWindow = new sf::RenderWindow(sf::VideoMode(mWidth, mHeight), mTitle, 
+		sf::Style::Close);
 
-	mKeyboard = new Keyboard();
-	mMouse = new Mouse();
-	mSceneRoot = new Node();
-
-	mInnerInit();
+	mGraphics = new Graphics(this);
 }
 
 void Game::loadContent()
@@ -42,7 +32,10 @@ void Game::loadContent()
 
 void Game::mResize(int width, int height)
 {
-	mGraphics->resize(width, height);
+	mWidth = width;
+	mHeight = height;
+
+	glViewport(0, 0, mWidth, mHeight);
 }
 
 void Game::run()
@@ -51,7 +44,7 @@ void Game::run()
 
 	sf::Time oldTime = mGameClock.getElapsedTime();
 
-	while (mGraphics->mWindow->isOpen())
+	while (mWindow->isOpen())
 	{
 		sf::Time sftime = mGameClock.getElapsedTime();
 
@@ -59,10 +52,10 @@ void Game::run()
 		float deltaTime = (sftime - oldTime).asSeconds();
 
 		sf::Event event;
-        while (mGraphics->mWindow->pollEvent(event))
+        while (mWindow->pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
-                mGraphics->mWindow->close();
+                mWindow->close();
 			else if (event.type == sf::Event::LostFocus)
 				mFocused = false;
 			else if (event.type == sf::Event::GainedFocus)
@@ -76,28 +69,46 @@ void Game::run()
 			else if (event.type == sf::Event::MouseButtonPressed)
 			{
 				mMouse->buttonDown(event.mouseButton.button);
-				mMouse->changePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+				mMouse->changeX(event.mouseButton.x);
+				mMouse->changeY(event.mouseButton.y);
 			}
 			else if (event.type == sf::Event::MouseButtonReleased)
 			{
 				mMouse->buttonUp(event.mouseButton.button);
-				mMouse->changePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+				mMouse->changeX(event.mouseButton.x);
+				mMouse->changeY(event.mouseButton.y);
 			}
 			else if (event.type == sf::Event::MouseMoved)
 			{
-				mMouse->changePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+				mMouse->changeX(event.mouseMove.x);
+				mMouse->changeY(event.mouseMove.y);
 			}
 			else if (event.type == sf::Event::MouseWheelMoved)
 			{
 				mMouse->wheelMoved(event.mouseWheel.delta);
-				mMouse->changePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+				mMouse->changeX(event.mouseMove.x);
+				mMouse->changeY(event.mouseMove.y);
 			}
         }
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, (float(mWidth) / float(mHeight)), 1, 0, 0.5, 10);
+
+		glClearColor(0, 0, 0, 1);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
 
 		mUpdate(time, deltaTime);
 		mDraw(time, deltaTime);
 
-		mGraphics->display();
+		mWindow->display();
 		
 		mKeyboard->pushState();
 		mMouse->pushState();
@@ -113,19 +124,4 @@ KeyboardState Game::getKeyboardState()
 MouseState Game::getMouseState()
 {
 	return mMouse->getState();
-}
-
-void Game::loadTexture(sf::Texture* texture, const char *fileName)
-{
-	mGraphics->loadTexture(texture, fileName);
-}
-
-int Game::getWidth()
-{
-	return mGraphics->getWidth();
-}
-
-int Game::getHeight()
-{
-	return mGraphics->getHeight();
 }

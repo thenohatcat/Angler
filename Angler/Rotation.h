@@ -1,45 +1,21 @@
-//Version: 0.1.1
-//Author: Jakob Pipping
-//Contributors:
-
-//Changelog:
-//changed parent class to Transformation
-//+ added		void rotate(float)
-//+ added		float getRotation()
-//renamed		updateRotation to setRotation
-//+ added		doTransform()
-
 #ifndef INC_ROTATION_H
 #define INC_ROTATION_H
 
-#ifdef ANGLER_0_1_1
-
-#include "Transformation.h"
+#include "Node.h"
 
 class Rotation
-	: public Transformation
+	: public Node
 {
 public:
 	Rotation(float rotation);
-
 	Rotation(Node *parent, float rotation);
 
-	void setRotation(float rot);
-
-	void rotate(float rot);
-
-	float getRotation();
+	void updateRotation(float rot);
 
 	virtual void draw(Game* context, Graphics* graphics, float time, float deltaTime);
-
-	void doTransform();
 
 private:
 	float mRotation;
 };
-
-#else
-#error Rotation.h: Wrong Version 0.1.1
-#endif
 
 #endif
