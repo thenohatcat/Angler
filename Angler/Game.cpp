@@ -10,6 +10,12 @@
 
 #include <iostream>
 
+#include "Keyboard.h"
+
+using namespace Angler;
+using namespace Angler::Graphics;
+using namespace Angler::Input;
+
 Game::Game()
 	: mWidth(800), mHeight(600)
 {
@@ -25,7 +31,7 @@ Game::~Game()
 
 void Game::init()
 {
-	mGraphics = new Graphics(this, mNumLayers);
+	mGraphics = new GraphicsEngine(this, mNumLayers);
 	mGraphics->createWindow(mWidth, mHeight, mTitle, false);
 
 	mKeyboard = new Keyboard();
@@ -85,12 +91,12 @@ void Game::run()
 			}
 			else if (event.type == sf::Event::MouseMoved)
 			{
-				mMouse->changePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+				mMouse->changePos(sf::Vector2i(event.mouseMove.x, event.mouseMove.y));
 			}
 			else if (event.type == sf::Event::MouseWheelMoved)
 			{
 				mMouse->wheelMoved(event.mouseWheel.delta);
-				mMouse->changePos(sf::Vector2i(event.mouseButton.x, event.mouseButton.y));
+				mMouse->changePos(sf::Vector2i(event.mouseWheel.x, event.mouseWheel.y));
 			}
         }
 

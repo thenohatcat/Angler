@@ -16,27 +16,33 @@
 
 #include "Transformation.h"
 
-class Rotation
-	: public Transformation
+namespace Angler
 {
-public:
-	Rotation(float rotation);
+	namespace Nodes
+	{
+		class Rotation
+			: public Transformation
+		{
+		public:
+			Rotation(float rotation);
 
-	Rotation(Node *parent, float rotation);
+			Rotation(Node *parent, float rotation);
 
-	void setRotation(float rot);
+			void setRotation(float rot);
 
-	void rotate(float rot);
+			void rotate(float rot);
 
-	float getRotation();
+			float getRotation();
 
-	virtual void draw(Game* context, Graphics* graphics, float time, float deltaTime);
+			virtual void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 
-	void doTransform();
+			void doTransform();
 
-private:
-	float mRotation;
-};
+		private:
+			float mRotation;
+		};
+	}
+}
 
 #else
 #error Rotation.h: Wrong Version 0.1.1

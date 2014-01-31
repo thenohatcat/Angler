@@ -8,6 +8,8 @@
 
 #include "Graphics.h"
 
+using namespace Angler::Graphics;
+
 GraphicElement::GraphicElement(GLdouble matrix[16], float originX, float originY, 
 							   float cropOriginX, float cropOriginY, 
 							   float cropWidth, float cropHeight,

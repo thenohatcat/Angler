@@ -7,13 +7,16 @@
 
 #ifdef ANGLER_0_1_1
 
-class Game;
-
-class Updateable
+namespace Angler
 {
-public:
-	virtual void update(Game* context, float time, float deltaTime) = 0;
-};
+	class Game;
+
+	class Updateable
+	{
+	public:
+		virtual void update(Game* context, float time, float deltaTime) = 0;
+	};
+}
 
 #else
 #error Updateable.h: Wrong Version 0.1.1

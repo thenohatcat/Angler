@@ -8,6 +8,8 @@
 
 #include "Node.h"
 
+using namespace Angler;
+
 Node::Node()
 	: mParent(0), mChildren()
 {
@@ -38,7 +40,7 @@ void Node::clearChildren()
 	mChildren.clear();
 }
 
-void Node::draw(Game* context, Graphics* graphics, float time, float deltaTime)
+void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	mDrawChildren(context, graphics, time, deltaTime);
 }
@@ -48,7 +50,7 @@ void Node::update(Game* context, float time, float deltaTime)
 	mUpdateChildren(context, time, deltaTime);
 }
 
-void Node::mDrawChildren(Game* context, Graphics* graphics, float time, float deltaTime)
+void Node::mDrawChildren(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	for (NodeVector::iterator i = mChildren.begin(); i != mChildren.end(); i++)
 	{

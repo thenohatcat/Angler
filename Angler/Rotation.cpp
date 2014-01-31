@@ -10,6 +10,9 @@
 
 #include <glut.h>
 
+using namespace Angler;
+using namespace Angler::Nodes;
+
 Rotation::Rotation(Node *parent, float rotation)
 	: Transformation(parent), mRotation(rotation)
 {
@@ -40,7 +43,7 @@ float Rotation::getRotation()
 	return fmod(mRotation, 360);
 }
 
-void Rotation::draw(Game* context, Graphics* graphics, float time, float deltaTime)
+void Rotation::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	glPushMatrix();
 

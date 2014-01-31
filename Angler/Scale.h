@@ -24,32 +24,38 @@
 
 #include <SFML\System\Vector2.hpp>
 
-class Scale
-	: public Transformation
+namespace Angler
 {
-public:
-	Scale(float scaleX, float scaleY);
-	Scale(sf::Vector2f s);
+	namespace Nodes
+	{
+		class Scale
+			: public Transformation
+		{
+		public:
+			Scale(float scaleX, float scaleY);
+			Scale(sf::Vector2f s);
 
-	Scale(Node *parent, float scaleX, float scaleY);
-	Scale(Node *parent, sf::Vector2f s);
+			Scale(Node *parent, float scaleX, float scaleY);
+			Scale(Node *parent, sf::Vector2f s);
 
-	void setScale(float scaleX, float scaleY);
-	void setScale(sf::Vector2f s);
+			void setScale(float scaleX, float scaleY);
+			void setScale(sf::Vector2f s);
 
-	void scale(float scaleX, float scaleY);
-	void scale(sf::Vector2f s);
+			void scale(float scaleX, float scaleY);
+			void scale(sf::Vector2f s);
 
-	sf::Vector2f getScale();
-	float getScaleX(), getScaleY();
+			sf::Vector2f getScale();
+			float getScaleX(), getScaleY();
 
-	virtual void draw(Game* context, Graphics* graphics, float time, float deltaTime);
+			virtual void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 
-	void doTransform();
+			void doTransform();
 
-private:
-	float mScaleX, mScaleY;
-};
+		private:
+			float mScaleX, mScaleY;
+		};
+	}
+}
 
 #else
 #error Scale.h: Wrong Version 0.1.1

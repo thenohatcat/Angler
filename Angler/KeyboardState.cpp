@@ -8,6 +8,8 @@
 
 #include "Keyboard.h"
 
+using namespace Angler::Input;
+
 KeyboardState::KeyboardState()
 	: mAlt(false), mShift(false), mCtrl(false),
 	mOldAlt(false), mOldShift(false), mOldCtrl(false)

@@ -1,3 +1,11 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
+#ifndef ANGLER_0_1_1
+#error Transformation.cpp: Wrong Version 0.1.1
+#endif
+
 #include "Transformation.h"
 
 #include <glut.h>
@@ -6,10 +14,12 @@
 
 #include "HelpFunctions.h"
 
+using namespace Angler::Nodes;
+
 Transformation::Transformation()
 	: Node()
 {
-
+	
 }
 
 Transformation::Transformation(Node *parent)
@@ -25,15 +35,13 @@ sf::Vector2f Transformation::transform(sf::Vector2f vec)
 	return v;
 }
 
-void Transformation::transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count)
+void Transformation::transform(Node *n)
 {
-	glPushMatrix();
-
 	glLoadIdentity();
 
 	std::vector<Transformation*> transf;
 
-	Node *node = this;
+	Node *node = n;
 
 	while (node->getParent() != nullptr)
 	{
@@ -47,19 +55,26 @@ void Transformation::transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count)
 	{
 		(*--i)->doTransform();
 	}
+}
+
+void Transformation::transform(Node *n, sf::Vector2f *vIn, sf::Vector2f *vOut, int count)
+{
+	glPushMatrix();
+
+	transform(n);
 
 	GLdouble matrix[16];
 	glGetDoublev(GL_MODELVIEW_MATRIX, matrix);
 
 	for (int i = 0; i < count; i++)
 	{
-		vOut[i] = Angler::HelpFunctions::transform(matrix, vIn[i]);
+		vOut[i] = Angler::HelpFunctions::Geometry::transform(matrix, vIn[i]);
 	}
 
 	glPopMatrix();
 }
 
-void Transformation::transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut)
+void Transformation::transform(Node *n, std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut)
 {
 	sf::Vector2f *vInA = new sf::Vector2f[vIn.size()];
 	sf::Vector2f *vOutA = new sf::Vector2f[vIn.size()];
@@ -67,9 +82,19 @@ void Transformation::transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Ve
 	{
 		vInA[i] = vIn.at(i);
 	}
-	transform(vInA, vOutA, vIn.size());
+	transform(n, vInA, vOutA, vIn.size());
 	for (int i = 0; i < vIn.size(); i++)
 	{
 		vOut->push_back(vOutA[i]);
 	}
+}
+
+void Transformation::transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count)
+{
+	transform(this, vIn, vOut, count);
+}
+
+void Transformation::transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut)
+{
+	transform(this, vIn, vOut);
 }

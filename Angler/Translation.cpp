@@ -10,10 +10,13 @@
 
 #include <glut.h>
 
+using namespace Angler;
+using namespace Angler::Nodes;
+
 Translation::Translation(Node *parent, float x, float y)
 	: Transformation(parent), mX(x), mY(y)
 {
-
+	
 }
 
 Translation::Translation(Node *parent, sf::Vector2f translation)
@@ -73,7 +76,7 @@ float Translation::getTranslationY()
 	return mY;
 }
 
-void Translation::draw(Game* context, Graphics* graphics, float time, float deltaTime)
+void Translation::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	glPushMatrix();
 

@@ -8,6 +8,8 @@
 
 #include "Mouse.h"
 
+using namespace Angler::Input;
+
 MouseState::MouseState()
 	: mX(0), mY(0), mOldX(0), mOldY(0), mWheel(0), mOldWheel(0)
 {

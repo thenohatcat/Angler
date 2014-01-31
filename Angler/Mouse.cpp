@@ -8,6 +8,8 @@
 
 #include "Mouse.h"
 
+using namespace Angler::Input;
+
 MouseState Mouse::getState()
 {
 	return MouseState(mState);

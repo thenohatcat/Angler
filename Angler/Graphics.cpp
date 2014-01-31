@@ -15,7 +15,11 @@
 
 #include "Exceptions.h"
 
-Graphics::Graphics(Game *parent, int numLayers)
+using namespace Angler;
+using namespace Angler::Graphics;
+using namespace Angler::Exceptions;
+
+GraphicsEngine::GraphicsEngine(Game *parent, int numLayers)
 	: mParent(parent), mNumLayers(numLayers), 
 	mLayers(new GraphicElementVector[numLayers]), mRunning(false)
 {
@@ -26,18 +30,18 @@ Graphics::Graphics(Game *parent, int numLayers)
 	}
 }
 
-Graphics::~Graphics()
+GraphicsEngine::~GraphicsEngine()
 {
 	delete[] mLayers;
 }
 
-void Graphics::createWindow(int width, int height, const char* title, bool resizable)
+void GraphicsEngine::createWindow(int width, int height, const char* title, bool resizable)
 {
 	mWindow = new sf::RenderWindow(sf::VideoMode(width, height), title, 
 		(resizable ? sf::Style::Resize : sf::Style::Close));
 }
 
-void Graphics::begin()
+void GraphicsEngine::begin()
 {
 	if (!mRunning)
 	{
@@ -66,12 +70,12 @@ void Graphics::begin()
 	}
 }
 
-void Graphics::display()
+void GraphicsEngine::display()
 {
 	mWindow->display();
 }
 
-void Graphics::end()
+void GraphicsEngine::end()
 {
 	if (mRunning)
 	{
@@ -85,7 +89,7 @@ void Graphics::end()
 	}
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, float originX, float originY, 
+void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float originY, 
 					float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
 					float r, float g, float b, float a)
 {
@@ -105,58 +109,58 @@ void Graphics::draw(int layer, sf::Texture *tx, float originX, float originY,
 	}
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, sf::Vector2f origin, sf::Vector2f cropOrigin,
+void GraphicsEngine::draw(int layer, sf::Texture *tx, sf::Vector2f origin, sf::Vector2f cropOrigin,
 					sf::Vector2f cropSize, float r, float g, float b, float a)
 {
 	draw(layer, tx, origin.x, origin.y, cropOrigin.x, cropOrigin.y, cropSize.x, cropSize.y, r, g, b, a);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, float originX, float originY, 
+void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float originY, 
 					float r, float g, float b, float a)
 {
-	Graphics::draw(layer, tx, originX, originY, 0, 0, 1, 1, r, g, b, a);
+	draw(layer, tx, originX, originY, 0, 0, 1, 1, r, g, b, a);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, sf::Vector2f origin,
+void GraphicsEngine::draw(int layer, sf::Texture *tx, sf::Vector2f origin,
 					float r, float g, float b, float a)
 {
 	draw(layer, tx, origin.x, origin.y, 0, 0, 1, 1, r, g, b, a);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, sf::Vector2f cropOrigin, sf::Vector2f cropSize)
+void GraphicsEngine::draw(int layer, sf::Texture *tx, sf::Vector2f cropOrigin, sf::Vector2f cropSize)
 {
 	draw(layer, tx, 0, 0, cropOrigin.x, cropOrigin.y, cropSize.x, cropSize.y, 1, 1, 1, 1);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, sf::Vector2f origin, sf::Vector2f cropOrigin,
+void GraphicsEngine::draw(int layer, sf::Texture *tx, sf::Vector2f origin, sf::Vector2f cropOrigin,
 					sf::Vector2f cropSize)
 {
 	draw(layer, tx, origin.x, origin.y, cropOrigin.x, cropOrigin.y, cropSize.x, cropSize.y, 
 		1, 1, 1, 1);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, sf::Vector2f origin)
+void GraphicsEngine::draw(int layer, sf::Texture *tx, sf::Vector2f origin)
 {
 	draw(layer, tx, origin.x, origin.y);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, float r, float g, float b, 
+void GraphicsEngine::draw(int layer, sf::Texture *tx, float r, float g, float b, 
 						 float a)
 {
 	draw(layer, tx, 0, 0, 0, 0, 1, 1, r, g, b, a);
 }
 
-void Graphics::draw(int layer, sf::Texture *tx, float originX, float originY)
+void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float originY)
 {
-	Graphics::draw(layer, tx, originX, originY, 0, 0, 1, 1, 1, 1, 1, 1);
+	draw(layer, tx, originX, originY, 0, 0, 1, 1, 1, 1, 1, 1);
 }
 
-void Graphics::resize(int width, int height)
+void GraphicsEngine::resize(int width, int height)
 {
 	glViewport(0, 0, width, height);
 }
 
-void Graphics::mClear()
+void GraphicsEngine::mClear()
 {
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
@@ -164,7 +168,7 @@ void Graphics::mClear()
 	}
 }
 
-void Graphics::mRender()
+void GraphicsEngine::mRender()
 {
 	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_MODELVIEW);
@@ -180,7 +184,7 @@ void Graphics::mRender()
 	glPopMatrix();
 }
 
-void Graphics::mDrawElement(GraphicElement *element)
+void GraphicsEngine::mDrawElement(GraphicElement *element)
 {
 	sf::Texture::bind(element->mTexture);
 
@@ -208,17 +212,17 @@ void Graphics::mDrawElement(GraphicElement *element)
 	glPopMatrix();
 }
 
-void Graphics::loadTexture(sf::Texture* texture, const char* fileName)
+void GraphicsEngine::loadTexture(sf::Texture* texture, const char* fileName)
 {
 	texture->loadFromFile(fileName);
 }
 
-int Graphics::getWidth()
+int GraphicsEngine::getWidth()
 {
 	return mWindow->getSize().x;
 }
 
-int Graphics::getHeight()
+int GraphicsEngine::getHeight()
 {
 	return mWindow->getSize().y;
 }

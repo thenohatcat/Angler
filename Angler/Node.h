@@ -15,38 +15,45 @@
 #include "Drawable.h"
 #include "Updateable.h"
 
-class Game;
-class Graphics;
-
-class Node
-	: public Drawable, public Updateable
+namespace Angler
 {
-public:
-	Node();
+	class Game;
 
-	void addChild(Node* node);
+	namespace Graphics
+	{
+		class GraphicsEngine;
+	}
 
-	void clearChildren();
+	class Node
+		: public Drawable, public Updateable
+	{
+	public:
+		Node();
 
-	virtual void draw(Game *context, Graphics *graphics, float time, float deltaTime);
+		void addChild(Node* node);
 
-	virtual void update(Game *context, float time, float deltaTime);
+		void clearChildren();
 
-	Node *getParent();
+		virtual void draw(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
 
-protected:
-	Node(Node *parent);
+		virtual void update(Game *context, float time, float deltaTime);
 
-	Node *mParent;
+		Node *getParent();
 
-	void mDrawChildren(Game *context, Graphics *graphics, float time, float deltaTime);
-	void mUpdateChildren(Game *context, float time, float deltaTime);
+	protected:
+		Node(Node *parent);
 
-	typedef std::vector<Node*> NodeVector;
+		Node *mParent;
 
-private:
-	NodeVector mChildren;
-};
+		void mDrawChildren(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
+		void mUpdateChildren(Game *context, float time, float deltaTime);
+
+		typedef std::vector<Node*> NodeVector;
+
+	private:
+		NodeVector mChildren;
+	};
+}
 
 #else
 #error Node.h: Wrong Version 0.1.1

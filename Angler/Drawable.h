@@ -7,14 +7,21 @@
 
 #ifdef ANGLER_0_1_1
 
-class Game;
-class Graphics;
-
-class Drawable
+namespace Angler
 {
-public:
-	virtual void draw(Game* context, Graphics* graphics, float time, float deltaTime) = 0;
-};
+	class Game;
+
+	namespace Graphics
+	{
+		class GraphicsEngine;
+	}
+
+	class Drawable
+	{
+	public:
+		virtual void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime) = 0;
+	};
+}
 
 #else
 #error DrawNode.h: Wrong Version 0.1.1

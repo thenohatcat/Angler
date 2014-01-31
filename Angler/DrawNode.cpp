@@ -8,6 +8,9 @@
 
 #include "DrawNode.h"
 
+using namespace Angler;
+using namespace Angler::Nodes;
+
 DrawNode::DrawNode(Node *parent, int layer, sf::Texture *tx, float ox, float oy)
 	: Node(parent), mTX(tx), mLayer(layer), mOX(ox), mOY(oy)
 {
@@ -32,7 +35,7 @@ DrawNode::DrawNode(int layer, sf::Texture *tx, sf::Vector2f origo)
 
 }
 
-void DrawNode::draw(Game* context, Graphics* graphics, float time, float deltaTime)
+void DrawNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	graphics->draw(mLayer, mTX, mOX, mOY);
 

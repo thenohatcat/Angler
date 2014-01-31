@@ -10,6 +10,9 @@
 
 #include <glut.h>
 
+using namespace Angler;
+using namespace Angler::Nodes;
+
 Scale::Scale(float scaleX, float scaleY)
 	: Transformation(), mScaleX(scaleX), mScaleY(scaleY)
 {
@@ -71,7 +74,7 @@ float Scale::getScaleY()
 	return mScaleY;
 }
 
-void Scale::draw(Game* context, Graphics* graphics, float time, float deltaTime)
+void Scale::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	glPushMatrix();
 

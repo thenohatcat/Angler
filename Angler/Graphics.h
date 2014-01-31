@@ -28,90 +28,95 @@
 #include <SFML\Window.hpp>
 #include <glut.h>
 
-class Game;
-
-class GraphicElement final
+namespace Angler
 {
-	friend class Graphics;
-public:
-	GraphicElement(GLdouble matrix[16], float originX, float originY,
-		float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
-		float r, float g, float b, float a, sf::Texture *texture);
+	class Game;
 
-private:
-	GLdouble mMatrix[16];
-	float mR, mG, mB, mA;
-	float mOriginX, mOriginY;
-	float mCropOriginX, mCropOriginY, mCropWidth, mCropHeight;
-	sf::Texture *mTexture;
-};
+	namespace Graphics
+	{
+		class GraphicElement final
+		{
+			friend class GraphicsEngine;
+		public:
+			GraphicElement(GLdouble matrix[16], float originX, float originY,
+				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
+				float r, float g, float b, float a, sf::Texture *texture);
 
-#define MAX_ELEMENTS 1024
+		private:
+			GLdouble mMatrix[16];
+			float mR, mG, mB, mA;
+			float mOriginX, mOriginY;
+			float mCropOriginX, mCropOriginY, mCropWidth, mCropHeight;
+			sf::Texture *mTexture;
+		};
 
-class Graphics final
-{
-public:
-	friend class Game;
+		#define MAX_ELEMENTS 1024
 
-	Graphics(Game* parent, int numLayers);
-	~Graphics();
+		class GraphicsEngine final
+		{
+		public:
+			friend class Game;
 
-	void createWindow(int width, int height, const char* title, bool resizable);
+			GraphicsEngine(Game* parent, int numLayers);
+			~GraphicsEngine();
 
-	void draw(int layer, sf::Texture* texture, float originX, float originY, 
-		float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
-		float r, float g, float b, float a);	
-	void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
-		sf::Vector2f cropOrigin, sf::Vector2f cropSize,
-		float r, float g, float b, float a);
+			void createWindow(int width, int height, const char* title, bool resizable);
 
-	void draw(int layer, sf::Texture* texture, float originX, float originY, 
-		float r, float g, float b, float a);
-	void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
-		float r, float g, float b, float a);
+			void draw(int layer, sf::Texture* texture, float originX, float originY, 
+				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
+				float r, float g, float b, float a);	
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
+				sf::Vector2f cropOrigin, sf::Vector2f cropSize,
+				float r, float g, float b, float a);
 
-	void draw(int layer, sf::Texture* texture, float r, float g, float b, float a);
+			void draw(int layer, sf::Texture* texture, float originX, float originY, 
+				float r, float g, float b, float a);
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
+				float r, float g, float b, float a);
 
-	void draw(int layer, sf::Texture* texture, sf::Vector2f cropOrigin, sf::Vector2f cropSize);
+			void draw(int layer, sf::Texture* texture, float r, float g, float b, float a);
 
-	void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
-		sf::Vector2f cropOrigin, sf::Vector2f cropSize);
+			void draw(int layer, sf::Texture* texture, sf::Vector2f cropOrigin, sf::Vector2f cropSize);
 
-	void draw(int layer, sf::Texture* texture, float originX, float originY);
-	void draw(int layer, sf::Texture* texture, sf::Vector2f origin);
-	//draw(int layer, sf::Texture* texture, float cropOriginX, float cropOriginY, 
-	//float cropWidth, float cropHeight) doesn't exist as it would conflict
-	void draw(int layer, sf::Texture* texture);
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
+				sf::Vector2f cropOrigin, sf::Vector2f cropSize);
 
-	void begin();
-	void end();
+			void draw(int layer, sf::Texture* texture, float originX, float originY);
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin);
+			//draw(int layer, sf::Texture* texture, float cropOriginX, float cropOriginY, 
+			//float cropWidth, float cropHeight) doesn't exist as it would conflict
+			void draw(int layer, sf::Texture* texture);
 
-	void display();
+			void begin();
+			void end();
 
-	int getWidth(), getHeight();
+			void display();
 
-	void resize(int width, int height);
+			int getWidth(), getHeight();
 
-	void loadTexture(sf::Texture* texture, const char* fileName);
+			void resize(int width, int height);
 
-	typedef std::vector<GraphicElement*> GraphicElementVector;
+			void loadTexture(sf::Texture* texture, const char* fileName);
 
-private:
-	Game* mParent;
-	sf::RenderWindow *mWindow;
+		private:
+			Game* mParent;
+			sf::RenderWindow *mWindow;
 
-	int mNumLayers;
+			int mNumLayers;
 
-	GraphicElementVector *mLayers;
+			typedef std::vector<GraphicElement*> GraphicElementVector;
+			GraphicElementVector *mLayers;
 
-	void mClear();
+			void mClear();
 
-	void mRender();
+			void mRender();
 
-	void mDrawElement(GraphicElement *element);
+			void mDrawElement(GraphicElement *element);
 
-	bool mRunning;
-};
+			bool mRunning;
+		};
+	}
+}
 
 #else
 #error Graphics.h: Wrong Version 0.1.1

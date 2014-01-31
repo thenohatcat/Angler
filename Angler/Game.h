@@ -12,6 +12,13 @@
 //+ added		int getWidth()
 //+ added		int getHeight()
 
+//Bugs discovered:
+//Bug-Angler-J-0001 Mouse position stored incorrectly
+
+//Bugs solved:
+//Bug-Angler-J-0001 Mouse position stored incorrectly
+//* Solution: Changed update code to use the correct update format in the SFML event loop
+
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
@@ -23,53 +30,54 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 
-class Game
+namespace Angler
 {
-	//friend class Graphics;
+	class Game
+	{
+	public:
+		Game();
+		~Game();
 
-public:
-	Game();
-	~Game();
+		void init();
 
-	void init();
+		void loadContent();
 
-	void loadContent();
+		void run();
 
-	void run();
+		Angler::Input::KeyboardState getKeyboardState();
+		Angler::Input::MouseState getMouseState();
 
-	KeyboardState getKeyboardState();
-	MouseState getMouseState();
+		int getWidth(), getHeight();
 
-	int getWidth(), getHeight();
+		void loadTexture(sf::Texture* texture, const char* fileName);
 
-	void loadTexture(sf::Texture* texture, const char* fileName);
+	protected:
+		Angler::Graphics::GraphicsEngine* mGraphics;
+		Node* mSceneRoot;
+		Angler::Input::Keyboard* mKeyboard;
+		Angler::Input::Mouse* mMouse;
 
-protected:
-	Graphics* mGraphics;
-	Node* mSceneRoot;
-	Keyboard* mKeyboard;
-	Mouse* mMouse;
+		virtual void mDraw(float time, float deltaTime) = 0;
+		virtual void mUpdate(float time, float deltaTime) = 0;
 
-	virtual void mDraw(float time, float deltaTime) = 0;
-	virtual void mUpdate(float time, float deltaTime) = 0;
+		virtual void mLoadContent() = 0;
 
-	virtual void mLoadContent() = 0;
+		virtual void mInnerInit() = 0;
 
-	virtual void mInnerInit() = 0;
+		int mWidth;
+		int mHeight;
 
-	int mWidth;
-	int mHeight;
+		float mGetTime();
+		sf::Clock mGameClock;
 
-	float mGetTime();
-	sf::Clock mGameClock;
+		const char *mTitle;
+		int mNumLayers;
+		bool mFocused;
 
-	const char *mTitle;
-	int mNumLayers;
-	bool mFocused;
-
-private:
-	void mResize(int width, int height);
-};
+	private:
+		void mResize(int width, int height);
+	};
+}
 
 #else
 #error Game.h: Wrong Version 0.1.1

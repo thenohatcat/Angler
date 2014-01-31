@@ -9,45 +9,51 @@
 
 #include <SFML\Window\Keyboard.hpp>
 
-class KeyboardState
+namespace Angler
 {
-public:
-	friend class Keyboard;
+	namespace Input
+	{
+		class KeyboardState
+		{
+		public:
+			friend class Keyboard;
 
-	KeyboardState();
-	KeyboardState(KeyboardState &state);
+			KeyboardState();
+			KeyboardState(KeyboardState &state);
 
-	bool isKeyDown(sf::Keyboard::Key key);
+			bool isKeyDown(sf::Keyboard::Key key);
 
-	bool wasKeyDown(sf::Keyboard::Key key);
+			bool wasKeyDown(sf::Keyboard::Key key);
 
-	bool isAltDown(), isShiftDown(), isCtrlDown();
-	bool wasAltDown(), wasShiftDown(), wasCtrlDown();
+			bool isAltDown(), isShiftDown(), isCtrlDown();
+			bool wasAltDown(), wasShiftDown(), wasCtrlDown();
 
-	void pushState();
+			void pushState();
 
-private:
-	bool mKeys[sf::Keyboard::Key::KeyCount];
-	bool mOldKeys[sf::Keyboard::Key::KeyCount];
-	bool mAlt, mShift, mCtrl;
-	bool mOldAlt, mOldShift, mOldCtrl;
-};
+		private:
+			bool mKeys[sf::Keyboard::Key::KeyCount];
+			bool mOldKeys[sf::Keyboard::Key::KeyCount];
+			bool mAlt, mShift, mCtrl;
+			bool mOldAlt, mOldShift, mOldCtrl;
+		};
 
-class Keyboard
-{
-public:
-	Keyboard();
+		class Keyboard
+		{
+		public:
+			Keyboard();
 
-	KeyboardState getState();
+			KeyboardState getState();
 
-	void keyDown(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl);
-	void keyUp(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl);
+			void keyDown(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl);
+			void keyUp(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl);
 
-	void pushState();
+			void pushState();
 
-private:
-	KeyboardState mState;
-};
+		private:
+			KeyboardState mState;
+		};
+	}
+}
 
 #else
 #error Keyboard.h: Wrong Version 0.1.1

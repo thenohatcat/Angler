@@ -11,20 +11,30 @@
 
 #include <SFML\System\Vector2.hpp>
 
-class Transformation
-	: public Node
+namespace Angler
 {
-public:
-	Transformation();
-	Transformation(Node *parent);
+	namespace Nodes
+	{
+		class Transformation
+			: public Angler::Node
+		{
+		public:
+			Transformation();
+			Transformation(Node *parent);
 
-	sf::Vector2f transform(sf::Vector2f v);
+			sf::Vector2f transform(sf::Vector2f v);
 
-	void transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count);
-	void transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut);
+			void transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count);
+			void transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut);
 
-	virtual void doTransform() = 0;
-};
+			static void transform(Node *node);
+			static void transform(Node *node, sf::Vector2f *vIn, sf::Vector2f *vOit, int count);
+			static void transform(Node *node, std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut);
+
+			virtual void doTransform() = 0;
+		};
+	}
+}
 
 #else
 #error Transformation.h: Wrong Version 0.1.1

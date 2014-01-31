@@ -8,9 +8,11 @@
 
 #include "Keyboard.h"
 
+using namespace Angler::Input;
+
 Keyboard::Keyboard()
 {
-
+	
 }
 
 KeyboardState Keyboard::getState()
