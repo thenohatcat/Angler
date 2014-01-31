@@ -2,9 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-//+ added		Node* getParent()
-
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
@@ -12,39 +9,40 @@
 
 #include <vector>
 
+#include "Game.h"
+#include "Graphics.h"
+
 #include "Drawable.h"
 #include "Updateable.h"
 
 namespace Angler
 {
-	class Game;
-
-	namespace Graphics
-	{
-		class GraphicsEngine;
-	}
-
 	class Node
 		: public Drawable, public Updateable
 	{
 	public:
 		Node();
 
+		Node(Node *parent);
+
+		//Adds a child to this node, and makes this node it's parent
 		void addChild(Node* node);
 
 		void clearChildren();
 
-		virtual void draw(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
+		//Not true virtual functions, as nodes shall be able to be implemented as
+		//root nodes
+		virtual void draw(Game *context, Angler::Graphics::GraphicsEngine *graphics, 
+			float time, float deltaTime);
 
 		virtual void update(Game *context, float time, float deltaTime);
 
 		Node *getParent();
 
 	protected:
-		Node(Node *parent);
-
 		Node *mParent;
 
+		//Draws/updates all children in the vector
 		void mDrawChildren(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
 		void mUpdateChildren(Game *context, float time, float deltaTime);
 

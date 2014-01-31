@@ -2,53 +2,43 @@
 //Author: Jakob Pipping
 //Contributors: 
 
-//Changelog:
-//* added mInnerInit() to init()
-//* moved some graphics code from Game::run() to Graphics::begin()
-//* moved window handling to Graphics
-//
-//+ added		loadTexture(sf::Texture*, const char*)
-//- removed		sf::RenderWindow* mWindow
-//+ added		int getWidth()
-//+ added		int getHeight()
-
-//Bugs discovered:
-//Bug-Angler-J-0001 Mouse position stored incorrectly
-
-//Bugs solved:
-//Bug-Angler-J-0001 Mouse position stored incorrectly
-//* Solution: Changed update code to use the correct update format in the SFML event loop
-
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
 #ifdef ANGLER_0_1_1
 
 #include "Graphics.h"
-#include "Node.h"
 
 #include "Keyboard.h"
 #include "Mouse.h"
 
 namespace Angler
 {
+	class Node;
+
 	class Game
 	{
 	public:
 		Game();
 		~Game();
 
+		//Initializes the game, and calls mInit (for derived)
 		void init();
 
+		//Loads content
 		void loadContent();
 
+		//Starts the game logic and main loop
 		void run();
 
+		//Wrapper for the current keyboard and mouse states
 		Angler::Input::KeyboardState getKeyboardState();
 		Angler::Input::MouseState getMouseState();
 
+		//Wrapper for the same functions in GraphicsEngine
 		int getWidth(), getHeight();
 
+		//Wrapper for the same function in GraphicsEngine
 		void loadTexture(sf::Texture* texture, const char* fileName);
 
 	protected:
@@ -57,24 +47,31 @@ namespace Angler
 		Angler::Input::Keyboard* mKeyboard;
 		Angler::Input::Mouse* mMouse;
 
+		//Inner draw function, virtual
 		virtual void mDraw(float time, float deltaTime) = 0;
 		virtual void mUpdate(float time, float deltaTime) = 0;
 
+		//Inner load content
 		virtual void mLoadContent() = 0;
 
-		virtual void mInnerInit() = 0;
+		//Inner init
+		virtual void mInit() = 0;
 
 		int mWidth;
 		int mHeight;
 
+		//Time elapsed since start functions
 		float mGetTime();
 		sf::Clock mGameClock;
 
 		const char *mTitle;
 		int mNumLayers;
+		//If the window is currently the focus of the system
 		bool mFocused;
 
 	private:
+		//Wrapper for the same function in GraphicsEngine, 
+		//not used to change size of the window
 		void mResize(int width, int height);
 	};
 }

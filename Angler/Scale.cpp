@@ -74,18 +74,8 @@ float Scale::getScaleY()
 	return mScaleY;
 }
 
-void Scale::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
-{
-	glPushMatrix();
-
-	doTransform();
-	
-	mDrawChildren(context, graphics, time, deltaTime);
-
-	glPopMatrix();
-}
-
 void Scale::doTransform()
 {
+	//Normal opengl scale
 	glScalef(mScaleX, mScaleY, 0);
 }

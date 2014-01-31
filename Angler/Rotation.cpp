@@ -43,18 +43,8 @@ float Rotation::getRotation()
 	return fmod(mRotation, 360);
 }
 
-void Rotation::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
-{
-	glPushMatrix();
-
-	doTransform();
-
-	mDrawChildren(context, graphics, time, deltaTime);
-
-	glPopMatrix();
-}
-
 void Rotation::doTransform()
 {
+	//Normal opengl rotation
 	glRotatef(mRotation, 0, 0, 1);
 }

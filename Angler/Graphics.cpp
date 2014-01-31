@@ -17,7 +17,7 @@
 
 using namespace Angler;
 using namespace Angler::Graphics;
-using namespace Angler::Exceptions;
+using namespace Angler::Exceptions::Graphics;
 
 GraphicsEngine::GraphicsEngine(Game *parent, int numLayers)
 	: mParent(parent), mNumLayers(numLayers), 
@@ -37,6 +37,7 @@ GraphicsEngine::~GraphicsEngine()
 
 void GraphicsEngine::createWindow(int width, int height, const char* title, bool resizable)
 {
+	//Creates a SFML window
 	mWindow = new sf::RenderWindow(sf::VideoMode(width, height), title, 
 		(resizable ? sf::Style::Resize : sf::Style::Close));
 }
@@ -49,7 +50,7 @@ void GraphicsEngine::begin()
 
 		mRunning = true;
 
-		//Must be done every frame, as SFML creates it's own 
+		//Must be done every frame, as SFML does it's own wiewframe code
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, (float(getWidth()) / float(getHeight())), 1, 0, 0.5, 10);
@@ -62,16 +63,19 @@ void GraphicsEngine::begin()
 
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
+		//Z is depth, x and y are x and y respectively
 		gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
 	}
 	else
 	{
+		//If we call begin during a draw cycle (when mRunning == true)
 		throw graphics_begin_without_end_exception();
 	}
 }
 
 void GraphicsEngine::display()
 {
+	//Swaps the display buffers and renders to the screen
 	mWindow->display();
 }
 
@@ -85,6 +89,7 @@ void GraphicsEngine::end()
 	}
 	else
 	{
+		//If we call end outside of a draw cycle (when mRunning == false)
 		throw graphics_end_without_begin_exception();
 	}
 }
@@ -99,16 +104,23 @@ void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float origi
 		GLdouble matrix[16];
 		glGetDoublev(GL_MODELVIEW_MATRIX, matrix);
 
+		//And pushes back a GraphicElement to be used later
 		mLayers[layer].push_back(new GraphicElement(matrix, originX, originY, 
 			cropOriginX, cropOriginY, cropWidth, cropHeight,
 			r, g, b, a, tx));
 	}
 	else
 	{
+		//Thrown if draw is called outside of the draw cycle (mRunning == false)
 		throw graphics_draw_without_begin_exception();
 	}
 }
 
+//Multiple draw functions, with the default values of:
+//Origin: (0, 0)
+//Color: (1, 1, 1, 1)
+//Crop Origin: (0, 0)
+//Crop Size: (1, 1)
 void GraphicsEngine::draw(int layer, sf::Texture *tx, sf::Vector2f origin, sf::Vector2f cropOrigin,
 					sf::Vector2f cropSize, float r, float g, float b, float a)
 {
@@ -157,6 +169,7 @@ void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float origi
 
 void GraphicsEngine::resize(int width, int height)
 {
+	//Updates the viewport to fit the current size
 	glViewport(0, 0, width, height);
 }
 
@@ -173,6 +186,7 @@ void GraphicsEngine::mRender()
 	glEnable(GL_TEXTURE_2D);
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
+	//Iterates over each layer, back to front, and renders all elements
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
 		for (GraphicElementVector::const_iterator element = mLayers[layer].begin(); 
@@ -189,16 +203,25 @@ void GraphicsEngine::mDrawElement(GraphicElement *element)
 	sf::Texture::bind(element->mTexture);
 
 	glPushMatrix();
+	//Loads the matrix stored in element into graphics
 	glLoadMatrixd(element->mMatrix);
 
+	//Sets the current color
 	glColor4d(element->mR, element->mG, element->mB, element->mA);
+	//Calculates aspect ratio
 	float ar = (element->mTexture->getSize().x /
 		(double)element->mTexture->getSize().y);
-	if (element->mCropHeight != 0 && element->mCropWidth != 0)
+	//If cropHeight and cropWidht isn't the default value we calculate that 
+	//aspect ratio instead
+	if (element->mCropOriginX != 0 || element->mCropOriginY != 0 ||
+		element->mCropHeight != 1 || element->mCropWidth != 1)
 		ar = (element->mCropWidth / element->mCropHeight);
+	//Scales based on aspect ratio
 	glScaled(ar, 1, 1);
 
+	//Translates so we get our origin
 	glTranslated(-element->mOriginX, -element->mOriginY, 0);
+	//Draws the quad, with the texture coordinates based on the crop
 	glBegin(GL_QUADS);
 		glTexCoord2d(element->mCropOriginX, element->mCropOriginY + element->mCropHeight);
 		glVertex2d(0, 1);
@@ -214,6 +237,7 @@ void GraphicsEngine::mDrawElement(GraphicElement *element)
 
 void GraphicsEngine::loadTexture(sf::Texture* texture, const char* fileName)
 {
+	//Uses SFML
 	texture->loadFromFile(fileName);
 }
 

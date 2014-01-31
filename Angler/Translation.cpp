@@ -34,7 +34,7 @@ Translation::Translation(float x, float y)
 Translation::Translation(sf::Vector2f translation)
 	: Transformation(), mX(translation.x), mY(translation.y)
 {
-
+	
 }
 
 void Translation::setTranslation(float x, float y)
@@ -76,18 +76,8 @@ float Translation::getTranslationY()
 	return mY;
 }
 
-void Translation::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
-{
-	glPushMatrix();
-
-	doTransform();
-
-	mDrawChildren(context, graphics, time, deltaTime);
-
-	glPopMatrix();
-}
-
 void Translation::doTransform()
 {
+	//Normal opengl transformation
 	glTranslatef(mX, mY, 0);
 }

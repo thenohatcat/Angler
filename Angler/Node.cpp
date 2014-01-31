@@ -8,7 +8,10 @@
 
 #include "Node.h"
 
+#include "Exceptions.h"
+
 using namespace Angler;
+using namespace Angler::Exceptions;
 
 Node::Node()
 	: mParent(0), mChildren()
@@ -31,7 +34,8 @@ void Node::addChild(Node* node)
 	}
 	else
 	{
-		//Throw error
+		//Thrown if this node already has a parent
+		throw node_already_has_parent_exception();
 	}
 }
 

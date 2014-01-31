@@ -2,19 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-//changed parent class to Transformation
-//+ added		Translation(sf::Vector2f)
-//+ added		Translation(Node*, sf::Vector2f)
-//+ added		sf::Vector2f getTranslation();
-//+ added		float getTranslationX()
-//+ added		float getTranslationY()
-//+ added		void translate(float, float)
-//+ added		void translate(sf::Vector2f)
-//renamed		updateTranslation to setTranslation
-//+ added		setTranslation(sf::Vector2f)
-//+ added		doTransform()
-
 #ifndef INC_TRANSLATION_H
 #define INC_TRANLSATION_H
 
@@ -28,27 +15,31 @@ namespace Angler
 {
 	namespace Nodes
 	{
+		//Transformation node for translation
 		class Translation
 			: public Transformation
 		{
 		public:
+			//Standard node constructors with a translation vector
+			//(both in (float, float) and as a sf::Vector2f)
 			Translation(float x, float y);
 			Translation(sf::Vector2f translation);
 
 			Translation(Node *parent, float x, float y);
 			Translation(Node *parent, sf::Vector2f translation);
 
+			//Used to force the current translation value
 			void setTranslation(float x, float y);
 			void setTranslation(sf::Vector2f translation);
 
+			//Does a relative translation to the current one (adds)
 			void translate(float x, float y);
 			void translate(sf::Vector2f translation);
 
 			sf::Vector2f getTranslation();
 			float getTranslationX(), getTranslationY();
 
-			virtual void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
-
+			//The transformation itself, to standardize functionality
 			void doTransform();
 
 		private:

@@ -39,5 +39,5 @@ void DrawNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, f
 {
 	graphics->draw(mLayer, mTX, mOX, mOY);
 
-	Node::draw(context, graphics, time, deltaTime);
+	mDrawChildren(context, graphics, time, deltaTime);
 }

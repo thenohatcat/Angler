@@ -8,6 +8,8 @@
 
 #include "Game.h"
 
+#include "Node.h"
+
 #include <iostream>
 
 #include "Keyboard.h"
@@ -31,6 +33,7 @@ Game::~Game()
 
 void Game::init()
 {
+	//Initializes the graphics engine
 	mGraphics = new GraphicsEngine(this, mNumLayers);
 	mGraphics->createWindow(mWidth, mHeight, mTitle, false);
 
@@ -38,7 +41,8 @@ void Game::init()
 	mMouse = new Mouse();
 	mSceneRoot = new Node();
 
-	mInnerInit();
+	//Runs the virtual inner init for derived
+	mInit();
 }
 
 void Game::loadContent()
@@ -53,17 +57,23 @@ void Game::mResize(int width, int height)
 
 void Game::run()
 {
+	//Initializes the clock at zero time of the program
 	mGameClock = sf::Clock();
 
+	//The time used to calculate time difference between frames
 	sf::Time oldTime = mGameClock.getElapsedTime();
 
 	while (mGraphics->mWindow->isOpen())
 	{
+		//Current elapsed time (in sf::Time format)
 		sf::Time sftime = mGameClock.getElapsedTime();
 
+		//and in float format in seconds
 		float time = sftime.asSeconds();
+		//Time since last frame in seconds
 		float deltaTime = (sftime - oldTime).asSeconds();
 
+		//Handles SFML events
 		sf::Event event;
         while (mGraphics->mWindow->pollEvent(event))
         {
@@ -105,8 +115,10 @@ void Game::run()
 
 		mGraphics->display();
 		
+		//Pushes the states of the keyboard and mouse
 		mKeyboard->pushState();
 		mMouse->pushState();
+		//Updates the old time with the beginning of the frame
 		oldTime = sftime;
 	}
 }

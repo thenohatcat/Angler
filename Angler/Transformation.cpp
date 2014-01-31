@@ -98,3 +98,16 @@ void Transformation::transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Ve
 {
 	transform(this, vIn, vOut);
 }
+
+void Transformation::draw(Angler::Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime)
+{
+	glPushMatrix();
+
+	//Does the transformation of the derived object
+	doTransform();
+
+	//Draws all children in the SAME graphics context (before glPopMatrix)
+	mDrawChildren(context, graphics, time, deltaTime);
+
+	glPopMatrix();
+}

@@ -2,10 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-//Added DrawNode(Node*, int, sf::Texture*, sf::Vector2f)
-//Added DrawNode(int, sf::Texture*, sf::Vector2f)
-
 #ifndef INC_DRAWNODE_H
 #define INC_DRAWNODE_H
 
@@ -19,10 +15,13 @@ namespace Angler
 {
 	namespace Nodes
 	{
+		//A draw node that renders sf::Textures (currently)
 		class DrawNode
 			: public Node
 		{
 		public:
+			//Standard constructors, with a layer for the texture, a pointer to a texture and
+			//a origin vector (both in (float, float) and as a sf::Vector2f)
 			DrawNode(Node *parent, int layer, sf::Texture *tx, float ox = 0, float oy = 0);
 			DrawNode(Node *parent, int layer, sf::Texture *tx, sf::Vector2f origo);
 

@@ -2,22 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Graphics
-//Changelog:
-//* moved some code from Game::run() to Graphics::begin()
-//* moved window handling here from Game
-//
-//+ added		draw(int, sf::Texture*, float, float, float, float, float, float, float, float, float, float)
-//+ added		draw(int, sf::Texture*, sf::Vector2f, sf::Vector2f, sf::Vector2f, float, float, float, float)
-//+ added		draw(int, sf::Texture*, sf::Vector2f, float, float, float, float)
-//+ added		draw(int, sf::Texture*, sf::Vector2f, sf::Vector2f, sf::Vector2f)
-//+ added		draw(int, sf::Texture*, sf::Vector2f)
-//+ added		resize(int, int)
-//+ added		loadTexture(sf::Texture*, const char*)
-//+ added		createWindow(int, int, const char*, sf::Style)
-//+ added		int getWidth()
-//+ added		int getHeight()
-
 #ifndef INC_GRAPHICS_H
 #define INC_GRAPHICS_H
 
@@ -34,6 +18,7 @@ namespace Angler
 
 	namespace Graphics
 	{
+		//Graphics Element to store data in the to-draw vectors
 		class GraphicElement final
 		{
 			friend class GraphicsEngine;
@@ -50,6 +35,7 @@ namespace Angler
 			sf::Texture *mTexture;
 		};
 
+		//Maximum number of elements per layer
 		#define MAX_ELEMENTS 1024
 
 		class GraphicsEngine final
@@ -60,8 +46,10 @@ namespace Angler
 			GraphicsEngine(Game* parent, int numLayers);
 			~GraphicsEngine();
 
+			//Hanldes creating a SFML window and initialize basic functions
 			void createWindow(int width, int height, const char* title, bool resizable);
 
+			//Functions to "draw" (push elements onto the vector)
 			void draw(int layer, sf::Texture* texture, float originX, float originY, 
 				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
 				float r, float g, float b, float a);	
@@ -87,15 +75,20 @@ namespace Angler
 			//float cropWidth, float cropHeight) doesn't exist as it would conflict
 			void draw(int layer, sf::Texture* texture);
 
+			//Has to be called at the beginning of every draw cycle
 			void begin();
+			//Has to be called at the end of every draw cycle
 			void end();
 
+			//Renders to the screen
 			void display();
 
 			int getWidth(), getHeight();
 
+			//Called from the main loop to resize, not used to force a resize of the screen
 			void resize(int width, int height);
 
+			//Wrapper for texture loading (currently using SFML)
 			void loadTexture(sf::Texture* texture, const char* fileName);
 
 		private:
@@ -107,10 +100,13 @@ namespace Angler
 			typedef std::vector<GraphicElement*> GraphicElementVector;
 			GraphicElementVector *mLayers;
 
+			//Clears the layers
 			void mClear();
 
+			//Renders the layers
 			void mRender();
 
+			//Draws a GraphicElement to the screen
 			void mDrawElement(GraphicElement *element);
 
 			bool mRunning;

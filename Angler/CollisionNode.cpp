@@ -39,7 +39,7 @@ CollisionNode::CollisionNode(Node* parent, const std::vector<sf::Vector2f> &pts)
 
 int CollisionNode::isColliding(CollisionNode *node)
 {
-	//Needs future revision
+	//Needs future revision, and is not commented atm.
 	std::vector<sf::Vector2f> tmPointsA;
 	std::vector<sf::Vector2f> tmPointsB;
 
@@ -85,6 +85,7 @@ std::vector<sf::Vector2f> CollisionNode::getPoints()
 
 void CollisionNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
+	//Renders the bounding box of this object
 	std::vector<sf::Vector2f> tmPoints;
 
 	Transformation::transform(this, mPoints, &tmPoints);

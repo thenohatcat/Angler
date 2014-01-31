@@ -7,10 +7,11 @@
 
 #ifdef ANGLER_0_1_1
 
+#include "Game.h"
+
 namespace Angler
 {
-	class Game;
-
+	//Interface for "updateable" objects
 	class Updateable
 	{
 	public:

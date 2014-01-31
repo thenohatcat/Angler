@@ -2,13 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-//changed parent class to Transformation
-//+ added		void rotate(float)
-//+ added		float getRotation()
-//renamed		updateRotation to setRotation
-//+ added		doTransform()
-
 #ifndef INC_ROTATION_H
 #define INC_ROTATION_H
 
@@ -24,18 +17,20 @@ namespace Angler
 			: public Transformation
 		{
 		public:
+			//Standard node constructors with a rotation
 			Rotation(float rotation);
 
 			Rotation(Node *parent, float rotation);
 
+			//Sets the current rotation
 			void setRotation(float rot);
 
+			//Rotates (adds) the current rotation
 			void rotate(float rot);
 
 			float getRotation();
 
-			virtual void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
-
+			//The transformation itself, to standardize functionality
 			void doTransform();
 
 		private:

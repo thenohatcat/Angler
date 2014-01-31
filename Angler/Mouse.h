@@ -2,19 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//MouseState
-//Changelog:
-//+ added	sf::Vector2i getPos
-//+ added	sf::Vector2i getOldPos
-//renamed	getX to getPosX
-//renamed	getY to getPosY
-//renamed	getOldX to getOldPosX
-//renamed	getOldY to getOldPosY
-
-//Mouse
-//Changelog:
-//added		changePos(sf::Vector2i)
-
 #ifndef INC_MOUSE_H
 #define INC_MOUSE_H
 
@@ -45,6 +32,8 @@ namespace Angler
 			int getWheel();
 			int getOldWheel();
 
+			//Pushes the current state into the old state, for use to detect
+			//changes in state
 			void pushState();
 
 		private:
@@ -62,6 +51,7 @@ namespace Angler
 		public:
 			MouseState getState();
 
+			//Functions to update current state
 			void buttonDown(sf::Mouse::Button button);
 			void buttonUp(sf::Mouse::Button button);
 
@@ -71,6 +61,7 @@ namespace Angler
 			void changeX(int x);
 			void changeY(int y);
 
+			//Wrapper for the internal MouseState::pushState
 			void pushState();
 		private:
 			MouseState mState;

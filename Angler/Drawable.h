@@ -7,15 +7,12 @@
 
 #ifdef ANGLER_0_1_1
 
+#include "Graphics.h"
+#include "Graphics.h"
+
 namespace Angler
 {
-	class Game;
-
-	namespace Graphics
-	{
-		class GraphicsEngine;
-	}
-
+	//Interface for "drawable" objects
 	class Drawable
 	{
 	public:
