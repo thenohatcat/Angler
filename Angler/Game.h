@@ -1,56 +1,83 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors: 
+
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
+#ifdef ANGLER_0_1_1
+
 #include "Graphics.h"
-#include "Node.h"
 
 #include "Keyboard.h"
 #include "Mouse.h"
 
-class Game
+namespace Angler
 {
-	friend class Graphics;
+	class Node;
 
-public:
-	Game();
-	~Game();
+	class Game
+	{
+	public:
+		Game();
+		~Game();
 
-	void init();
+		//Initializes the game, and calls mInit (for derived)
+		void init();
 
-	void loadContent();
+		//Loads content
+		void loadContent();
 
-	void run();
+		//Starts the game logic and main loop
+		void run();
 
-	KeyboardState getKeyboardState();
-	MouseState getMouseState();
+		//Wrapper for the current keyboard and mouse states
+		Angler::Input::KeyboardState getKeyboardState();
+		Angler::Input::MouseState getMouseState();
 
-protected:
-	Graphics* mGraphics;
-	Node* mSceneRoot;
-	Keyboard* mKeyboard;
-	Mouse* mMouse;
+		//Wrapper for the same functions in GraphicsEngine
+		int getWidth(), getHeight();
 
-	virtual void mDraw(float time, float deltaTime) = 0;
-	virtual void mUpdate(float time, float deltaTime) = 0;
+		//Wrapper for the same function in GraphicsEngine
+		void loadTexture(sf::Texture* texture, const char* fileName);
 
-	virtual void mLoadContent() = 0;
+	protected:
+		Angler::Graphics::GraphicsEngine* mGraphics;
+		Node* mSceneRoot;
+		Angler::Input::Keyboard* mKeyboard;
+		Angler::Input::Mouse* mMouse;
 
-	virtual void mInnerInit() = 0;
+		//Inner draw function, virtual
+		virtual void mDraw(float time, float deltaTime) = 0;
+		virtual void mUpdate(float time, float deltaTime) = 0;
 
-	float mGetTime();
-	sf::Clock mGameClock;
+		//Inner load content
+		virtual void mLoadContent() = 0;
 
-	int mHeight;
-	int mWidth;
+		//Inner init
+		virtual void mInit() = 0;
 
-	sf::RenderWindow *mWindow;
+		int mWidth;
+		int mHeight;
 
-	const char *mTitle;
-	int mNumLayers;
-	bool mFocused;
+		//Time elapsed since start functions
+		float mGetTime();
+		sf::Clock mGameClock;
 
-private:
-	void mResize(int width, int height);
-};
+		const char *mTitle;
+		int mNumLayers;
+		//If the window is currently the focus of the system
+		bool mFocused;
+
+	private:
+		//Wrapper for the same function in GraphicsEngine, 
+		//not used to change size of the window
+		void mResize(int width, int height);
+	};
+}
+
+#else
+#error Game.h: Wrong Version 0.1.1
+#endif
 
 #endif

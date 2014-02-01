@@ -1,53 +1,76 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
 #ifndef INC_MOUSE_H
 #define INC_MOUSE_H
 
+#ifdef ANGLER_0_1_1
+
 #include <SFML\Window\Mouse.hpp>
 
-class MouseState
+namespace Angler
 {
-public:
-	friend class Mouse;
+	namespace Input
+	{
+	class MouseState
+	{
+		public:
+			friend class Mouse;
 
-	MouseState();
-	MouseState(MouseState &state);
+			MouseState();
+			MouseState(MouseState &state);
 
-	bool isButtonDown(sf::Mouse::Button button);
-	bool wasButtonDown(sf::Mouse::Button button);
+			bool isButtonDown(sf::Mouse::Button button);
+			bool wasButtonDown(sf::Mouse::Button button);
 
-	int getX(), getY();
-	int getOldX(), getOldY();
+			int getPosX(), getPosY();
+			sf::Vector2i getPos();
+			int getOldPosX(), getOldPosY();
+			sf::Vector2i getOldPos();
 
-	int getWheel();
-	int getOldWheel();
+			int getWheel();
+			int getOldWheel();
 
-	void pushState();
+			//Pushes the current state into the old state, for use to detect
+			//changes in state
+			void pushState();
 
-private:
-	bool mButtons[sf::Mouse::Button::ButtonCount];
-	bool mOldButtons[sf::Mouse::Button::ButtonCount];
+		private:
+			bool mButtons[sf::Mouse::Button::ButtonCount];
+			bool mOldButtons[sf::Mouse::Button::ButtonCount];
 
-	int mX, mY;
-	int mOldX, mOldY;
-	int mWheel;
-	int mOldWheel;
-};
+			int mX, mY;
+			int mOldX, mOldY;
+			int mWheel;
+			int mOldWheel;
+		};
 
-class Mouse
-{
-public:
-	MouseState getState();
+		class Mouse
+		{
+		public:
+			MouseState getState();
 
-	void buttonDown(sf::Mouse::Button button);
-	void buttonUp(sf::Mouse::Button button);
+			//Functions to update current state
+			void buttonDown(sf::Mouse::Button button);
+			void buttonUp(sf::Mouse::Button button);
 
-	void wheelMoved(int delta);
+			void wheelMoved(int delta);
 
-	void changeX(int x);
-	void changeY(int y);
+			void changePos(sf::Vector2i pos);
+			void changeX(int x);
+			void changeY(int y);
 
-	void pushState();
-private:
-	MouseState mState;
-};
+			//Wrapper for the internal MouseState::pushState
+			void pushState();
+		private:
+			MouseState mState;
+		};
+	}
+}
+
+#else
+#error Mouse.h: Wrong Version 0.1.1
+#endif
 
 #endif

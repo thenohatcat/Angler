@@ -1,21 +1,46 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
 #ifndef INC_ROTATION_H
 #define INC_ROTATION_H
 
-#include "Node.h"
+#ifdef ANGLER_0_1_1
 
-class Rotation
-	: public Node
+#include "Transformation.h"
+
+namespace Angler
 {
-public:
-	Rotation(float rotation);
-	Rotation(Node *parent, float rotation);
+	namespace Nodes
+	{
+		class Rotation
+			: public Transformation
+		{
+		public:
+			//Standard node constructors with a rotation
+			Rotation(float rotation);
 
-	void updateRotation(float rot);
+			Rotation(Node *parent, float rotation);
 
-	virtual void draw(Game* context, Graphics* graphics, float time, float deltaTime);
+			//Sets the current rotation
+			void setRotation(float rot);
 
-private:
-	float mRotation;
-};
+			//Rotates (adds) the current rotation
+			void rotate(float rot);
+
+			float getRotation();
+
+			//The transformation itself, to standardize functionality
+			void doTransform();
+
+		private:
+			float mRotation;
+		};
+	}
+}
+
+#else
+#error Rotation.h: Wrong Version 0.1.1
+#endif
 
 #endif
