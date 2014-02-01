@@ -1,22 +1,54 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
 #ifndef INC_SCALE_H
 #define INC_SCALE_H
 
-#include "Node.h"
+#ifdef ANGLER_0_1_1
 
-class Scale
-	: public Node
+#include "Transformation.h"
+
+#include <SFML\System\Vector2.hpp>
+
+namespace Angler
 {
-public:
-	Scale(float scaleX, float scaleY);
-	Scale(Node *parent, float scaleX, float scaleY);
+	namespace Nodes
+	{
+		class Scale
+			: public Transformation
+		{
+		public:
+			//Standard node constructors with a scale vector
+			//(both in (float, float) and as a sf::Vector2f)
+			Scale(float scaleX, float scaleY);
+			Scale(sf::Vector2f s);
 
-	void updateScale(float scaleX, float scaleY);
+			Scale(Node *parent, float scaleX, float scaleY);
+			Scale(Node *parent, sf::Vector2f s);
 
-	virtual void draw(Game* context, Graphics* graphics, float time, float deltaTime);
+			//Sets the current scale
+			void setScale(float scaleX, float scaleY);
+			void setScale(sf::Vector2f s);
 
-private:
-	float mScaleX, mScaleY;
-};
+			//Scales the current scale
+			void scale(float scaleX, float scaleY);
+			void scale(sf::Vector2f s);
 
+			sf::Vector2f getScale();
+			float getScaleX(), getScaleY();
+
+			//The transformation itself, to standardize functionality
+			void doTransform();
+
+		private:
+			float mScaleX, mScaleY;
+		};
+	}
+}
+
+#else
+#error Scale.h: Wrong Version 0.1.1
+#endif
 
 #endif

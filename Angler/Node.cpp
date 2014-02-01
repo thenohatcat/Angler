@@ -1,4 +1,17 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
+#ifndef ANGLER_0_1_1
+#error Node.cpp: Wrong Version 0.1.1
+#endif
+
 #include "Node.h"
+
+#include "Exceptions.h"
+
+using namespace Angler;
+using namespace Angler::Exceptions;
 
 Node::Node()
 	: mParent(0), mChildren()
@@ -21,7 +34,8 @@ void Node::addChild(Node* node)
 	}
 	else
 	{
-		//Throw error
+		//Thrown if this node already has a parent
+		throw node_already_has_parent_exception();
 	}
 }
 
@@ -30,7 +44,7 @@ void Node::clearChildren()
 	mChildren.clear();
 }
 
-void Node::draw(Game* context, Graphics* graphics, float time, float deltaTime)
+void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	mDrawChildren(context, graphics, time, deltaTime);
 }
@@ -40,7 +54,7 @@ void Node::update(Game* context, float time, float deltaTime)
 	mUpdateChildren(context, time, deltaTime);
 }
 
-void Node::mDrawChildren(Game* context, Graphics* graphics, float time, float deltaTime)
+void Node::mDrawChildren(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	for (NodeVector::iterator i = mChildren.begin(); i != mChildren.end(); i++)
 	{
@@ -54,4 +68,9 @@ void Node::mUpdateChildren(Game* context, float time, float deltaTime)
 	{
 		(*i)->update(context, time, deltaTime);
 	}
+}
+
+Node* Node::getParent()
+{
+	return mParent;
 }

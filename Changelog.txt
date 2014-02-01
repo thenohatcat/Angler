@@ -1,0 +1,99 @@
+-v0.1.1
+
+--Changelog:
+The changelog of this version is lacking
+
+CollisionNode:
+ + added
+
+DrawNode:
+ + added 	DrawNode(Node*, int, sf::Texture*, sf::Vector2f)
+ + added 	DrawNode(int, sf::Texture*, sf::Vector2f)
+
+Exceptions:
+ + added
+
+Game:
+ * added mInnerInit() to init()
+ * moved some graphics code from Game::run() to Graphics::begin()
+ * moved window handling to Graphics
+
+ + added	loadTexture(sf::Texture*, const char*)
+ - removed	sf::RenderWindow* mWindow
+ + added	int getWidth()
+ + added	int getHeight()
+
+Graphics:
+ * renamed Graphics to GraphicsEngine
+ * moved some code from Game::run() to Graphics::begin()
+ * moved window handling here from Game
+ 
+ + added	draw(int, sf::Texture*, float, float, float, float, float, float, float, float, float, float)
+ + added	draw(int, sf::Texture*, sf::Vector2f, sf::Vector2f, sf::Vector2f, float, float, float, float)
+ + added	draw(int, sf::Texture*, sf::Vector2f, float, float, float, float)
+ + added	draw(int, sf::Texture*, sf::Vector2f, sf::Vector2f, sf::Vector2f)
+ + added	draw(int, sf::Texture*, sf::Vector2f)
+ + added	resize(int, int)
+ + added	loadTexture(sf::Texture*, const char*)
+ + added	createWindow(int, int, const char*, sf::Style)
+ + added	int getWidth()
+ + added	int getHeight()
+
+HelpFunctions:
+ + added
+
+Mouse:
+ + added	sf::Vector2i getPos
+ + added	sf::Vector2i getOldPos
+ * renamed	getX to getPosX
+ * renamed	getY to getPosY
+ * renamed	getOldX to getOldPosX
+ * renamed	getOldY to getOldPosY
+
+Node:
+ + added	Node* getParent()
+
+Rotation:
+ * changed parent class to Transformation
+ + added	void rotate(float)
+ + added	float getRotation()
+ * renamed	updateRotation to setRotation
+ + added	doTransform()
+
+Scale:
+ * changed parent class to Transformation
+ + added	Scale(sf::Vector2f)
+ + added	Scale(Node*, sf::Vector2f)
+ + added	float getScaleX
+ + added	float getScaleY
+ + added	sf::Vector2f getScale
+ + added	scale(float, float)
+ + added	scale(sf::Vector2f)
+ * renamed	updateScale to setScale
+ + added	setScale(sf::Vector2f)
+ + added	doTransform()
+
+Transformation:
+ + added
+
+Translation:
+ * changed parent class to Transformation
+ + added		Translation(sf::Vector2f)
+ + added		Translation(Node*, sf::Vector2f)
+ + added		sf::Vector2f getTranslation();
+ + added		float getTranslationX()
+ + added		float getTranslationY()
+ + added		void translate(float, float)
+ + added		void translate(sf::Vector2f)
+ * renamed		updateTranslation to setTranslation
+ + added		setTranslation(sf::Vector2f)
+ + added		doTransform()
+
+--Discovered bugs:
+Bug-Angler-J-0001: 	Mouse position stored incorrectly
+
+--Solved bugs:
+Bug-Angler-J-0001: 	Mouse position stored incorrectly
+* Solution: Changed update code to use the correct update format in the SFML event loop
+
+--Bugs:

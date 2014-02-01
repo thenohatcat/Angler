@@ -1,58 +1,121 @@
+//Version: 0.1.1
+//Author: Jakob Pipping
+//Contributors:
+
 #ifndef INC_GRAPHICS_H
 #define INC_GRAPHICS_H
 
+#ifdef ANGLER_0_1_1
+
 #include <SFML\Graphics.hpp>
 #include <SFML\System.hpp>
+#include <SFML\Window.hpp>
 #include <glut.h>
 
-class Game;
-
-class GraphicElement final
+namespace Angler
 {
-	friend class Graphics;
-public:
-	GraphicElement(GLdouble matrix[16], float originX, float originY, 
-		float r, float g, float b, float a, sf::Texture *texture);
+	class Game;
 
-private:
-	GLdouble mMatrix[16];
-	float mR, mG, mB, mA;
-	float mOriginX, mOriginY;
-	sf::Texture *mTexture;
-};
+	namespace Graphics
+	{
+		//Graphics Element to store data in the to-draw vectors
+		class GraphicElement final
+		{
+			friend class GraphicsEngine;
+		public:
+			GraphicElement(GLdouble matrix[16], float originX, float originY,
+				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
+				float r, float g, float b, float a, sf::Texture *texture);
 
-#define MAX_ELEMENTS 512
+		private:
+			GLdouble mMatrix[16];
+			float mR, mG, mB, mA;
+			float mOriginX, mOriginY;
+			float mCropOriginX, mCropOriginY, mCropWidth, mCropHeight;
+			sf::Texture *mTexture;
+		};
 
-class Graphics final
-{
-public:
+		//Maximum number of elements per layer
+		#define MAX_ELEMENTS 1024
 
-	Graphics(Game *parent);
-	~Graphics();
+		class GraphicsEngine final
+		{
+		public:
+			friend class Game;
 
-	void draw(int layer, sf::Texture *texture, float originX, float originY, 
-		float r, float g, float b, float a);
-	void draw(int layer, sf::Texture *texture, float r, float g, float b, float a);
-	void draw(int layer, sf::Texture *texture, float originX, float originY);
-	void draw(int layer, sf::Texture *texture);
+			GraphicsEngine(Game* parent, int numLayers);
+			~GraphicsEngine();
 
-	void begin();
-	void end();
+			//Hanldes creating a SFML window and initialize basic functions
+			void createWindow(int width, int height, const char* title, bool resizable);
 
-	typedef std::vector<GraphicElement*> GraphicElementVector;
+			//Functions to "draw" (push elements onto the vector)
+			void draw(int layer, sf::Texture* texture, float originX, float originY, 
+				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
+				float r, float g, float b, float a);	
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
+				sf::Vector2f cropOrigin, sf::Vector2f cropSize,
+				float r, float g, float b, float a);
 
-private:
-	Game* mParent;
+			void draw(int layer, sf::Texture* texture, float originX, float originY, 
+				float r, float g, float b, float a);
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
+				float r, float g, float b, float a);
 
-	GraphicElementVector *mLayers;
+			void draw(int layer, sf::Texture* texture, float r, float g, float b, float a);
 
-	void mClear();
+			void draw(int layer, sf::Texture* texture, sf::Vector2f cropOrigin, sf::Vector2f cropSize);
 
-	void mRender();
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin, 
+				sf::Vector2f cropOrigin, sf::Vector2f cropSize);
 
-	void mDrawElement(GraphicElement *element);
+			void draw(int layer, sf::Texture* texture, float originX, float originY);
+			void draw(int layer, sf::Texture* texture, sf::Vector2f origin);
+			//draw(int layer, sf::Texture* texture, float cropOriginX, float cropOriginY, 
+			//float cropWidth, float cropHeight) doesn't exist as it would conflict
+			void draw(int layer, sf::Texture* texture);
 
-	bool mRunning;
-};
+			//Has to be called at the beginning of every draw cycle
+			void begin();
+			//Has to be called at the end of every draw cycle
+			void end();
+
+			//Renders to the screen
+			void display();
+
+			int getWidth(), getHeight();
+
+			//Called from the main loop to resize, not used to force a resize of the screen
+			void resize(int width, int height);
+
+			//Wrapper for texture loading (currently using SFML)
+			void loadTexture(sf::Texture* texture, const char* fileName);
+
+		private:
+			Game* mParent;
+			sf::RenderWindow *mWindow;
+
+			int mNumLayers;
+
+			typedef std::vector<GraphicElement*> GraphicElementVector;
+			GraphicElementVector *mLayers;
+
+			//Clears the layers
+			void mClear();
+
+			//Renders the layers
+			void mRender();
+
+			//Draws a GraphicElement to the screen
+			void mDrawElement(GraphicElement *element);
+
+			bool mRunning;
+		};
+	}
+}
+
+#else
+#error Graphics.h: Wrong Version 0.1.1
+#endif
 
 #endif
