@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error Game.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error Game.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Game.h"
@@ -39,7 +39,7 @@ void Game::init()
 
 	mKeyboard = new Keyboard();
 	mMouse = new Mouse();
-	mSceneRoot = new Node();
+	mSceneRoot = new Node(0);
 
 	//Runs the virtual inner init for derived
 	mInit();

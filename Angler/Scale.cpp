@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error Scale.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error Scale.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Scale.h"
@@ -13,26 +13,26 @@
 using namespace Angler;
 using namespace Angler::Nodes;
 
-Scale::Scale(float scaleX, float scaleY)
-	: Transformation(), mScaleX(scaleX), mScaleY(scaleY)
+Scale::Scale(unsigned long id, float scaleX, float scaleY)
+	: Transformation(id), mScaleX(scaleX), mScaleY(scaleY)
 {
 
 }
 
-Scale::Scale(sf::Vector2f s)
-	: Transformation(), mScaleX(s.x), mScaleY(s.y)
+Scale::Scale(unsigned long id, sf::Vector2f s)
+	: Transformation(id), mScaleX(s.x), mScaleY(s.y)
 {
 
 }
 
-Scale::Scale(Node *parent, float scaleX, float scaleY)
-	: Transformation(parent), mScaleX(scaleX), mScaleY(scaleY)
+Scale::Scale(unsigned long id, Node *parent, float scaleX, float scaleY)
+	: Transformation(id, parent), mScaleX(scaleX), mScaleY(scaleY)
 {
 
 }
 
-Scale::Scale(Node *parent, sf::Vector2f s)
-	: Transformation(parent), mScaleX(s.x), mScaleY(s.y)
+Scale::Scale(unsigned long id, Node *parent, sf::Vector2f s)
+	: Transformation(id, parent), mScaleX(s.x), mScaleY(s.y)
 {
 
 }

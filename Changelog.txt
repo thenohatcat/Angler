@@ -97,3 +97,71 @@ Bug-Angler-J-0001: 	Mouse position stored incorrectly
 * Solution: Changed update code to use the correct update format in the SFML event loop
 
 --Bugs:
+
+
+
+
+-v0.1.2
+
+--Changelog:
+CollisionNode:
+ - removed		CollisionNode(const std::vector<sf::Vector2f>&)
+ - removed		CollisionNode(Node*, const std::vector<sf::Vector2f>&);
+ + added		CollisionNode(unsigned long, const std::vector<sf::Vector2f>&)
+ + added		CollisionNode(unsigned long, Node*, const std::vector<sf::Vector2f>&)
+
+DrawNode:
+ - removed		DrawNode(Node*, int layer, sf::Texture*, float, float)
+ - removed		DrawNode(Node*, int layer, sf::Texture*, sf::Vector2f)
+ - removed		DrawNode(int, sf::Texture*, float, float)
+ - removed		DrawNode(int, sf::Texture*, sf::Vector2f)
+ + added		DrawNode(unsigned long, Node*, int layer, sf::Texture*, float, float)
+ + added		DrawNode(unsigned long, Node*, int layer, sf::Texture*, sf::Vector2f)
+ + added		DrawNode(unsigned long, int, sf::Texture*, float, float)
+ + added		DrawNode(unsigned long, int, sf::Texture*, sf::Vector2f)
+
+Node:
+ - removed		Node()
+ - removed		Node(Node *parent)
+ + added		Node(unsigned long id)
+ + added		Node(unsigned long id, Node *parent)
+ + added		unsigned long mID
+ + added		unsigned long getID()
+
+Rotation:
+ - removed		Rotation(float rotation)
+ - removed		Rotation(Node *parent, float rotation) 
+ + added		Rotation(unsigned long id, float rotation)
+ + added		Rotation(unsigned long id, Node *parent, float rotation)
+
+Scale:
+ - removed		Scale(float, float)
+ - removed		Scale(sf::Vector2f)
+ - removed		Scale(Node*, float, float)
+ - removed		Scale(Node*, sf::Vector2f)
+ + added		Scale(unsigned long, float, float)
+ + added		Scale(unsigned long, sf::Vector2f)
+ + added		Scale(unsigned long, Node*, float, float)
+ + added		Scale(unsigned long, Node*, sf::Vector2f)
+
+Transformation:
+ - removed		Transformation()
+ - removed		Transformation(Node *parent)
+ + added		Transformation(unsigned long id)
+ + added		Transformation(unsigned long id, Node *parent)
+
+Translation:
+ - removed		Translation(float, float)
+ - removed		Translation(sf::Vector2f)
+ - removed		Translation(Node*, float, float)
+ - removed		Translation(Node*, sf::Vector2f)
+ + added		Translation(unsigned long, float, float)
+ + added		Translation(unsigned long, sf::Vector2f)
+ + added		Translation(unsigned long, Node*, float, float)
+ + added		Translation(unsigned long, Node*, sf::Vector2f)
+
+--Discovered bugs:
+
+--Solved bugs:
+
+--Bugs:

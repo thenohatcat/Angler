@@ -1,11 +1,11 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_TRANSLATION_H
 #define INC_TRANLSATION_H
 
-#ifdef ANGLER_0_1_1
+#ifdef ANGLER_0_1_2
 
 #include "Transformation.h"
 
@@ -22,11 +22,11 @@ namespace Angler
 		public:
 			//Standard node constructors with a translation vector
 			//(both in (float, float) and as a sf::Vector2f)
-			Translation(float x, float y);
-			Translation(sf::Vector2f translation);
+			Translation(unsigned long id, float x, float y);
+			Translation(unsigned long id, sf::Vector2f translation);
 
-			Translation(Node *parent, float x, float y);
-			Translation(Node *parent, sf::Vector2f translation);
+			Translation(unsigned long id, Node *parent, float x, float y);
+			Translation(unsigned long id, Node *parent, sf::Vector2f translation);
 
 			//Used to force the current translation value
 			void setTranslation(float x, float y);
@@ -49,7 +49,7 @@ namespace Angler
 }
 
 #else
-#error Transformation.h: Wrong Version 0.1.1
+#error Transformation.h: Wrong Version 0.1.2
 #endif
 
 #endif

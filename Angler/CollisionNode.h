@@ -1,11 +1,11 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_COLLISIONNODE_H
 #define INC_COLLISIONNODE_H
 
-#ifdef ANGLER_0_1_1
+#ifdef ANGLER_0_1_2
 
 #include "Node.h"
 #include <SFML\System\Vector2.hpp>
@@ -21,8 +21,8 @@ namespace Angler
 		{
 		public:
 			//Standard Node constructors, with a vector of points
-			CollisionNode(const std::vector<sf::Vector2f> &pts);
-			CollisionNode(Node *parent, const std::vector<sf::Vector2f> &pts);
+			CollisionNode(unsigned long id, const std::vector<sf::Vector2f> &pts);
+			CollisionNode(unsigned long id, Node *parent, const std::vector<sf::Vector2f> &pts);
 
 			//Returns:
 			//0 if the nodes aren't colliding
@@ -44,7 +44,7 @@ namespace Angler
 }
 
 #else
-#error CollisionNode.h: Wrong Version 0.1.1
+#error CollisionNode.h: Wrong Version 0.1.2
 #endif
 
 #endif

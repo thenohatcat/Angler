@@ -1,11 +1,11 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ROTATION_H
 #define INC_ROTATION_H
 
-#ifdef ANGLER_0_1_1
+#ifdef ANGLER_0_1_2
 
 #include "Transformation.h"
 
@@ -18,9 +18,9 @@ namespace Angler
 		{
 		public:
 			//Standard node constructors with a rotation
-			Rotation(float rotation);
+			Rotation(unsigned long id, float rotation);
 
-			Rotation(Node *parent, float rotation);
+			Rotation(unsigned long id, Node *parent, float rotation);
 
 			//Sets the current rotation
 			void setRotation(float rot);
@@ -40,7 +40,7 @@ namespace Angler
 }
 
 #else
-#error Rotation.h: Wrong Version 0.1.1
+#error Rotation.h: Wrong Version 0.1.2
 #endif
 
 #endif

@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error DrawNode.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error DrawNode.cpp: Wrong Version 0.1.2
 #endif
 
 #include "DrawNode.h"
@@ -11,26 +11,26 @@
 using namespace Angler;
 using namespace Angler::Nodes;
 
-DrawNode::DrawNode(Node *parent, int layer, sf::Texture *tx, float ox, float oy)
-	: Node(parent), mTX(tx), mLayer(layer), mOX(ox), mOY(oy)
+DrawNode::DrawNode(unsigned long id, Node *parent, int layer, sf::Texture *tx, float ox, float oy)
+	: Node(id, parent), mTX(tx), mLayer(layer), mOX(ox), mOY(oy)
 {
 
 }
 
-DrawNode::DrawNode(Node *parent, int layer, sf::Texture *tx, sf::Vector2f origo)
-	: Node(parent), mTX(tx), mLayer(layer), mOX(origo.x), mOY(origo.y)
+DrawNode::DrawNode(unsigned long id, Node *parent, int layer, sf::Texture *tx, sf::Vector2f origo)
+	: Node(id, parent), mTX(tx), mLayer(layer), mOX(origo.x), mOY(origo.y)
 {
 
 }
 
-DrawNode::DrawNode(int layer, sf::Texture *tx, float ox, float oy)
-	: Node(), mTX(tx), mLayer(layer), mOX(ox), mOY(oy)
+DrawNode::DrawNode(unsigned long id, int layer, sf::Texture *tx, float ox, float oy)
+	: Node(id), mTX(tx), mLayer(layer), mOX(ox), mOY(oy)
 {
 
 }
 
-DrawNode::DrawNode(int layer, sf::Texture *tx, sf::Vector2f origo)
-	: Node(), mTX(tx), mLayer(layer), mOX(origo.x), mOY(origo.y)
+DrawNode::DrawNode(unsigned long id, int layer, sf::Texture *tx, sf::Vector2f origo)
+	: Node(id), mTX(tx), mLayer(layer), mOX(origo.x), mOY(origo.y)
 {
 
 }

@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error CollisionNode.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error CollisionNode.cpp: Wrong Version 0.1.2
 #endif
 
 #include "CollisionNode.h"
@@ -19,8 +19,8 @@ using namespace Angler;
 using namespace Angler::HelpFunctions::Geometry;
 using namespace Angler::Nodes;
 
-CollisionNode::CollisionNode(const std::vector<sf::Vector2f> &pts)
-	: Node(), mPoints()
+CollisionNode::CollisionNode(unsigned long id, const std::vector<sf::Vector2f> &pts)
+	: Node(id), mPoints()
 {
 	for (int i = 0; i < pts.size(); i++)
 	{
@@ -28,8 +28,8 @@ CollisionNode::CollisionNode(const std::vector<sf::Vector2f> &pts)
 	}
 }
 
-CollisionNode::CollisionNode(Node* parent, const std::vector<sf::Vector2f> &pts)
-	: Node(parent), mPoints()
+CollisionNode::CollisionNode(unsigned long id, Node* parent, const std::vector<sf::Vector2f> &pts)
+	: Node(id, parent), mPoints()
 {
 	for (int i = 0; i < pts.size(); i++)
 	{
