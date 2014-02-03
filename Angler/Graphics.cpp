@@ -167,6 +167,11 @@ void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float origi
 	draw(layer, tx, originX, originY, 0, 0, 1, 1, 1, 1, 1, 1);
 }
 
+void GraphicsEngine::draw(int layer, sf::Texture *tx)
+{
+	draw(layer, tx, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1);
+}
+
 void GraphicsEngine::resize(int width, int height)
 {
 	//Updates the viewport to fit the current size
