@@ -1,11 +1,11 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
-#ifdef ANGLER_0_1_1
+#ifdef ANGLER_0_1_2
 
 #include <vector>
 
@@ -21,9 +21,9 @@ namespace Angler
 		: public Drawable, public Updateable
 	{
 	public:
-		Node();
+		Node(unsigned long id);
 
-		Node(Node *parent);
+		Node(unsigned long id, Node *parent);
 
 		//Adds a child to this node, and makes this node it's parent
 		void addChild(Node* node);
@@ -39,7 +39,11 @@ namespace Angler
 
 		Node *getParent();
 
+		unsigned long getID();
+
 	protected:
+		unsigned long mID;
+
 		Node *mParent;
 
 		//Draws/updates all children in the vector
@@ -54,7 +58,7 @@ namespace Angler
 }
 
 #else
-#error Node.h: Wrong Version 0.1.1
+#error Node.h: Wrong Version 0.1.2
 #endif
 
 #endif

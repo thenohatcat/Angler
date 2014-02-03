@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error Translation.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error Translation.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Translation.h"
@@ -13,26 +13,26 @@
 using namespace Angler;
 using namespace Angler::Nodes;
 
-Translation::Translation(Node *parent, float x, float y)
-	: Transformation(parent), mX(x), mY(y)
+Translation::Translation(unsigned long id, Node *parent, float x, float y)
+	: Transformation(id, parent), mX(x), mY(y)
 {
 	
 }
 
-Translation::Translation(Node *parent, sf::Vector2f translation)
-	: Transformation(parent), mX(translation.x), mY(translation.y)
+Translation::Translation(unsigned long id, Node *parent, sf::Vector2f translation)
+	: Transformation(id, parent), mX(translation.x), mY(translation.y)
 {
 
 }
 
-Translation::Translation(float x, float y)
-	: Transformation(), mX(x), mY(y)
+Translation::Translation(unsigned long id, float x, float y)
+	: Transformation(id), mX(x), mY(y)
 {
 
 }
 
-Translation::Translation(sf::Vector2f translation)
-	: Transformation(), mX(translation.x), mY(translation.y)
+Translation::Translation(unsigned long id, sf::Vector2f translation)
+	: Transformation(id), mX(translation.x), mY(translation.y)
 {
 	
 }

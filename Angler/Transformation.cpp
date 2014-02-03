@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error Transformation.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error Transformation.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Transformation.h"
@@ -16,14 +16,14 @@
 
 using namespace Angler::Nodes;
 
-Transformation::Transformation()
-	: Node()
+Transformation::Transformation(unsigned long id)
+	: Node(id)
 {
 	
 }
 
-Transformation::Transformation(Node *parent)
-	: Node(parent)
+Transformation::Transformation(unsigned long id, Node *parent)
+	: Node(id, parent)
 {
 
 }

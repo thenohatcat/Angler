@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error Node.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error Node.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Node.h"
@@ -13,14 +13,14 @@
 using namespace Angler;
 using namespace Angler::Exceptions;
 
-Node::Node()
-	: mParent(0), mChildren()
+Node::Node(unsigned long id)
+	: mParent(0), mChildren(), mID(id)
 {
 
 }
 
-Node::Node(Node *parent)
-	: mParent(0), mChildren()
+Node::Node(unsigned long id, Node *parent)
+	: mParent(0), mChildren(), mID(id)
 {
 	parent->addChild(this);
 }
@@ -73,4 +73,9 @@ void Node::mUpdateChildren(Game* context, float time, float deltaTime)
 Node* Node::getParent()
 {
 	return mParent;
+}
+
+unsigned long Node::getID()
+{
+	return mID;
 }

@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error GraphicsElement.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error GraphicsElement.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Graphics.h"

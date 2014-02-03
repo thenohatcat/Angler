@@ -1,9 +1,9 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_1
-#error Rotation.cpp: Wrong Version 0.1.1
+#ifndef ANGLER_0_1_2
+#error Rotation.cpp: Wrong Version 0.1.2
 #endif
 
 #include "Rotation.h"
@@ -13,14 +13,14 @@
 using namespace Angler;
 using namespace Angler::Nodes;
 
-Rotation::Rotation(Node *parent, float rotation)
-	: Transformation(parent), mRotation(rotation)
+Rotation::Rotation(unsigned long id, Node *parent, float rotation)
+	: Transformation(id, parent), mRotation(rotation)
 {
 
 }
 
-Rotation::Rotation(float rotation)
-	: Transformation(), mRotation(rotation)
+Rotation::Rotation(unsigned long id, float rotation)
+	: Transformation(id), mRotation(rotation)
 {
 
 }

@@ -1,11 +1,11 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_TRANSFORMATION_H
 #define INC_TRANSFORMATION_H
 
-#ifdef ANGLER_0_1_1
+#ifdef ANGLER_0_1_2
 
 #include "Node.h"
 
@@ -20,8 +20,8 @@ namespace Angler
 		{
 		public:
 			//Standard node constructors
-			Transformation();
-			Transformation(Node *parent);
+			Transformation(unsigned long id);
+			Transformation(unsigned long id, Node *parent);
 
 			//Transforms a lone vector with this object
 			sf::Vector2f transform(sf::Vector2f v);
@@ -47,7 +47,7 @@ namespace Angler
 }
 
 #else
-#error Transformation.h: Wrong Version 0.1.1
+#error Transformation.h: Wrong Version 0.1.2
 #endif
 
 #endif

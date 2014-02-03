@@ -1,11 +1,11 @@
-//Version: 0.1.1
+//Version: 0.1.2
 //Author: Jakob Pipping
 //Contributors: 
 
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
-#ifdef ANGLER_0_1_1
+#ifdef ANGLER_0_1_2
 
 #include "Graphics.h"
 
@@ -77,7 +77,7 @@ namespace Angler
 }
 
 #else
-#error Game.h: Wrong Version 0.1.1
+#error Game.h: Wrong Version 0.1.2
 #endif
 
 #endif
