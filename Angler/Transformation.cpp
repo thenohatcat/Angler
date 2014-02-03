@@ -43,7 +43,7 @@ void Transformation::transform(Node *n)
 
 	Node *node = n;
 
-	while (node->getParent() != nullptr)
+	while (node != nullptr)
 	{
 		if (Angler::HelpFunctions::isDerivedFrom<Transformation>(node))
 			transf.push_back((Transformation*)node);

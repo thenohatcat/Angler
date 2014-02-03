@@ -79,3 +79,11 @@ unsigned long Node::getID()
 {
 	return mID;
 }
+
+Node Node::getIsolated()
+{
+	//Isolates this node to be able to run it without the hierarchy
+	Node n(*this);
+	n.mParent = 0;
+	return n;
+}

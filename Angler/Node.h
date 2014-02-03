@@ -2,6 +2,9 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// + added		Node getIsolated()
+
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
@@ -40,6 +43,8 @@ namespace Angler
 		Node *getParent();
 
 		unsigned long getID();
+
+		Node getIsolated();
 
 	protected:
 		Node *mParent;

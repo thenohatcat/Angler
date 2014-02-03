@@ -2,6 +2,10 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+//Changed the functionality in transform as it skipped the root node if it 
+//wasn't a Node (i.e. a lone transformation won't work)
+
 #ifndef INC_TRANSFORMATION_H
 #define INC_TRANSFORMATION_H
 
