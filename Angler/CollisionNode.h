@@ -2,12 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-// - removed		CollisionNode(const std::vector<sf::Vector2f>&)
-// - removed		CollisionNode(Node*, const std::vector<sf::Vector2f>&)
-// + added		CollisionNode(unsigned long, const std::vector<sf::Vector2f>&)
-// + added		CollisionNode(unsigned long, Node*, const std::vector<sf::Vector2f>&)
-
 #ifndef INC_COLLISIONNODE_H
 #define INC_COLLISIONNODE_H
 

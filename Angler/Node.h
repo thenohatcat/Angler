@@ -2,14 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-// - removed	Node()
-// - removed	Node(Node*)
-// + added		Node(unsigned long)
-// + added		Node(unsigned long, Node*)
-// + added		unsigned long getID();
-// + added		unsigned long mID;
-
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
