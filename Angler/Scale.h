@@ -2,16 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-//- removed		Scale(float, float)
-//- removed		Scale(sf::Vector2f)
-//- removed		Scale(Node*, float, float)
-//- removed		Scale(Node*, sf::Vector2f)
-//+ added		Scale(unsigned long, float, float)
-//+ added		Scale(unsigned long, sf::Vector2f)
-//+ added		Scale(unsigned long, Node*, float, float)
-//+ added		Scale(unsigned long, Node*, sf::Vector2f)
-
 #ifndef INC_SCALE_H
 #define INC_SCALE_H
 
