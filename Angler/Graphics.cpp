@@ -255,3 +255,8 @@ int GraphicsEngine::getHeight()
 {
 	return mWindow->getSize().y;
 }
+
+void GraphicsEngine::close()
+{
+	mWindow->close();
+}

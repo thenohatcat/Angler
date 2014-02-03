@@ -2,6 +2,9 @@
 //Author: Jakob Pipping
 //Contributors: 
 
+//Changelog:
+// + added		void close()
+
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
@@ -40,6 +43,8 @@ namespace Angler
 
 		//Wrapper for the same function in GraphicsEngine
 		void loadTexture(sf::Texture* texture, const char* fileName);
+
+		void close();
 
 	protected:
 		Angler::Graphics::GraphicsEngine* mGraphics;

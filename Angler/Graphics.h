@@ -2,6 +2,10 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// + added		void draw(int, sf::Texture*) (implemention)
+// + added		void close()
+
 #ifndef INC_GRAPHICS_H
 #define INC_GRAPHICS_H
 
@@ -82,6 +86,8 @@ namespace Angler
 
 			//Renders to the screen
 			void display();
+
+			void close();
 
 			int getWidth(), getHeight();
 

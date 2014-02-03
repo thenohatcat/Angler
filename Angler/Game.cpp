@@ -147,3 +147,8 @@ int Game::getHeight()
 {
 	return mGraphics->getHeight();
 }
+
+void Game::close()
+{
+	mGraphics->close();
+}
