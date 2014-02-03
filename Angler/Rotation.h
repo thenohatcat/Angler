@@ -2,6 +2,13 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// - removed	Rotation(float)
+// - removed	Rotation(Node*, float)
+// + added		Rotation(unsigned long, float)
+// + added		Rotation(unsigned long, Node*, float)
+
+
 #ifndef INC_ROTATION_H
 #define INC_ROTATION_H
 

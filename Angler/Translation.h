@@ -2,6 +2,16 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// - removed	Translation(float, float)
+// - removed	Translation(sf::Vector2f)
+// - removed	Translation(Node*, float, float)
+// - removed	Translation(Node*, sf::Vector2f)
+// + added		Translation(unsigned long, float, float)
+// + added		Translation(unsigned long, sf::Vector2f)
+// + added		Translation(unsigned long, Node*, float, float)
+// + added		Translation(unsigned long, Node*, sf::Vector2f)
+
 #ifndef INC_TRANSLATION_H
 #define INC_TRANLSATION_H
 

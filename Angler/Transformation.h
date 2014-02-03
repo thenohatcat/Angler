@@ -2,6 +2,12 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// - removed	Transformation();
+// - removed	Transformation(Node*);
+// + added		Transformation(unsigned long);
+// + added		Transformation(unsigned long, Node*);
+
 #ifndef INC_TRANSFORMATION_H
 #define INC_TRANSFORMATION_H
 

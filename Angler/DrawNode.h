@@ -2,6 +2,16 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// - removed	DrawNode(Node*, int, sf::Texture*, float, float)
+// - removed	DrawNode(Node*, int, sf::Texture*, sf::Vector2f)
+// - removed	DrawNode(int, sf::Texture*, float, float)
+// - removed	DrawNode(int, sf::Texture*, sf::Vector2f)
+// + added		DrawNode(unsigned long, Node*, int, sf::Texture*, float, float)
+// + added		DrawNode(unsigned long, Node*, int, sf::Texture*, sf::Vector2f)
+// + added		DrawNode(unsigned long, int, sf::Texture*, float, float)
+// + added		DrawNode(unsigned long, int, sf::Texture*, sf::Vector2f)
+
 #ifndef INC_DRAWNODE_H
 #define INC_DRAWNODE_H
 
