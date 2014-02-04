@@ -2,6 +2,16 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// Corrected inverted matrix orientation in transformation
+
+//Discovered bugs:
+// Bug-Angler-J-0002: 	Transformations mirrors along the x axis
+
+//--Solved bugs:
+// Bug-Angler-J-0002: 	Transformations mirrors along the x axis
+// * Solution: Changed matrix creation in transformation
+
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
@@ -27,8 +37,8 @@ namespace Angler
 			static sf::Vector2f transform(double *matrix, sf::Vector2f vIn)
 			{
 				glm::mat2 m(
-					matrix[0], matrix[1],
-					matrix[4], matrix[5]);
+					matrix[0], matrix[4],
+					matrix[1], matrix[5]);
 	
 				glm::vec2 v = glm::vec2(vIn.x, vIn.y) * m + glm::vec2(matrix[12], matrix[13]);
 				return sf::Vector2f(v.x, v.y);
