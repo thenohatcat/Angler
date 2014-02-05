@@ -1,14 +1,15 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
 //Changelog:
 // + added		Node getIsolated()
+// + added		std::vector<Node*> getChildren()
 
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
-#ifdef ANGLER_0_1_2
+#ifdef ANGLER_0_1_3
 
 #include <vector>
 
@@ -44,6 +45,8 @@ namespace Angler
 
 		unsigned long getID();
 
+		std::vector<Node*> getChildren();
+
 		Node getIsolated();
 
 	protected:
@@ -63,7 +66,7 @@ namespace Angler
 }
 
 #else
-#error Node.h: Wrong Version 0.1.2
+#error Node.h: Wrong Version 0.1.3
 #endif
 
 #endif

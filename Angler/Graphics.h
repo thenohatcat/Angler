@@ -1,4 +1,4 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
@@ -9,7 +9,7 @@
 #ifndef INC_GRAPHICS_H
 #define INC_GRAPHICS_H
 
-#ifdef ANGLER_0_1_2
+#ifdef ANGLER_0_1_3
 
 #include <SFML\Graphics.hpp>
 #include <SFML\System.hpp>
@@ -121,7 +121,7 @@ namespace Angler
 }
 
 #else
-#error Graphics.h: Wrong Version 0.1.2
+#error Graphics.h: Wrong Version 0.1.3
 #endif
 
 #endif

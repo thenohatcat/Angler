@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_2
-#error Graphics.cpp: Wrong Version 0.1.2
+#ifndef ANGLER_0_1_3
+#error Graphics.cpp: Wrong Version 0.1.3
 #endif
 
 #include "Graphics.h"
@@ -182,7 +182,12 @@ void GraphicsEngine::mClear()
 {
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
-		mLayers[layer].clear();
+		//mLayers[layer].clear();
+		while (mLayers[layer].size() > 0)
+		{
+			delete mLayers[layer].back();
+			mLayers[layer].pop_back();
+		}
 	}
 }
 
