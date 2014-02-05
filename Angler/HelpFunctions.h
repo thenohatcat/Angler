@@ -1,14 +1,15 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
-#ifdef ANGLER_0_1_2
+#ifdef ANGLER_0_1_3
 
 #include <SFML\System\Vector2.hpp>
 #include <glm\mat4x4.hpp>
+#include <vector>
 
 namespace Angler
 {
@@ -21,14 +22,54 @@ namespace Angler
 			return (dynamic_cast<T*>(p) == p);
 		}
 
+		static std::vector<Node*> getAnscestors(Node *node)
+		{
+			std::vector<Node*> ntr;
+			while (node != nullptr)
+			{
+				if (Angler::HelpFunctions::isDerivedFrom<Angler::Nodes::Transformation>(node))
+					ntr.push_back((Angler::Nodes::Transformation*)node);
+
+				node = node->getParent();
+			}
+
+			return ntr;
+		}
+
+		//Returns all nodes that descend from this, in a depth first manner
+		static std::vector<Node*> getDescendants(Node *node)
+		{
+			std::vector<Angler::Node*> nds;
+
+			std::vector<Angler::Node*> nxt;
+			nxt.push_back(node);
+
+			Angler::Node *n;
+			while (nxt.size() > 0)
+			{
+				n = nxt.back();
+				nxt.pop_back();
+
+				nds.push_back(n);
+
+				std::vector<Angler::Node*> v = n->getChildren();
+				for (int i = 0; i < v.size(); i++)
+				{
+					nxt.push_back(v.at(v.size() - 1 - i));
+				}
+			}
+
+			return nds;
+		}
+
 		namespace Geometry
 		{
 			//Transforms a vector with a matrix
 			static sf::Vector2f transform(double *matrix, sf::Vector2f vIn)
 			{
 				glm::mat2 m(
-					matrix[0], matrix[1],
-					matrix[4], matrix[5]);
+					matrix[0], matrix[4],
+					matrix[1], matrix[5]);
 	
 				glm::vec2 v = glm::vec2(vIn.x, vIn.y) * m + glm::vec2(matrix[12], matrix[13]);
 				return sf::Vector2f(v.x, v.y);
@@ -184,7 +225,7 @@ namespace Angler
 }
 
 #else
-#error HelpFunctions.h: Wrong Version 0.1.2
+#error HelpFunctions.h: Wrong Version 0.1.3
 #endif
 
 #endif

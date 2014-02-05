@@ -165,3 +165,33 @@ Translation:
 --Solved bugs:
 
 --Bugs:
+
+-v0.1.3
+Game:
+ + added	void close()
+
+Graphics:
+ + added	void draw(int, sf::Texture*) (implemention)
+ + added	void close()
+
+HelpFunctions:
+ Corrected inverted matrix orientation in transformation
+ + added	std::vector<Node*> getDescendants(Node*)
+ + added	std::vector<Node*> getAnscestors(Node*)
+
+Node:
+ + added	Node getIsolated()
+ + added	std::vector<Node*> getChildren()
+
+Transformation:
+ Changed the functionality in transform as it skipped the root node if it 
+ wasn't a Node (i.e. a lone transformation won't work)
+
+--Discovered bugs:
+ Bug-Angler-J-0002: 	Transformations mirrors along the x axis
+
+--Solved bugs:
+ Bug-Angler-J-0002: 	Transformations mirrors along the x axis
+ * Solution: Changed matrix creation in transformation
+
+--Bugs:
