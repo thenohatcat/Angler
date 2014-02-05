@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_2
-#error Node.cpp: Wrong Version 0.1.2
+#ifndef ANGLER_0_1_3
+#error Node.cpp: Wrong Version 0.1.3
 #endif
 
 #include "Node.h"
@@ -78,4 +78,17 @@ Node* Node::getParent()
 unsigned long Node::getID()
 {
 	return mID;
+}
+
+Node Node::getIsolated()
+{
+	//Isolates this node to be able to run it without the hierarchy
+	Node n(*this);
+	n.mParent = 0;
+	return n;
+}
+
+std::vector<Node*> Node::getChildren()
+{
+	return std::vector<Node*>(mChildren);
 }

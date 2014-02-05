@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_2
-#error Translation.cpp: Wrong Version 0.1.2
+#ifndef ANGLER_0_1_3
+#error Translation.cpp: Wrong Version 0.1.3
 #endif
 
 #include "Translation.h"

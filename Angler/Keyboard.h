@@ -1,11 +1,11 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_KEYBOARD_H
 #define INC_KEYBOARD_H
 
-#ifdef ANGLER_0_1_2
+#ifdef ANGLER_0_1_3
 
 #include <SFML\Window\Keyboard.hpp>
 
@@ -63,7 +63,7 @@ namespace Angler
 }
 
 #else
-#error Keyboard.h: Wrong Version 0.1.2
+#error Keyboard.h: Wrong Version 0.1.3
 #endif
 
 #endif

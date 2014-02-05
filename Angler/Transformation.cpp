@@ -1,9 +1,9 @@
-//Version: 0.1.2
+//Version: 0.1.3
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_2
-#error Transformation.cpp: Wrong Version 0.1.2
+#ifndef ANGLER_0_1_3
+#error Transformation.cpp: Wrong Version 0.1.3
 #endif
 
 #include "Transformation.h"
@@ -39,16 +39,15 @@ void Transformation::transform(Node *n)
 {
 	glLoadIdentity();
 
+	std::vector<Node*> ansc = HelpFunctions::getAnscestors(n);
 	std::vector<Transformation*> transf;
 
 	Node *node = n;
 
-	while (node->getParent() != nullptr)
+	for (int i = 0; i < ansc.size(); i++)
 	{
-		if (Angler::HelpFunctions::isDerivedFrom<Transformation>(node))
-			transf.push_back((Transformation*)node);
-
-		node = node->getParent();
+		if (HelpFunctions::isDerivedFrom<Transformation>(ansc.at(i)))
+			transf.push_back((Transformation*)ansc.at(i));
 	}
 
 	for (std::vector<Transformation*>::const_iterator i = transf.end(); i != transf.begin();)
@@ -87,6 +86,8 @@ void Transformation::transform(Node *n, std::vector<sf::Vector2f> vIn, std::vect
 	{
 		vOut->push_back(vOutA[i]);
 	}
+	delete vInA;
+	delete vOutA;
 }
 
 void Transformation::transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count)
