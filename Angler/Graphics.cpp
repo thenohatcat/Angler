@@ -21,13 +21,27 @@ using namespace Angler::Exceptions::Graphics;
 
 GraphicsEngine::GraphicsEngine(Game *parent, int numLayers)
 	: mParent(parent), mNumLayers(numLayers), 
-	mLayers(new GraphicElementVector[numLayers]), mRunning(false)
+	//mLayers(new GraphicElementVector[numLayers]), 
+	mRunning(false)
 {
+	mLayers = new GraphicElement**[mNumLayers];
+	mIndx = new int[mNumLayers];
+
 	for (int layer = 0; layer < mNumLayers; layer++)
+	{
+		mIndx[layer] = 0;
+		mLayers[layer] = new GraphicElement*[MAX_ELEMENTS];
+		for (int i = 0; i < MAX_ELEMENTS; i++)
+		{
+			mLayers[layer][i] = new GraphicElement();
+		}
+	}
+
+	/*for (int layer = 0; layer < mNumLayers; layer++)
 	{
 		mLayers[layer] = GraphicElementVector(MAX_ELEMENTS);
 		mLayers[layer].clear();
-	}
+	}*/
 }
 
 GraphicsEngine::~GraphicsEngine()
@@ -49,6 +63,8 @@ void GraphicsEngine::begin()
 		mClear();
 
 		mRunning = true;
+
+		mOldTexture = nullptr;
 
 		//Must be done every frame, as SFML does it's own wiewframe code
 		glMatrixMode(GL_PROJECTION);
@@ -105,9 +121,12 @@ void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float origi
 		glGetDoublev(GL_MODELVIEW_MATRIX, matrix);
 
 		//And pushes back a GraphicElement to be used later
-		mLayers[layer].push_back(new GraphicElement(matrix, originX, originY, 
+		/*mLayers[layer].push_back(new GraphicElement(matrix, originX, originY, 
 			cropOriginX, cropOriginY, cropWidth, cropHeight,
-			r, g, b, a, tx));
+			r, g, b, a, tx));*/
+		*(mLayers[layer][mIndx[layer]++]) = GraphicElement(matrix, originX, originY, 
+			cropOriginX, cropOriginY, cropWidth, cropHeight,
+			r, g, b, a, tx);
 	}
 	else
 	{
@@ -182,12 +201,14 @@ void GraphicsEngine::mClear()
 {
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
-		//mLayers[layer].clear();
-		while (mLayers[layer].size() > 0)
-		{
-			delete mLayers[layer].back();
-			mLayers[layer].pop_back();
-		}
+		mIndx[layer] = 0;
+
+		////mLayers[layer].clear();
+		//while (mLayers[layer].size() > 0)
+		//{
+		//	delete mLayers[layer].back();
+		//	mLayers[layer].pop_back();
+		//}
 	}
 }
 
@@ -199,10 +220,14 @@ void GraphicsEngine::mRender()
 	//Iterates over each layer, back to front, and renders all elements
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
-		for (GraphicElementVector::const_iterator element = mLayers[layer].begin(); 
+		/*for (GraphicElementVector::const_iterator element = mLayers[layer].begin(); 
 			element != mLayers[layer].end(); element++)
 		{
 			mDrawElement(*element);
+		}*/
+		for (int i = 0; i < mIndx[layer]; i++)
+		{
+			mDrawElement(mLayers[layer][i]);
 		}
 	}
 	glPopMatrix();
@@ -210,7 +235,11 @@ void GraphicsEngine::mRender()
 
 void GraphicsEngine::mDrawElement(GraphicElement *element)
 {
-	sf::Texture::bind(element->mTexture);
+	if (mOldTexture != element->mTexture)
+	{
+		sf::Texture::bind(element->mTexture);
+		mOldTexture = element->mTexture;
+	}
 
 	glPushMatrix();
 	//Loads the matrix stored in element into graphics

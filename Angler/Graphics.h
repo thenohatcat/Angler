@@ -26,6 +26,7 @@ namespace Angler
 			GraphicElement(GLdouble matrix[16], float originX, float originY,
 				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
 				float r, float g, float b, float a, sf::Texture *texture);
+			GraphicElement();
 
 		private:
 			GLdouble mMatrix[16];
@@ -36,7 +37,7 @@ namespace Angler
 		};
 
 		//Maximum number of elements per layer
-		#define MAX_ELEMENTS 1024
+		#define MAX_ELEMENTS 512
 
 		class GraphicsEngine final
 		{
@@ -99,8 +100,10 @@ namespace Angler
 
 			int mNumLayers;
 
-			typedef std::vector<GraphicElement*> GraphicElementVector;
-			GraphicElementVector *mLayers;
+			//typedef std::vector<GraphicElement*> GraphicElementVector;
+			//GraphicElementVector *mLayers;
+			GraphicElement ***mLayers;
+			int *mIndx;
 
 			//Clears the layers
 			void mClear();
@@ -112,6 +115,8 @@ namespace Angler
 			void mDrawElement(GraphicElement *element);
 
 			bool mRunning;
+
+			sf::Texture *mOldTexture;
 		};
 	}
 }

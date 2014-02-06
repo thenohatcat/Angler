@@ -22,3 +22,8 @@ GraphicElement::GraphicElement(GLdouble matrix[16], float originX, float originY
 {
 	memcpy(mMatrix, matrix, 16 * sizeof(GLdouble));
 }
+
+GraphicElement::GraphicElement()
+{
+
+}
