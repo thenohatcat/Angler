@@ -1,11 +1,11 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_ROTATION_H
 #define INC_ROTATION_H
 
-#ifdef ANGLER_0_1_3
+#ifdef ANGLER_0_1_4
 
 #include "Transformation.h"
 
@@ -40,7 +40,7 @@ namespace Angler
 }
 
 #else
-#error Rotation.h: Wrong Version 0.1.3
+#error Rotation.h: Wrong Version 0.1.4
 #endif
 
 #endif

@@ -1,9 +1,9 @@
-//Version: 0.1.3
+//Version: 0.1.4
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_3
-#error Graphics.cpp: Wrong Version 0.1.3
+#ifndef ANGLER_0_1_4
+#error Graphics.cpp: Wrong Version 0.1.4
 #endif
 
 #include "Graphics.h"
@@ -20,9 +20,7 @@ using namespace Angler::Graphics;
 using namespace Angler::Exceptions::Graphics;
 
 GraphicsEngine::GraphicsEngine(Game *parent, int numLayers)
-	: mParent(parent), mNumLayers(numLayers), 
-	//mLayers(new GraphicElementVector[numLayers]), 
-	mRunning(false)
+	: mParent(parent), mNumLayers(numLayers), mRunning(false)
 {
 	mLayers = new GraphicElement**[mNumLayers];
 	mIndx = new int[mNumLayers];
@@ -36,12 +34,6 @@ GraphicsEngine::GraphicsEngine(Game *parent, int numLayers)
 			mLayers[layer][i] = new GraphicElement();
 		}
 	}
-
-	/*for (int layer = 0; layer < mNumLayers; layer++)
-	{
-		mLayers[layer] = GraphicElementVector(MAX_ELEMENTS);
-		mLayers[layer].clear();
-	}*/
 }
 
 GraphicsEngine::~GraphicsEngine()
@@ -120,10 +112,6 @@ void GraphicsEngine::draw(int layer, sf::Texture *tx, float originX, float origi
 		GLdouble matrix[16];
 		glGetDoublev(GL_MODELVIEW_MATRIX, matrix);
 
-		//And pushes back a GraphicElement to be used later
-		/*mLayers[layer].push_back(new GraphicElement(matrix, originX, originY, 
-			cropOriginX, cropOriginY, cropWidth, cropHeight,
-			r, g, b, a, tx));*/
 		*(mLayers[layer][mIndx[layer]++]) = GraphicElement(matrix, originX, originY, 
 			cropOriginX, cropOriginY, cropWidth, cropHeight,
 			r, g, b, a, tx);
@@ -202,13 +190,6 @@ void GraphicsEngine::mClear()
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
 		mIndx[layer] = 0;
-
-		////mLayers[layer].clear();
-		//while (mLayers[layer].size() > 0)
-		//{
-		//	delete mLayers[layer].back();
-		//	mLayers[layer].pop_back();
-		//}
 	}
 }
 
@@ -220,11 +201,6 @@ void GraphicsEngine::mRender()
 	//Iterates over each layer, back to front, and renders all elements
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
-		/*for (GraphicElementVector::const_iterator element = mLayers[layer].begin(); 
-			element != mLayers[layer].end(); element++)
-		{
-			mDrawElement(*element);
-		}*/
 		for (int i = 0; i < mIndx[layer]; i++)
 		{
 			mDrawElement(mLayers[layer][i]);
