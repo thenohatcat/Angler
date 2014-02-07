@@ -85,36 +85,5 @@ std::vector<sf::Vector2f> CollisionNode::getPoints()
 
 void CollisionNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
-	//Renders the bounding box of this object
-	std::vector<sf::Vector2f> tmPoints;
-
-	Transformation::transform(this, mPoints, &tmPoints);
-
-	sf::Vector2f ul, lr;
-	getBoundingPoints(&tmPoints, &ul, &lr);
-
-	glPushMatrix();
-
-	glLoadIdentity();
-
-	gluLookAt(0, 0, 1, 0, 0, 0, 0, 1, 0);
-
-	glColor3d(1, 0, 0);
-	glBegin(GL_LINES);
-		glVertex2d(lr.x, lr.y);
-		glVertex2d(lr.x, ul.y);
-
-		glVertex2d(lr.x, ul.y);
-		glVertex2d(ul.x, ul.y);
-
-		glVertex2d(ul.x, ul.y);
-		glVertex2d(ul.x, lr.y);
-
-		glVertex2d(ul.x, lr.y);
-		glVertex2d(lr.x, lr.y);
-	glEnd();
-
-	glPopMatrix();
-
 	mDrawChildren(context, graphics, time, deltaTime);
 }
