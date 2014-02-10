@@ -2,6 +2,11 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// + added		Node* getNode(unsigned long, Node*)
+// + added		Node* getRoot(Node*)
+// + added		std::vector<Node*> getRelatives(Node*)
+
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
@@ -22,44 +27,86 @@ namespace Angler
 			return (dynamic_cast<T*>(p) == p);
 		}
 
-		static std::vector<Node*> getAnscestors(Node *node)
+		namespace Nodes
 		{
-			std::vector<Node*> ntr;
-			while (node != nullptr)
+			static Node* getNode(unsigned long id, Node *node)
 			{
-				if (Angler::HelpFunctions::isDerivedFrom<Angler::Nodes::Transformation>(node))
-					ntr.push_back((Angler::Nodes::Transformation*)node);
+				std::vector<Angler::Node*> nxt;
+				nxt.push_back(node);
 
-				node = node->getParent();
-			}
-
-			return ntr;
-		}
-
-		//Returns all nodes that descend from this, in a depth first manner
-		static std::vector<Node*> getDescendants(Node *node)
-		{
-			std::vector<Angler::Node*> nds;
-
-			std::vector<Angler::Node*> nxt;
-			nxt.push_back(node);
-
-			Angler::Node *n;
-			while (nxt.size() > 0)
-			{
-				n = nxt.back();
-				nxt.pop_back();
-
-				nds.push_back(n);
-
-				std::vector<Angler::Node*> v = n->getChildren();
-				for (int i = 0; i < v.size(); i++)
+				Angler::Node *n;
+				while (nxt.size() > 0)
 				{
-					nxt.push_back(v.at(v.size() - 1 - i));
+					n = nxt.back();
+					nxt.pop_back();
+
+					if (n->getID() == id)
+						return n;
+
+					std::vector<Angler::Node*> v = n->getChildren();
+					for (int i = 0; i < v.size(); i++)
+					{
+						nxt.push_back(v.at(v.size() - 1 - i));
+					}
 				}
+
+				return nullptr;
 			}
 
-			return nds;
+			static std::vector<Node*> getAnscestors(Node *node)
+			{
+				std::vector<Node*> ntr;
+				while (node != nullptr)
+				{
+					if (Angler::HelpFunctions::isDerivedFrom<Angler::Nodes::Transformation>(node))
+						ntr.push_back((Angler::Nodes::Transformation*)node);
+
+					node = node->getParent();
+				}
+
+				return ntr;
+			}
+
+			static Node* getRoot(Node *node)
+			{
+				Node *ntr = node;
+				while (ntr->getParent() != nullptr)
+				{
+					ntr = ntr->getParent();
+				}
+				return ntr;
+			}
+
+			//Returns all nodes that descend from this, in a depth first manner
+			static std::vector<Node*> getDescendants(Node *node)
+			{
+				std::vector<Angler::Node*> nds;
+
+				std::vector<Angler::Node*> nxt;
+				nxt.push_back(node);
+
+				Angler::Node *n;
+				while (nxt.size() > 0)
+				{
+					n = nxt.back();
+					nxt.pop_back();
+
+					nds.push_back(n);
+
+					std::vector<Angler::Node*> v = n->getChildren();
+					for (int i = 0; i < v.size(); i++)
+					{
+						nxt.push_back(v.at(v.size() - 1 - i));
+					}
+				}
+
+				return nds;
+			}
+
+			static std::vector<Node*> getRelatives(Node *node)
+			{
+				return getDescendants(getRoot(node));
+			}
 		}
 
 		namespace Geometry

@@ -15,6 +15,8 @@
 #include "HelpFunctions.h"
 
 using namespace Angler::Nodes;
+using namespace Angler::HelpFunctions;
+using namespace Angler::HelpFunctions::Nodes;
 
 Transformation::Transformation(unsigned long id)
 	: Node(id)
@@ -39,14 +41,14 @@ void Transformation::transform(Node *n)
 {
 	glLoadIdentity();
 
-	std::vector<Node*> ansc = HelpFunctions::getAnscestors(n);
+	std::vector<Node*> ansc = getAnscestors(n);
 	std::vector<Transformation*> transf;
 
 	Node *node = n;
 
 	for (int i = 0; i < ansc.size(); i++)
 	{
-		if (HelpFunctions::isDerivedFrom<Transformation>(ansc.at(i)))
+		if (isDerivedFrom<Transformation>(ansc.at(i)))
 			transf.push_back((Transformation*)ansc.at(i));
 	}
 

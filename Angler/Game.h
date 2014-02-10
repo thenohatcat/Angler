@@ -43,6 +43,13 @@ namespace Angler
 
 		void close();
 
+		virtual void throwEvent(int type, ... ) = 0;
+
+		typedef enum
+		{
+			Collide
+		} Events;
+
 	protected:
 		Angler::Graphics::GraphicsEngine* mGraphics;
 		Node* mSceneRoot;
