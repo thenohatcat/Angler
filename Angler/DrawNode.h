@@ -30,7 +30,13 @@ namespace Angler
 
 			void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 
-		private:
+			void setOrigin(sf::Vector2f origin);
+			void setOrigin(float x, float y);
+			sf::Vector2f getOrigin();
+			float getOriginX();
+			float getOriginY();
+
+		protected:
 			int mLayer;
 			sf::Texture *mTX;
 			float mOX, mOY;

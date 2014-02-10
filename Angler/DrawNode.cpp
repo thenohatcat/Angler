@@ -41,3 +41,29 @@ void DrawNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, f
 
 	mDrawChildren(context, graphics, time, deltaTime);
 }
+
+void DrawNode::setOrigin(float x, float y)
+{
+	mOX = x;
+	mOY = y;
+}
+
+void DrawNode::setOrigin(sf::Vector2f origin)
+{
+	setOrigin(origin.x, origin.y);
+}
+
+sf::Vector2f DrawNode::getOrigin()
+{
+	return sf::Vector2f(getOriginX(), getOriginY());
+}
+
+float DrawNode::getOriginX()
+{
+	return mOX;
+}
+
+float DrawNode::getOriginY()
+{
+	return mOY;
+}

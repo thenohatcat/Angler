@@ -13,7 +13,7 @@
 #ifdef ANGLER_0_1_4
 
 #include <SFML\System\Vector2.hpp>
-#include <glm\mat4x4.hpp>
+#include <glm\matrix.hpp>
 #include <vector>
 
 namespace Angler
