@@ -203,3 +203,23 @@ Transformation:
 --Solved bugs:
 
 --Bugs:
+
+-v0.1.5
+Changelog:
+
+HelpFunctions:
+ + added	Node* getNode(unsigned long, Node*)
+ + added	Node* getRoot(Node*)
+ + added	std::vector<Node*> getRelatives(Node*)
+
+SpriteNode:
+ added
+
+SoundEngine:
+ added
+
+--Discovered bugs:
+
+--Solved bugs:
+
+--Bugs:

@@ -2,11 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-// + added		Node* getNode(unsigned long, Node*)
-// + added		Node* getRoot(Node*)
-// + added		std::vector<Node*> getRelatives(Node*)
-
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
