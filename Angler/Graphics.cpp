@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_4
-#error Graphics.cpp: Wrong Version 0.1.4
+#ifndef ANGLER_0_1_5
+#error Graphics.cpp: Wrong Version 0.1.5
 #endif
 
 #include "Graphics.h"
@@ -27,12 +27,12 @@ GraphicsEngine::GraphicsEngine(Game *parent, int numLayers)
 
 	for (int layer = 0; layer < mNumLayers; layer++)
 	{
-		mIndx[layer] = 0;
 		mLayers[layer] = new GraphicElement*[MAX_ELEMENTS];
 		for (int i = 0; i < MAX_ELEMENTS; i++)
 		{
 			mLayers[layer][i] = new GraphicElement();
 		}
+		mIndx[layer] = 0;
 	}
 }
 

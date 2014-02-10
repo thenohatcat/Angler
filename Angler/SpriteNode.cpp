@@ -1,3 +1,11 @@
+//Version: 0.1.5
+//Author: Jakob Pipping
+//Contributors: 
+
+#ifndef ANGLER_0_1_5
+#error SpriteNode.cpp: Wrong Version 0.1.5
+#endif
+
 #include "SpriteNode.h"
 
 using namespace Angler;

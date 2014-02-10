@@ -1,9 +1,9 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_4
-#error DrawNode.cpp: Wrong Version 0.1.4
+#ifndef ANGLER_0_1_5
+#error DrawNode.cpp: Wrong Version 0.1.5
 #endif
 
 #include "DrawNode.h"

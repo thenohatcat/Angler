@@ -1,4 +1,4 @@
-//Version: 0.1.4
+//Version: 0.1.5
 //Author: Jakob Pipping
 //Contributors:
 
@@ -10,7 +10,7 @@
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
-#ifdef ANGLER_0_1_4
+#ifdef ANGLER_0_1_5
 
 #include <SFML\System\Vector2.hpp>
 #include <glm\matrix.hpp>
@@ -18,6 +18,11 @@
 
 namespace Angler
 {
+	namespace Nodes
+	{
+		class Transformation;
+	}
+
 	namespace HelpFunctions
 	{
 		//Determines if a certain class is derived from another
@@ -58,8 +63,7 @@ namespace Angler
 				std::vector<Node*> ntr;
 				while (node != nullptr)
 				{
-					if (Angler::HelpFunctions::isDerivedFrom<Angler::Nodes::Transformation>(node))
-						ntr.push_back((Angler::Nodes::Transformation*)node);
+					ntr.push_back(node);
 
 					node = node->getParent();
 				}
@@ -272,7 +276,7 @@ namespace Angler
 }
 
 #else
-#error HelpFunctions.h: Wrong Version 0.1.4
+#error HelpFunctions.h: Wrong Version 0.1.5
 #endif
 
 #endif

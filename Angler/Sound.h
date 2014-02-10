@@ -1,11 +1,11 @@
-//Version: 0.1.4
-//Author: 
+//Version: 0.1.5
+//Author: Oskar Engblad
 //Contributors: Jakob Pipping
 
 #ifndef INC_SOUND_H
 #define INC_SOUND_H
 
-#ifdef ANGLER_0_1_4
+#ifdef ANGLER_0_1_5
 
 namespace Angler
 {
@@ -18,11 +18,15 @@ namespace Angler
 		public:
 			SoundEngine(Game *parent);
 
-			playSound();
-			stopSound();
-			getStatus();
-			getPosition();
-			setPosition();
+			void playSound(sf::Sound *s);
+			void pauseSound(sf::Sound *s);
+			void stopSound(sf::Sound *s);
+			float getVolume(sf::Sound *s);
+			void setVolume(sf::Sound *s, float x);
+			int getStatus(sf::Sound *s);
+			float getPosition(sf::Sound *s);
+			void setPosition(sf::Sound *s, float x);
+			void crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v);
 
 		private:
 			Game *mParent;
@@ -31,7 +35,7 @@ namespace Angler
 }
 
 #else
-#error Sound.h: Wrong Version 0.1.4
+#error Sound.h: Wrong Version 0.1.5
 #endif
 
 #endif
