@@ -1,9 +1,9 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_5
-#error Game.cpp: Wrong Version 0.1.5
+#ifndef ANGLER_0_1_6
+#error Game.cpp: Wrong Version 0.1.6
 #endif
 
 #include "Game.h"
@@ -34,7 +34,7 @@ Game::~Game()
 void Game::init()
 {
 	//Initializes the graphics engine
-	mGraphics = new GraphicsEngine(this, mNumLayers);
+	mGraphics = new GraphicsEngine(this);
 	mGraphics->createWindow(mWidth, mHeight, mTitle, false);
 
 	mKeyboard = new Keyboard();

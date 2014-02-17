@@ -1,11 +1,13 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Oskar Engblad
 //Contributors: Jakob Pipping
 
 #ifndef INC_SOUND_H
 #define INC_SOUND_H
 
-#ifdef ANGLER_0_1_5
+#ifdef ANGLER_0_1_6
+
+#include <SFML\Audio\Sound.hpp>
 
 namespace Angler
 {
@@ -35,7 +37,7 @@ namespace Angler
 }
 
 #else
-#error Sound.h: Wrong Version 0.1.5
+#error Sound.h: Wrong Version 0.1.6
 #endif
 
 #endif

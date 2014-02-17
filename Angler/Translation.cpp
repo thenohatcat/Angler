@@ -1,14 +1,14 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_5
-#error Translation.cpp: Wrong Version 0.1.5
+#ifndef ANGLER_0_1_6
+#error Translation.cpp: Wrong Version 0.1.6
 #endif
 
 #include "Translation.h"
 
-#include <glut.h>
+#include <SFML\OpenGL.hpp>
 
 using namespace Angler;
 using namespace Angler::Nodes;
@@ -41,24 +41,24 @@ void Translation::setTranslation(float x, float y)
 {
 	mX = x;
 	mY = y;
+	mChanged = true;
 }
 
 void Translation::setTranslation(sf::Vector2f translation)
 {
-	mX = translation.x;
-	mY = translation.y;
+	setTranslation(translation.x, translation.y);
 }
 
 void Translation::translate(float x, float y)
 {
 	mX += x;
 	mY += y;
+	mChanged = true;
 }
 
 void Translation::translate(sf::Vector2f translation)
 {
-	mX += translation.x;
-	mY += translation.y;
+	translate(translation.x, translation.y);
 }
 
 sf::Vector2f Translation::getTranslation()

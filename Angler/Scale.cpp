@@ -1,14 +1,14 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_5
-#error Scale.cpp: Wrong Version 0.1.5
+#ifndef ANGLER_0_1_6
+#error Scale.cpp: Wrong Version 0.1.6
 #endif
 
 #include "Scale.h"
 
-#include <glut.h>
+#include <SFML\OpenGL.hpp>
 
 using namespace Angler;
 using namespace Angler::Nodes;
@@ -41,6 +41,7 @@ void Scale::setScale(float scaleX, float scaleY)
 {
 	mScaleX = scaleX;
 	mScaleY = scaleX;
+	mChanged = true;
 }
 
 void Scale::setScale(sf::Vector2f s)
@@ -52,6 +53,7 @@ void Scale::scale(float scaleX, float scaleY)
 {
 	mScaleX *= scaleX;
 	mScaleY *= scaleY;
+	mChanged = true;
 }
 
 void Scale::scale(sf::Vector2f s)

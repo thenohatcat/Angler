@@ -1,11 +1,11 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors: 
 
 #ifndef INC_SPRITEENGINE_H
 #define INC_SPRITEENGINE_H
 
-#ifdef ANGLER_0_1_5
+#ifdef ANGLER_0_1_6
 
 #include "DrawNode.h"
 
@@ -17,18 +17,17 @@ namespace Angler
 			: public DrawNode
 		{
 		public:
-			SpriteNode(unsigned long id, Node *parent, int layer, sf::Texture *tx, 
-				float ox = 0, float oy = 0, float cropOriginX = 0, float cropOriginY = 0, 
+			SpriteNode(unsigned long id, Node *parent, int layer, float ox = 0, float oy = 0, 
+				float cropOriginX = 0, float cropOriginY = 0, 
 				float cropWidth = 1, float cropHeight = 1);
-			SpriteNode(unsigned long id, Node *parent, int layer, sf::Texture *tx, 
-				sf::Vector2f origo, 
-				sf::Vector2f cropOrigin, 
+			SpriteNode(unsigned long id, Node *parent, int layer, 
+				sf::Vector2f origo, sf::Vector2f cropOrigin, 
 				sf::Vector2f cropSize);
 
-			SpriteNode(unsigned long id, int layer, sf::Texture *tx, 
+			SpriteNode(unsigned long id, int layer, 
 				float ox = 0, float oy = 0, float cropOriginX = 0, float cropOriginY = 0, 
 				float cropWidth = 1, float cropHeight = 1);
-			SpriteNode(unsigned long id, int layer, sf::Texture *tx, 
+			SpriteNode(unsigned long id, int layer, 
 				sf::Vector2f origo, 
 				sf::Vector2f cropOrigin, 
 				sf::Vector2f cropSize);
@@ -56,7 +55,7 @@ namespace Angler
 }
 
 #else
-#error SpriteEngine.h: Wrong Version 0.1.5
+#error SpriteEngine.h: Wrong Version 0.1.6
 #endif
 
 #endif

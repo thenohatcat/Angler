@@ -1,9 +1,9 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Marcus Persson
 //Contributors: Jakob Pipping
 
-#ifndef ANGLER_0_1_5
-#error MechanicsEngine.cpp: Wrong version 0.1.5
+#ifndef ANGLER_0_1_6
+#error MechanicsEngine.cpp: Wrong version 0.1.6
 #endif
 
 
@@ -39,12 +39,12 @@ void MechanicsEngine::doCollide(Node *node)
 
 	for(int i = 0; i < nds.size(); i++)
 	{
-		for(int k = i + 1; k < nds.size(); k++)
-		{
-			if(typeid(*nds[i]) == typeid(CollisionNode) && 
-				typeid(*nds[k]) == typeid(CollisionNode))
-				if(((CollisionNode*)nds[i])->isColliding((CollisionNode*)nds[k]) == 1)
-					mParent->throwEvent(Game::Events::Collide, nds[i], nds[k]);
-		}
+		if (typeid(*nds[i]) == typeid(CollisionNode) && ((CollisionNode*)nds[i])->getType() == 0)
+			for(int k = i+1; k < nds.size(); k++)
+			{
+				if (typeid(*nds[k]) == typeid(CollisionNode))
+					if(((CollisionNode*)nds[i])->isColliding((CollisionNode*)nds[k]) == 1)
+						mParent->throwEvent(Game::Events::Collide, nds[i], nds[k]);
+			}
 	}
 }

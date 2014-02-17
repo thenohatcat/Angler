@@ -1,11 +1,11 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
-#ifdef ANGLER_0_1_5
+#ifdef ANGLER_0_1_6
 
 #include <vector>
 
@@ -35,7 +35,7 @@ namespace Angler
 		virtual void draw(Game *context, Angler::Graphics::GraphicsEngine *graphics, 
 			float time, float deltaTime);
 
-		virtual void update(Game *context, float time, float deltaTime);
+		virtual void update(Game *context, float time, float deltaTime, bool changed = false);
 
 		Node *getParent();
 
@@ -44,6 +44,8 @@ namespace Angler
 		std::vector<Node*> getChildren();
 
 		Node getIsolated();
+
+		bool getChanged();
 
 	protected:
 		Node *mParent;
@@ -54,6 +56,8 @@ namespace Angler
 
 		typedef std::vector<Node*> NodeVector;
 
+		bool mChanged;
+
 	private:
 		NodeVector mChildren;
 
@@ -62,7 +66,7 @@ namespace Angler
 }
 
 #else
-#error Node.h: Wrong Version 0.1.5
+#error Node.h: Wrong Version 0.1.6
 #endif
 
 #endif

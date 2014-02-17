@@ -1,9 +1,9 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Oskar Engblad
 //Contributors: Jakob Pipping
 
-#ifndef ANGLER_0_1_5
-#error SoundEngine.cpp: Wrong Version 0.1.5
+#ifndef ANGLER_0_1_6
+#error SoundEngine.cpp: Wrong Version 0.1.6
 #endif
 
 #include <SFML\Audio.hpp>

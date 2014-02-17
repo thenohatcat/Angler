@@ -1,14 +1,14 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_5
-#error Rotation.cpp: Wrong Version 0.1.5
+#ifndef ANGLER_0_1_6
+#error Rotation.cpp: Wrong Version 0.1.6
 #endif
 
 #include "Rotation.h"
 
-#include <glut.h>
+#include <SFML\OpenGL.hpp>
 
 using namespace Angler;
 using namespace Angler::Nodes;
@@ -29,18 +29,20 @@ void Rotation::setRotation(float rotation)
 {
 	//Modulo with 360, to keep the rotation within [0, 360)
 	mRotation = fmod(rotation, 360);
+	mChanged = true;
 }
 
 void Rotation::rotate(float rotation)
 {
 	//Modulo with 360, to keep the rotation within [0, 360)
 	mRotation = fmod(mRotation + rotation, 360);
+	mChanged = true;
 }
 
 float Rotation::getRotation()
 {
 	//Modulo around 360, to keep the rotation within [0, 360)
-	return fmod(mRotation, 360);
+	return mRotation;
 }
 
 void Rotation::doTransform()

@@ -1,9 +1,9 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_5
-#error Node.cpp: Wrong Version 0.1.5
+#ifndef ANGLER_0_1_6
+#error Node.cpp: Wrong Version 0.1.6
 #endif
 
 #include "Node.h"
@@ -14,13 +14,13 @@ using namespace Angler;
 using namespace Angler::Exceptions;
 
 Node::Node(unsigned long id)
-	: mParent(0), mChildren(), mID(id)
+	: mParent(0), mChildren(), mID(id), mChanged(true)
 {
 
 }
 
 Node::Node(unsigned long id, Node *parent)
-	: mParent(0), mChildren(), mID(id)
+	: mParent(0), mChildren(), mID(id), mChanged(true)
 {
 	parent->addChild(this);
 }
@@ -49,8 +49,10 @@ void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float
 	mDrawChildren(context, graphics, time, deltaTime);
 }
 
-void Node::update(Game* context, float time, float deltaTime)
+void Node::update(Game* context, float time, float deltaTime, bool changed)
 {
+	mChanged |= changed;
+
 	mUpdateChildren(context, time, deltaTime);
 }
 
@@ -66,8 +68,10 @@ void Node::mUpdateChildren(Game* context, float time, float deltaTime)
 {
 	for (NodeVector::iterator i = mChildren.begin(); i != mChildren.end(); i++)
 	{
-		(*i)->update(context, time, deltaTime);
+		(*i)->update(context, time, deltaTime, mChanged);
 	}
+
+	mChanged = false;
 }
 
 Node* Node::getParent()
@@ -78,6 +82,11 @@ Node* Node::getParent()
 unsigned long Node::getID()
 {
 	return mID;
+}
+
+bool Node::getChanged()
+{
+	return mChanged;
 }
 
 Node Node::getIsolated()

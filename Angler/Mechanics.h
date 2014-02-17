@@ -1,11 +1,11 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Marcus Persson
 //Contributors: Jakob Pipping
 
 #ifndef INC_MECHANICS_H
 #define INC_MECHANICS_H
 
-#ifdef ANGLER_0_1_5
+#ifdef ANGLER_0_1_6
 
 namespace Angler
 {
@@ -28,7 +28,7 @@ namespace Angler
 }
 
 #else
-#error Mechanics.h: Wrong Version 0.1.5
+#error Mechanics.h: Wrong Version 0.1.6
 #endif
 
 #endif

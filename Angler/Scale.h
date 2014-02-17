@@ -1,11 +1,11 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_SCALE_H
 #define INC_SCALE_H
 
-#ifdef ANGLER_0_1_5
+#ifdef ANGLER_0_1_6
 
 #include "Transformation.h"
 
@@ -48,7 +48,7 @@ namespace Angler
 }
 
 #else
-#error Scale.h: Wrong Version 0.1.5
+#error Scale.h: Wrong Version 0.1.6
 #endif
 
 #endif

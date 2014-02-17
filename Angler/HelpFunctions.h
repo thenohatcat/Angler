@@ -1,13 +1,14 @@
-//Version: 0.1.5
+//Version: 0.1.6
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
-#ifdef ANGLER_0_1_5
+#ifdef ANGLER_0_1_6
 
 #include <SFML\System\Vector2.hpp>
+#include "Node.h"
 #include <glm\matrix.hpp>
 #include <vector>
 
@@ -111,7 +112,7 @@ namespace Angler
 		namespace Geometry
 		{
 			//Transforms a vector with a matrix
-			static sf::Vector2f transform(double *matrix, sf::Vector2f vIn)
+			static sf::Vector2f transform(float *matrix, sf::Vector2f vIn)
 			{
 				glm::mat2 m(
 					matrix[0], matrix[4],
@@ -121,7 +122,11 @@ namespace Angler
 				return sf::Vector2f(v.x, v.y);
 			}
 
-			//Much of this will probably be moved to a dedicated Polygon class at a later time
+			static bool boundingCollides(sf::Vector2f ulA, sf::Vector2f lrA, sf::Vector2f ulB, sf::Vector2f lrB)
+			{
+				return (((ulB.x >= ulA.x && ulB.x <= lrA.x) && (ulB.y >= ulA.y && ulB.y <= lrA.y)) ||
+					((lrB.x >= ulA.x && lrB.x <= lrA.x) && (lrB.y >= ulA.y && lrB.y <= lrA.y)));
+			}
 
 			//Gets the "bounding box" corners ("upper left" and "lower right") of a series of points
 			static void getBoundingPoints(std::vector<sf::Vector2f> *p, sf::Vector2f *ul, sf::Vector2f *lr)
@@ -271,7 +276,7 @@ namespace Angler
 }
 
 #else
-#error HelpFunctions.h: Wrong Version 0.1.5
+#error HelpFunctions.h: Wrong Version 0.1.6
 #endif
 
 #endif
