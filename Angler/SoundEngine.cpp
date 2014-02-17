@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Oskar Engblad
 //Contributors: Jakob Pipping
 
-#ifndef ANGLER_0_1_6
-#error SoundEngine.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error SoundEngine.cpp: Wrong Version 0.1.7
 #endif
 
 #include <SFML\Audio.hpp>
@@ -18,7 +18,7 @@ SoundEngine::SoundEngine(Game *parent)
 {
 }
 
-bool SoundEngine::play(sf::Sound *s, bool hard, float start, float end, bool loop)
+bool SoundEngine::playSound(sf::Sound *s, bool hard, float start, float end, bool loop)
 {
 	//Isn't in list
 	if (mGetIndex(s) == mSoundElements.end())
@@ -90,12 +90,15 @@ void SoundEngine::update(float time, float deltaTime)
 		(*i)->update(time, deltaTime);
 	}
 
-	for (std::list<SoundElement*>::iterator i = mSoundElements.begin(); i != mSoundElements.end(); i++)
+	for (std::list<SoundElement*>::iterator i = mSoundElements.begin(); i != mSoundElements.end(); )
 	{
 		if (!(*i)->isAlive())
 		{
-			mSoundElements.erase(i);
-			break;
+			i = mSoundElements.erase(i);
+		}
+		else
+		{
+			i++;
 		}
 	}
 }

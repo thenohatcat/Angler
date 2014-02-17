@@ -1,25 +1,11 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
-
-//Changelog:
-//GraphicsEngine:
-// Rebuilt the grapics core, replaced the GraphicsElement structure with
-// a buffer structure in organized layers
-// - removed	GraphicsEngine(Game*, int);
-// - removed	void mDrawElement(GraphicsElement*, int)
-// + added		GraphicsEngine(Game*);
-// + added		void addLayer(int numElements);
-// + added		GraphicsLayer* getLayer(int);
-// 
-//
-//GraphicsElement:
-// Class removed
 
 #ifndef INC_GRAPHICS_H
 #define INC_GRAPHICS_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include <SFML\OpenGL.hpp>
 #include <SFML\Graphics.hpp>
@@ -149,7 +135,7 @@ namespace Angler
 }
 
 #else
-#error Graphics.h: Wrong Version 0.1.6
+#error Graphics.h: Wrong Version 0.1.7
 #endif
 
 #endif

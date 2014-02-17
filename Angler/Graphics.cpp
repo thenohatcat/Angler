@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_6
-#error Graphics.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error Graphics.cpp: Wrong Version 0.1.7
 #endif
 
 #include <chrono>
@@ -39,7 +39,7 @@ GraphicsEngine::GraphicsEngine(Game* parent)
 
 GraphicsEngine::~GraphicsEngine()
 {
-	for (int layer = 0; layer < mLayers.size(); layer++)
+	for (unsigned int layer = 0; layer < mLayers.size(); layer++)
 	{
 		delete mLayers.at(layer);
 	}
@@ -185,7 +185,7 @@ void GraphicsEngine::resize(int width, int height)
 
 void GraphicsEngine::mClear()
 {
-	for (int layer = 0; layer < mLayers.size(); layer++)
+	for (unsigned int layer = 0; layer < mLayers.size(); layer++)
 	{
 		mLayers.at(layer)->clear();
 	}
@@ -207,7 +207,7 @@ void GraphicsEngine::mRender()
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 	//Iterates over each layer, back to front, and renders all elements
-	for (int layer = 0; layer < mLayers.size(); layer++)
+	for (unsigned int layer = 0; layer < mLayers.size(); layer++)
 	{
 		mLayers.at(layer)->render();
 	}

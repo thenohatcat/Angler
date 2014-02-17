@@ -1,13 +1,15 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors: 
 
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include "Graphics.h"
+#include "Sound.h"
+#include "Mechanics.h"
 
 #include "Keyboard.h"
 #include "Mouse.h"
@@ -52,6 +54,8 @@ namespace Angler
 
 	protected:
 		Angler::Graphics::GraphicsEngine* mGraphics;
+		Angler::Sound::SoundEngine* mSound;
+		Angler::Mechanics::MechanicsEngine *mMechanics;
 		Node* mSceneRoot;
 		Angler::Input::Keyboard* mKeyboard;
 		Angler::Input::Mouse* mMouse;
@@ -86,7 +90,7 @@ namespace Angler
 }
 
 #else
-#error Game.h: Wrong Version 0.1.6
+#error Game.h: Wrong Version 0.1.7
 #endif
 
 #endif

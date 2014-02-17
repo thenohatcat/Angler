@@ -1,11 +1,11 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include <vector>
 
@@ -66,7 +66,7 @@ namespace Angler
 }
 
 #else
-#error Node.h: Wrong Version 0.1.6
+#error Node.h: Wrong Version 0.1.7
 #endif
 
 #endif

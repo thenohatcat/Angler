@@ -1,11 +1,11 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_COLLISIONNODE_H
 #define INC_COLLISIONNODE_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include "Node.h"
 #include <SFML\System\Vector2.hpp>
@@ -60,7 +60,7 @@ namespace Angler
 }
 
 #else
-#error CollisionNode.h: Wrong Version 0.1.6
+#error CollisionNode.h: Wrong Version 0.1.7
 #endif
 
 #endif

@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_6
-#error CollisionNode.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error CollisionNode.cpp: Wrong Version 0.1.7
 #endif
 
 #include "CollisionNode.h"
@@ -22,7 +22,7 @@ using namespace Angler::Nodes;
 CollisionNode::CollisionNode(unsigned long id, const std::vector<sf::Vector2f> &pts, int type)
 	: Node(id), mPoints(), mType(type)
 {
-	for (int i = 0; i < pts.size(); i++)
+	for (unsigned int i = 0; i < pts.size(); i++)
 	{
 		mPoints.push_back(pts.at(i));
 	}
@@ -31,7 +31,7 @@ CollisionNode::CollisionNode(unsigned long id, const std::vector<sf::Vector2f> &
 CollisionNode::CollisionNode(unsigned long id, Node* parent, const std::vector<sf::Vector2f> &pts, int type)
 	: Node(id, parent), mPoints(), mType(type)
 {
-	for (int i = 0; i < pts.size(); i++)
+	for (unsigned int i = 0; i < pts.size(); i++)
 	{
 		mPoints.push_back(pts.at(i));
 	}
@@ -108,7 +108,7 @@ void CollisionNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphi
 
 unsigned long region(sf::Vector2f ul, sf::Vector2f lr)
 {
-	float w = 16/10.0, h = 0.5;
+	float w = 16/10.0f, h = 0.5f;
 	unsigned int rtr = 0;
 	float ulx = ul.x, uly = ul.y;
 	float lrx = lr.x, lry = lr.y;
@@ -131,8 +131,8 @@ unsigned long region(sf::Vector2f ul, sf::Vector2f lr)
 			//Row. 2
 			else if ((uly > h) && (lry > h))
 			{
-				uly = (uly - h) * 2.0;
-				lry = (lry - h) * 2.0;
+				uly = (uly - h) * 2.0f;
+				lry = (lry - h) * 2.0f;
 				rg = 0x6;
 			}
 			else
@@ -143,8 +143,8 @@ unsigned long region(sf::Vector2f ul, sf::Vector2f lr)
 		//Col. 2
 		else if ((ulx > w) && (lrx > w))
 		{
-			ulx = (ulx - w) * 2.0;
-			lrx = (lrx - w) * 2.0;
+			ulx = (ulx - w) * 2.0f;
+			lrx = (lrx - w) * 2.0f;
 			//Row. 1
 			if ((uly < h) && (lry < h))
 			{
@@ -155,8 +155,8 @@ unsigned long region(sf::Vector2f ul, sf::Vector2f lr)
 			//Row. 2
 			else if ((uly > h) && (lry > h))
 			{
-				uly = (uly - h) * 2.0;
-				lry = (lry - h) * 2.0;
+				uly = (uly - h) * 2.0f;
+				lry = (lry - h) * 2.0f;
 				rg = 0x7;
 			}
 			else

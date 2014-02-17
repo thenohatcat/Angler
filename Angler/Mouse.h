@@ -1,11 +1,11 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_MOUSE_H
 #define INC_MOUSE_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include <SFML\Window\Mouse.hpp>
 
@@ -70,7 +70,7 @@ namespace Angler
 }
 
 #else
-#error Mouse.h: Wrong Version 0.1.6
+#error Mouse.h: Wrong Version 0.1.7
 #endif
 
 #endif

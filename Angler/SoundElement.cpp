@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ANGLER_0_1_6
-#error SoundElement.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error SoundElement.cpp: Wrong Version 0.1.7
 #endif
 
 #include <SFML\Audio.hpp>
@@ -17,6 +17,11 @@ SoundElement::SoundElement(sf::Sound *s, float start, float end,
 {
 	mSound->setLoop(mLoop);
 	mSound->play();
+	if (mStart < 0)
+		mStart = 0;
+	if (mEnd < 0)
+		mEnd = mSound->getBuffer()->getDuration().asSeconds();
+
 	mSound->setPlayingOffset(sf::seconds(mStart));
 }
 
@@ -53,26 +58,20 @@ void SoundElement::update(float time, float deltaTime)
 			return;
 		}
 
-		if (mStart >= 0)
+		if (mSound->getPlayingOffset().asSeconds() < mStart)
 		{
-			if (mSound->getPlayingOffset().asSeconds() < mStart)
+			mSound->setPlayingOffset(sf::seconds(mStart));
+		}
+		if (mSound->getPlayingOffset().asSeconds() >= mEnd)
+		{
+			if (mLoop)
 			{
 				mSound->setPlayingOffset(sf::seconds(mStart));
 			}
-		}
-		if (mEnd >= 0)
-		{
-			if (mSound->getPlayingOffset().asSeconds() > mEnd)
+			else
 			{
-				if (mLoop)
-				{
-					mSound->setPlayingOffset(sf::seconds(mStart));
-				}
-				else
-				{
-					mIsAlive = false;
-					return;
-				}
+				mIsAlive = false;
+				return;
 			}
 		}
 	}

@@ -1,11 +1,11 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Oskar Engblad
 //Contributors: Jakob Pipping
 
 #ifndef INC_SOUND_H
 #define INC_SOUND_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include <SFML\Audio\Sound.hpp>
 #include <list>
@@ -44,12 +44,11 @@ namespace Angler
 		public:
 			SoundEngine(Game *parent);
 
-			bool play(sf::Sound *s, bool hard = true, 
+			bool playSound(sf::Sound *s, bool hard = true, 
 				float start = -1, float end = -1, bool loop = false);
 
-			void stop(sf::Sound *s);
-			void pauseSound(sf::Sound *s);
 			void stopSound(sf::Sound *s);
+			void pauseSound(sf::Sound *s);
 			float getVolume(sf::Sound *s);
 			void setVolume(sf::Sound *s, float x);
 			int getStatus(sf::Sound *s);
@@ -88,7 +87,7 @@ namespace Angler
 }
 
 #else
-#error Sound.h: Wrong Version 0.1.6
+#error Sound.h: Wrong Version 0.1.7
 #endif
 
 #endif

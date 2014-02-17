@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ANGLER_0_1_6
-#error SpriteNode.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error SpriteNode.cpp: Wrong Version 0.1.7
 #endif
 
 #include "SpriteNode.h"

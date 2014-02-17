@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_6
-#error Transformation.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error Transformation.cpp: Wrong Version 0.1.7
 #endif
 
 #include "Transformation.h"
@@ -46,7 +46,7 @@ void Transformation::transform(Node *n)
 
 	Node *node = n;
 
-	for (int i = 0; i < ansc.size(); i++)
+	for (unsigned int i = 0; i < ansc.size(); i++)
 	{
 		if (isDerivedFrom<Transformation>(ansc.at(i)))
 			transf.push_back((Transformation*)ansc.at(i));
@@ -79,12 +79,12 @@ void Transformation::transform(Node *n, std::vector<sf::Vector2f> vIn, std::vect
 {
 	sf::Vector2f *vInA = new sf::Vector2f[vIn.size()];
 	sf::Vector2f *vOutA = new sf::Vector2f[vIn.size()];
-	for (int i = 0; i < vIn.size(); i++)
+	for (unsigned int i = 0; i < vIn.size(); i++)
 	{
 		vInA[i] = vIn.at(i);
 	}
 	transform(n, vInA, vOutA, vIn.size());
-	for (int i = 0; i < vIn.size(); i++)
+	for (unsigned int i = 0; i < vIn.size(); i++)
 	{
 		vOut->push_back(vOutA[i]);
 	}

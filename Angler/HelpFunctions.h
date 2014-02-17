@@ -1,11 +1,11 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_HELPFUNCTIONS_H
 #define INC_HELPFUNCTIONS_H
 
-#ifdef ANGLER_0_1_6
+#ifdef ANGLER_0_1_7
 
 #include <SFML\System\Vector2.hpp>
 #include "Node.h"
@@ -45,7 +45,7 @@ namespace Angler
 						return n;
 
 					std::vector<Angler::Node*> v = n->getChildren();
-					for (int i = 0; i < v.size(); i++)
+					for (unsigned int i = 0; i < v.size(); i++)
 					{
 						nxt.push_back(v.at(v.size() - 1 - i));
 					}
@@ -94,7 +94,7 @@ namespace Angler
 					nds.push_back(n);
 
 					std::vector<Angler::Node*> v = n->getChildren();
-					for (int i = 0; i < v.size(); i++)
+					for (unsigned int i = 0; i < v.size(); i++)
 					{
 						nxt.push_back(v.at(v.size() - 1 - i));
 					}
@@ -133,7 +133,7 @@ namespace Angler
 			{
 				float leb(p->at(0).x), ub(p->at(0).y), rb(p->at(0).x), lob(p->at(0).y);
 
-				for (int i = 0; i < p->size(); i++)
+				for (unsigned int i = 0; i < p->size(); i++)
 				{
 					sf::Vector2f v = p->at(i);
 					if (v.x < leb)
@@ -186,7 +186,7 @@ namespace Angler
 			//Determines if a point p is within the polygon
 			static bool pointIsWithinPolygon(std::vector<sf::Vector2f> *polygon, sf::Vector2f p)
 			{
-				for (int i = 0; i < polygon->size(); i++)
+				for (unsigned int i = 0; i < polygon->size(); i++)
 				{
 					if (side(polygon->at(i), polygon->at((i + 1) % polygon->size()), p) < 0)
 					{
@@ -249,19 +249,19 @@ namespace Angler
 			//Determines if two polygon intersects
 			static bool polygonIntersects(std::vector<sf::Vector2f> *pA, std::vector<sf::Vector2f> *pB)
 			{
-				for (int i = 0; i < pB->size(); i++)
+				for (unsigned int i = 0; i < pB->size(); i++)
 				{
 					if (pointIsWithinPolygon(pA, pB->at(i)))
 						return true;
 				}
-				for (int i = 0; i < pA->size(); i++)
+				for (unsigned int i = 0; i < pA->size(); i++)
 				{
 					if (pointIsWithinPolygon(pB, pA->at(i)))
 						return true;
 				}
-				for (int i = 0; i < pA->size(); i++)
+				for (unsigned int i = 0; i < pA->size(); i++)
 				{
-					for (int k = 0; k < pB->size(); k++)
+					for (unsigned int k = 0; k < pB->size(); k++)
 					{
 						int cr = lineCrosses(pA->at(i), pA->at((i+1) % pA->size()), pB->at(k), pB->at((k+1) % pB->size())); 
 
@@ -276,7 +276,7 @@ namespace Angler
 }
 
 #else
-#error HelpFunctions.h: Wrong Version 0.1.6
+#error HelpFunctions.h: Wrong Version 0.1.7
 #endif
 
 #endif

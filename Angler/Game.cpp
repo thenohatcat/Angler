@@ -1,9 +1,9 @@
-//Version: 0.1.6
+//Version: 0.1.7
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_6
-#error Game.cpp: Wrong Version 0.1.6
+#ifndef ANGLER_0_1_7
+#error Game.cpp: Wrong Version 0.1.7
 #endif
 
 #include "Game.h"
@@ -16,6 +16,8 @@
 
 using namespace Angler;
 using namespace Angler::Graphics;
+using namespace Angler::Mechanics;
+using namespace Angler::Sound;
 using namespace Angler::Input;
 
 Game::Game()
@@ -36,6 +38,10 @@ void Game::init()
 	//Initializes the graphics engine
 	mGraphics = new GraphicsEngine(this);
 	mGraphics->createWindow(mWidth, mHeight, mTitle, false);
+
+	mMechanics = new MechanicsEngine(this);
+
+	mSound = new SoundEngine(this);
 
 	mKeyboard = new Keyboard();
 	mMouse = new Mouse();
@@ -111,6 +117,9 @@ void Game::run()
 				mMouse->changePos(sf::Vector2i(event.mouseWheel.x, event.mouseWheel.y));
 			}
         }
+
+		mSceneRoot->update(this, time, deltaTime);
+		mSound->update(time, deltaTime);
 
 		mUpdate(time, deltaTime);
 		mDraw(time, deltaTime);
