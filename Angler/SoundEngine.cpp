@@ -18,9 +18,18 @@ SoundEngine::SoundEngine(Game *parent)
 {
 }
 
-void SoundEngine::playSound(sf::Sound *s)
+bool SoundEngine::play(sf::Sound *s, bool hard, float start, float end, bool loop)
 {
-	s->play();
+	//Isn't in list
+	if (mGetIndex(s) == mSoundElements.end())
+	{
+		mSoundElements.push_back(new SoundElement(s, start, end, loop));
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void SoundEngine::pauseSound(sf::Sound *s)
@@ -72,4 +81,31 @@ void SoundEngine::crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v)
 		//Sum total s1+s2 = 100
 		s2->setVolume(s2->getVolume() + v);
 	}
+}
+
+void SoundEngine::update(float time, float deltaTime)
+{
+	for (std::list<SoundElement*>::iterator i = mSoundElements.begin(); i != mSoundElements.end(); i++)
+	{
+		(*i)->update(time, deltaTime);
+	}
+
+	for (std::list<SoundElement*>::iterator i = mSoundElements.begin(); i != mSoundElements.end(); i++)
+	{
+		if (!(*i)->isAlive())
+		{
+			mSoundElements.erase(i);
+			break;
+		}
+	}
+}
+
+std::list<SoundElement*>::iterator SoundEngine::mGetIndex(sf::Sound *s)
+{
+	for (std::list<SoundElement*>::iterator i = mSoundElements.begin(); i != mSoundElements.end(); i++)
+	{
+		if ((*i)->getSound() == s)
+			return i;
+	}
+	return mSoundElements.end();
 }

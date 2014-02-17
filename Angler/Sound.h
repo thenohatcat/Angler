@@ -8,14 +8,65 @@
 #ifdef ANGLER_0_1_6
 
 #include <SFML\Audio\Sound.hpp>
+#include <list>
 
 namespace Angler
 {
 	class Game;
 
-	namespace Sound
+	namespace Sound	
 	{
-		class SoundEngine
+		class SoundElement
+		{
+		public:
+			SoundElement(sf::Sound *s, float start, float end,
+				bool loop);
+
+			bool isAlive();
+
+			void play();
+			void stop();
+			void pause();
+
+			void update(float time, float deltaTime);
+
+			sf::Sound *getSound();
+
+		private:
+			sf::Sound *mSound;
+			float mStart, mEnd;
+			bool mLoop;
+			bool mIsAlive;
+		};
+
+		class SoundEngine final
+		{
+		public:
+			SoundEngine(Game *parent);
+
+			bool play(sf::Sound *s, bool hard = true, 
+				float start = -1, float end = -1, bool loop = false);
+
+			void stop(sf::Sound *s);
+			void pauseSound(sf::Sound *s);
+			void stopSound(sf::Sound *s);
+			float getVolume(sf::Sound *s);
+			void setVolume(sf::Sound *s, float x);
+			int getStatus(sf::Sound *s);
+			float getPosition(sf::Sound *s);
+			void setPosition(sf::Sound *s, float x);
+			void crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v);
+
+			void update(float time, float deltaTime);
+
+		private:
+			Game *mParent;
+			std::list<SoundElement*> mSoundElements;
+			std::list<SoundElement*>::iterator mGetIndex(sf::Sound *s);
+		};
+
+		//Old sound
+		/*class SoundEngine
 		{
 		public:
 			SoundEngine(Game *parent);
@@ -32,7 +83,7 @@ namespace Angler
 
 		private:
 			Game *mParent;
-		};
+		};*/
 	}
 }
 
