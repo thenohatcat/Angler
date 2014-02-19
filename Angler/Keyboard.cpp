@@ -1,9 +1,9 @@
-//Version: 0.1.7
+//Version: 0.1.8
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_7
-#error Keyboard.cpp: Wrong Version 0.1.7
+#ifndef ANGLER_0_1_8
+#error Keyboard.cpp: Wrong Version 0.1.8
 #endif
 
 #include "Keyboard.h"
