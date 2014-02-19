@@ -59,7 +59,7 @@ void GraphicsLayer::draw(float originX, float originY, float cropOriginX, float 
 	//aspect ratio instead
 	if (cropOriginX != 0 || cropOriginY != 0 ||
 		cropHeight != 1 || cropWidth != 1)
-		ar = (cropWidth / cropHeight);
+		ar = (mTextureAR * cropWidth / cropHeight);
 	else
 		ar = mTextureAR;
 	//Scales based on aspect ratio
