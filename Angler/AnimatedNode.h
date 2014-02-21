@@ -1,0 +1,40 @@
+//Version: 0.1.8
+//Author: Jakob Pipping
+//Contributors: 
+
+#ifndef INC_ANIMATEDENODE_H
+#define INC_ANIMATEDNODE_H
+
+#ifdef ANGLER_0_1_8
+
+#include "SpriteNode.h"
+
+namespace Angler
+{
+	namespace Nodes
+	{
+		class AnimatedNode
+			: public SpriteNode
+		{
+		public:
+			AnimatedNode(unsigned long id, Node *parent, int layer,
+				std::vector<sf::Vector2f> &pts, float frametime, float ox = 0, float oy = 0, float cropWidth = 1, float cropHeight = 1);
+
+			AnimatedNode(unsigned long id, int layer,
+				std::vector<sf::Vector2f> &pts, float frametime, float ox = 0, float oy = 0, float cropWidth = 1, float cropHeight = 1);
+
+			void update(Game *context, float time, float deltaTime, bool changed = false);
+
+		protected:
+			int mFrame;
+			float mTime, mFrameTime;
+			std::vector<sf::Vector2f> mPts;
+		};
+	}
+}
+
+#else
+#error AnimatedNode.h: Wrong Version 0.1.8
+#endif
+
+#endif

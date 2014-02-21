@@ -2,8 +2,8 @@
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef INC_SPRITEENGINE_H
-#define INC_SPRITEENGINE_H
+#ifndef INC_SPRITENODE_H
+#define INC_SPRITENODE_H
 
 #ifdef ANGLER_0_1_8
 
@@ -55,7 +55,7 @@ namespace Angler
 }
 
 #else
-#error SpriteEngine.h: Wrong Version 0.1.8
+#error SpriteNode.h: Wrong Version 0.1.8
 #endif
 
 #endif
