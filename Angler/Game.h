@@ -43,19 +43,26 @@ namespace Angler
 		//Wrapper for the same function in GraphicsEngine
 		void loadTexture(sf::Texture* texture, const char* fileName);
 
+		//Wraps the close in Graphics and does some game specific code
 		void close();
 
+		//Event handling
 		virtual void throwEvent(int type, ... ) = 0;
 
+		//Event IDs
 		typedef enum
 		{
 			Collide
 		} Events;
 
 	protected:
+		//Pointer to current graphics context
 		Angler::Graphics::GraphicsEngine* mGraphics;
+		//Pointer to current sound context
 		Angler::Sound::SoundEngine* mSound;
+		//Pointer to current mechanics context
 		Angler::Mechanics::MechanicsEngine *mMechanics;
+		//The root node of the current scene
 		Node* mSceneRoot;
 		Angler::Input::Keyboard* mKeyboard;
 		Angler::Input::Mouse* mMouse;

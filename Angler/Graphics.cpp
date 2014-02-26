@@ -52,6 +52,17 @@ void GraphicsEngine::createWindow(int width, int height, const char* title, bool
 		(resizable ? sf::Style::Resize : sf::Style::Close));
 }
 
+void GraphicsEngine::crop(int layer, float x, float y, float w, float h)
+{
+	int sh = getHeight();
+	mLayers[layer]->setCrop(x * sh, y * sh, w * sh, h * sh);
+}
+
+void GraphicsEngine::resetCrop(int layer)
+{
+	crop(layer, 0, 0, 1, 1);
+}
+
 void GraphicsEngine::begin()
 {
 	if (!mRunning)
@@ -193,7 +204,7 @@ void GraphicsEngine::mClear()
 
 void GraphicsEngine::addLayer(int numElements)
 {
-	mLayers.push_back(new GraphicsLayer(this, numElements));
+	mLayers.push_back(new GraphicsLayer(this, numElements, 0, 0, getWidth(), getHeight()));
 }
 
 GraphicsLayer* GraphicsEngine::getLayer(int i)

@@ -12,10 +12,10 @@
 using namespace Angler;
 using namespace Angler::Graphics;
 
-GraphicsLayer::GraphicsLayer(GraphicsEngine *owner, int numElements)
+GraphicsLayer::GraphicsLayer(GraphicsEngine *owner, int numElements, int cropX, int cropY, int cropW, int cropH)
 	: mOwner(owner), mNumElements(numElements), mBuffVertex(new GLfloat[numElements*8]), 
 	mBUffColor(new GLfloat[numElements*16]), mBuffTexCord(new GLfloat[numElements*8]),
-	mIndx(0)
+	mCropX(cropX), mCropY(cropY), mCropW(cropW), mCropH(cropH), mIndx(0)
 {
 
 }
@@ -39,14 +39,29 @@ void GraphicsLayer::render()
 
 	sf::Texture::bind(mTexture);
 
+	glPushMatrix();
+	glViewport(mCropX, (mOwner->getHeight()-mCropH) - mCropY, mCropW, mCropH);
+	glScalef((float)(mOwner->getWidth())/mCropW, (float)(mOwner->getHeight())/mCropH, 1);
+	glTranslatef(-mCropX/(float)(mOwner->getHeight()), -mCropY/(float)(mOwner->getHeight()), 0);
+
 	glVertexPointer(2, GL_FLOAT, 0, mBuffVertex);
 	glTexCoordPointer(2, GL_FLOAT, 0, mBuffTexCord);
 	glColorPointer(4, GL_FLOAT, 0, mBUffColor);
 	glDrawArrays(GL_QUADS, 0, mIndx * 4);
 
+	glPopMatrix();
+
 	glDisableClientState(GL_VERTEX_ARRAY);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
+}
+
+void GraphicsLayer::setCrop(int x, int y, int w, int h)
+{
+	mCropX = x;
+	mCropY = y;
+	mCropW = w;
+	mCropH = h;
 }
 
 void GraphicsLayer::draw(float originX, float originY, float cropOriginX, float cropOriginY, 

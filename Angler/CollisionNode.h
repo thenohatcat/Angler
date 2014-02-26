@@ -20,8 +20,10 @@ namespace Angler
 			: public Angler::Node
 		{
 		public:
-			//Standard Node constructors, with a vector of points
+			//Creates a new collision node
 			CollisionNode(unsigned long id, const std::vector<sf::Vector2f> &pts, int type);
+
+			//Creates a new collision node with a parent
 			CollisionNode(unsigned long id, Node *parent, const std::vector<sf::Vector2f> &pts, int type);
 
 			//Returns:
@@ -33,10 +35,13 @@ namespace Angler
 			//Returns the points of the collision shape
 			std::vector<sf::Vector2f> getPoints();
 
+			//Returns the transformed collision shape
 			std::vector<sf::Vector2f> getTransformedPoints();
 
+			//Returns the bounding shape
 			sf::Vector2f getBoundingUL(), getBoundingLR();
 
+			//Returns the type of the collison node
 			int getType();
 
 			//Draws the bounding box of the shape
@@ -45,16 +50,17 @@ namespace Angler
 			
 			virtual void update(Game* context, float time, float deltaTime, bool changed);
 		private:
+			//The points of the collision shape, untransformed
 			std::vector<sf::Vector2f> mPoints;
+			//The transformed points of the collison shape
 			std::vector<sf::Vector2f> mTransformedPoints;
+			//Bounding points
 			sf::Vector2f mUL, mLR;
 			std::vector<sf::Vector2f> mBounding;
 
 			//type 0: Collides with everything
 			//type 1: Only collides with type 0
 			unsigned short mType;
-
-			unsigned int mRegion;
 		};
 	}
 }

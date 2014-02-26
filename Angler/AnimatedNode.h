@@ -17,17 +17,24 @@ namespace Angler
 			: public SpriteNode
 		{
 		public:
+			//Creates an animated node with a parent
 			AnimatedNode(unsigned long id, Node *parent, int layer,
 				std::vector<sf::Vector2f> &pts, float frametime, float ox = 0, float oy = 0, float cropWidth = 1, float cropHeight = 1);
 
+			//Creates an animated node
 			AnimatedNode(unsigned long id, int layer,
 				std::vector<sf::Vector2f> &pts, float frametime, float ox = 0, float oy = 0, float cropWidth = 1, float cropHeight = 1);
 
 			void update(Game *context, float time, float deltaTime, bool changed = false);
 
 		protected:
+			//Current frame
 			int mFrame;
-			float mTime, mFrameTime;
+			//Elapsed time in seconds
+			float mTime;
+			//Number of seconds per frame
+			float mFrameTime;
+			//Crop origin points for the frames
 			std::vector<sf::Vector2f> mPts;
 		};
 	}

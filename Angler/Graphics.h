@@ -27,7 +27,8 @@ namespace Angler
 		class GraphicsLayer final
 		{
 		public:
-			GraphicsLayer(GraphicsEngine *owner, int numElements);
+			GraphicsLayer(GraphicsEngine *owner, int numElements, 
+				int cropX, int cropY, int cropW, int cropH);
 
 			void render();
 
@@ -38,6 +39,8 @@ namespace Angler
 			void setTexture(sf::Texture *tx);
 
 			void clear();
+
+			void setCrop(int x, int y, int w, int h);
 
 		private:
 			GLfloat *mBuffVertex;
@@ -50,9 +53,13 @@ namespace Angler
 
 			float mTextureAR;
 
+			int mOldCropX, mOldCropY, mOldCropW, mOldCropH;
+
 			int mNumElements;
 
 			int mIndx;
+
+			int mCropX, mCropY, mCropW, mCropH;
 
 			GraphicsEngine *mOwner;
 		};
@@ -67,6 +74,9 @@ namespace Angler
 
 			//Hanldes creating a SFML window and initialize basic functions
 			void createWindow(int width, int height, const char* title, bool resizable);
+
+			void crop(int layer, float x, float y, float w, float h);
+			void resetCrop(int layer);
 
 			void draw(int layer, float originX, float originY, 
 				float cropOriginX, float cropOriginY, float cropWidth, float cropHeight,
@@ -121,6 +131,8 @@ namespace Angler
 			typedef std::vector<GraphicsLayer*> LayerVector;
 			LayerVector mLayers;
 
+			int mCropX, mCropY, mCropW, mCropH;
+
 			//Clears the layers
 			void mClear();
 
@@ -128,8 +140,6 @@ namespace Angler
 			void mRender();
 
 			bool mRunning;
-
-			sf::Texture *mOldTexture;
 		};
 	}
 }

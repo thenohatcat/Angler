@@ -16,7 +16,7 @@ AnimatedNode::AnimatedNode(unsigned long id, Node *parent, int layer, std::vecto
 				: SpriteNode(id, parent, layer, ox, oy, 0, 0, cropWidth, cropHeight), mFrame(0), 
 				mFrameTime(frametime), mTime(0)
 {
-	for (int i = 0; i < pts.size(); i++)
+	for (unsigned int i = 0; i < pts.size(); i++)
 	{
 		mPts.push_back(pts.at(i));
 	}
@@ -27,7 +27,7 @@ AnimatedNode::AnimatedNode(unsigned long id, int layer, std::vector<sf::Vector2f
 				: SpriteNode(id, layer, ox, oy, 0, 0, cropWidth, cropHeight), mFrame(0), 
 				mFrameTime(frametime), mTime(0)
 {
-	for (int i = 0; i < pts.size(); i++)
+	for (unsigned int i = 0; i < pts.size(); i++)
 	{
 		mPts.push_back(pts.at(i));
 	}

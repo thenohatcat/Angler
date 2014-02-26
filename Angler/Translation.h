@@ -3,7 +3,7 @@
 //Contributors:
 
 #ifndef INC_TRANSLATION_H
-#define INC_TRANLSATION_H
+#define INC_TRANSLATION_H
 
 #ifdef ANGLER_0_1_8
 
