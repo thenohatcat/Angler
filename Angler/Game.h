@@ -1,11 +1,11 @@
-//Version: 0.1.8
+//Version: 0.1.9
 //Author: Jakob Pipping
 //Contributors: 
 
 #ifndef INC_GAME_H
 #define INC_GAME_H
 
-#ifdef ANGLER_0_1_8
+#ifdef ANGLER_0_1_9
 
 #include "Graphics.h"
 #include "Sound.h"
@@ -97,7 +97,7 @@ namespace Angler
 }
 
 #else
-#error Game.h: Wrong Version 0.1.8
+#error Game.h: Wrong Version 0.1.9
 #endif
 
 #endif

@@ -1,11 +1,11 @@
-//Version: 0.1.8
+//Version: 0.1.9
 //Author: Jakob Pipping
 //Contributors: 
 
 #ifndef INC_SPRITENODE_H
 #define INC_SPRITENODE_H
 
-#ifdef ANGLER_0_1_8
+#ifdef ANGLER_0_1_9
 
 #include "DrawNode.h"
 
@@ -55,7 +55,7 @@ namespace Angler
 }
 
 #else
-#error SpriteNode.h: Wrong Version 0.1.8
+#error SpriteNode.h: Wrong Version 0.1.9
 #endif
 
 #endif

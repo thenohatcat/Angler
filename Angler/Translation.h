@@ -1,11 +1,11 @@
-//Version: 0.1.8
+//Version: 0.1.9
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_TRANSLATION_H
 #define INC_TRANSLATION_H
 
-#ifdef ANGLER_0_1_8
+#ifdef ANGLER_0_1_9
 
 #include "Transformation.h"
 
@@ -49,7 +49,7 @@ namespace Angler
 }
 
 #else
-#error Transformation.h: Wrong Version 0.1.8
+#error Transformation.h: Wrong Version 0.1.9
 #endif
 
 #endif

@@ -1,9 +1,9 @@
-//Version: 0.1.8
+//Version: 0.1.9
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_8
-#error Mouse.cpp: Wrong Version 0.1.8
+#ifndef ANGLER_0_1_9
+#error Mouse.cpp: Wrong Version 0.1.9
 #endif
 
 #include "Mouse.h"
