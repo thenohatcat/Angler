@@ -2,6 +2,9 @@
 //Author: Jakob Pipping
 //Contributors:
 
+//Changelog:
+// + added		removeChild(Node*)
+
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
@@ -27,6 +30,8 @@ namespace Angler
 
 		//Adds a child to this node, and makes this node it's parent
 		void addChild(Node* node);
+
+		void removeChild(Node* node);
 
 		void clearChildren();
 

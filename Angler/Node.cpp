@@ -25,6 +25,21 @@ Node::Node(unsigned long id, Node *parent)
 	parent->addChild(this);
 }
 
+void Node::removeChild(Node* node)
+{
+	for (NodeVector::const_iterator i = mChildren.begin(); i != mChildren.end(); )
+	{
+		if ((*i) == node)
+		{
+			i = mChildren.erase(i);
+		}
+		else
+		{
+			i++;
+		}
+	}
+}
+
 void Node::addChild(Node* node)
 {
 	if (node->mParent == 0)
