@@ -35,6 +35,11 @@ DrawNode::DrawNode(unsigned long id, int layer, sf::Vector2f origo)
 
 }
 
+DrawNode::~DrawNode()
+{
+	Node::~Node();
+}
+
 void DrawNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	graphics->draw(mLayer, mOX, mOY);

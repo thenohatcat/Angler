@@ -51,6 +51,8 @@ namespace Angler
 					}
 				}
 
+				nxt.clear();
+
 				return nullptr;
 			}
 
@@ -99,6 +101,8 @@ namespace Angler
 						nxt.push_back(v.at(v.size() - 1 - i));
 					}
 				}
+
+				nxt.clear();
 
 				return nds;
 			}

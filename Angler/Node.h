@@ -4,6 +4,8 @@
 
 //Changelog:
 // + added		removeChild(Node*)
+// + added		orphan()
+// + added		~Node()
 
 #ifndef INC_NODE_H
 #define INC_NODE_H
@@ -28,10 +30,15 @@ namespace Angler
 
 		Node(unsigned long id, Node *parent);
 
+		virtual ~Node();
+
 		//Adds a child to this node, and makes this node it's parent
 		void addChild(Node* node);
 
+		void orphanChild(Node* node);
 		void removeChild(Node* node);
+
+		void orphan();
 
 		void clearChildren();
 

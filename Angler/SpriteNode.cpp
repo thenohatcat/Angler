@@ -46,6 +46,11 @@ SpriteNode::SpriteNode(unsigned long id, int layer, sf::Vector2f origo, sf::Vect
 
 }
 
+SpriteNode::~SpriteNode()
+{
+	DrawNode::~DrawNode();
+}
+
 void SpriteNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
 	graphics->draw(mLayer, sf::Vector2f(mOX, mOY), sf::Vector2f(mCropOriginX, mCropOriginY),

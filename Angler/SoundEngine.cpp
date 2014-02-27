@@ -94,7 +94,9 @@ void SoundEngine::update(float time, float deltaTime)
 	{
 		if (!(*i)->isAlive())
 		{
+			SoundElement *s = *i;
 			i = mSoundElements.erase(i);
+			delete s;
 		}
 		else
 		{

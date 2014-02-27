@@ -25,6 +25,8 @@ namespace Angler
 			AnimatedNode(unsigned long id, int layer,
 				std::vector<sf::Vector2f> &pts, float frametime, float ox = 0, float oy = 0, float cropWidth = 1, float cropHeight = 1);
 
+			virtual ~AnimatedNode();
+
 			void update(Game *context, float time, float deltaTime, bool changed = false);
 
 		protected:

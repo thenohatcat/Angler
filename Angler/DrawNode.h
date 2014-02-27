@@ -31,6 +31,8 @@ namespace Angler
 			//Creates a new draw node, using vectors
 			DrawNode(unsigned long id, int layer, sf::Vector2f origo);
 
+			virtual ~DrawNode();
+
 			void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime);
 
 			//Sets the origin point of the node

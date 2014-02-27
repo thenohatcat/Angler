@@ -25,20 +25,51 @@ Node::Node(unsigned long id, Node *parent)
 	parent->addChild(this);
 }
 
-void Node::removeChild(Node* node)
+Node::~Node()
+{
+	clearChildren();
+	orphan();
+}
+
+void Node::orphanChild(Node* node)
 {
 	for (NodeVector::const_iterator i = mChildren.begin(); i != mChildren.end(); )
 	{
 		if ((*i) == node)
 		{
+			Node *n = *i;
 			i = mChildren.erase(i);
-			(*i)->mParent = nullptr;
+			n->mParent = nullptr;
 		}
 		else
 		{
 			i++;
 		}
 	}
+}
+
+void Node::removeChild(Node* node)
+{
+	for (NodeVector::const_iterator i = mChildren.begin(); i != mChildren.end(); )
+	{
+		if ((*i) == node)
+		{
+			Node *n = *i;
+			i = mChildren.erase(i);
+			delete n;
+			//n->mParent = nullptr;
+		}
+		else
+		{
+			i++;
+		}
+	}
+}
+
+void Node::orphan()
+{
+	if (mParent != nullptr)
+		mParent->orphanChild(this);
 }
 
 void Node::addChild(Node* node)
@@ -57,7 +88,13 @@ void Node::addChild(Node* node)
 
 void Node::clearChildren()
 {
-	mChildren.clear();
+	for (NodeVector::iterator i = mChildren.begin(); i != mChildren.end();)
+	{
+		Node *n = *i;
+		i = mChildren.erase(i);
+		delete n;
+		//n->mParent = nullptr;
+	}
 }
 
 void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)

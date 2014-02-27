@@ -32,6 +32,8 @@ namespace Angler
 				sf::Vector2f cropOrigin, 
 				sf::Vector2f cropSize);
 
+			virtual ~SpriteNode();
+
 			void setCropOrigin(float x, float y);
 			void setCropOrigin(sf::Vector2f origin);
 

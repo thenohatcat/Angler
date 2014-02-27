@@ -33,6 +33,13 @@ AnimatedNode::AnimatedNode(unsigned long id, int layer, std::vector<sf::Vector2f
 	}
 }
 
+AnimatedNode::~AnimatedNode()
+{
+	mPts.clear();
+
+	Node::~Node();
+}
+
 void AnimatedNode::update(Game *context, float time, float deltaTime, bool changed)
 {
 	setCropOrigin(mPts.at(mFrame));

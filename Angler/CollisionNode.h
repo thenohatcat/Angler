@@ -26,6 +26,8 @@ namespace Angler
 			//Creates a new collision node with a parent
 			CollisionNode(unsigned long id, Node *parent, const std::vector<sf::Vector2f> &pts, int type);
 
+			virtual ~CollisionNode();
+
 			//Returns:
 			//0 if the nodes aren't colliding
 			//1 if the nodes are colliding
