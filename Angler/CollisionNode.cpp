@@ -25,7 +25,15 @@ CollisionNode::CollisionNode(unsigned long id, const std::vector<sf::Vector2f> &
 	for (unsigned int i = 0; i < pts.size(); i++)
 	{
 		mPoints.push_back(pts.at(i));
+		mTransformedPoints.push_back(sf::Vector2f(-1, -1));
 	}
+
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mUL = sf::Vector2f(-1, -1);
+	mLR = sf::Vector2f(-1, -1);
 }
 
 CollisionNode::CollisionNode(unsigned long id, Node* parent, const std::vector<sf::Vector2f> &pts, int type)
@@ -34,7 +42,15 @@ CollisionNode::CollisionNode(unsigned long id, Node* parent, const std::vector<s
 	for (unsigned int i = 0; i < pts.size(); i++)
 	{
 		mPoints.push_back(pts.at(i));
+		mTransformedPoints.push_back(sf::Vector2f(-1, -1));
 	}
+
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mBounding.push_back(sf::Vector2f(-1, -1));
+	mUL = sf::Vector2f(-1, -1);
+	mLR = sf::Vector2f(-1, -1);
 }
 
 bool isSameRegion(unsigned int rA, unsigned int rB)

@@ -32,6 +32,7 @@ void Node::removeChild(Node* node)
 		if ((*i) == node)
 		{
 			i = mChildren.erase(i);
+			(*i)->mParent = nullptr;
 		}
 		else
 		{
