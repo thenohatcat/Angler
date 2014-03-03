@@ -14,13 +14,13 @@ using namespace Angler;
 using namespace Angler::Exceptions;
 
 Node::Node(unsigned long id)
-	: mParent(0), mChildren(), mID(id), mChanged(true)
+	: mParent(0), mChildren(), mID(id), mChanged(true), mPaused(false)
 {
 
 }
 
 Node::Node(unsigned long id, Node *parent)
-	: mParent(0), mChildren(), mID(id), mChanged(true)
+	: mParent(0), mChildren(), mID(id), mChanged(true), mPaused(false)
 {
 	parent->addChild(this);
 }
