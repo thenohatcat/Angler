@@ -59,6 +59,8 @@ namespace Angler
 
 		bool getChanged();
 
+		void pause(bool paused);
+
 	protected:
 		Node *mParent;
 
@@ -69,6 +71,8 @@ namespace Angler
 		typedef std::vector<Node*> NodeVector;
 
 		bool mChanged;
+		
+		bool mPaused;
 
 	private:
 		NodeVector mChildren;

@@ -104,9 +104,12 @@ void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float
 
 void Node::update(Game* context, float time, float deltaTime, bool changed)
 {
-	mChanged |= changed;
+	if (!mPaused)
+	{
+		mChanged |= changed;
 
-	mUpdateChildren(context, time, deltaTime);
+		mUpdateChildren(context, time, deltaTime);
+	}
 }
 
 void Node::mDrawChildren(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
@@ -153,4 +156,9 @@ Node Node::getIsolated()
 std::vector<Node*> Node::getChildren()
 {
 	return std::vector<Node*>(mChildren);
+}
+
+void Node::pause(bool paused)
+{
+	mPaused = paused;
 }
