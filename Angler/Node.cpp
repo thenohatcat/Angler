@@ -162,3 +162,8 @@ void Node::pause(bool paused)
 {
 	mPaused = paused;
 }
+
+bool Node::getPaused()
+{
+	return mPaused;
+}

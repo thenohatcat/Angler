@@ -118,7 +118,7 @@ void Game::run()
 			}
         }
 
-		mSceneRoot->update(this, time, deltaTime);
+		mSceneRoot->update(this, time, deltaTime);		
 		mSound->update(time, deltaTime);
 
 		mUpdate(time, deltaTime);

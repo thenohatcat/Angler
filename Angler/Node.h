@@ -2,11 +2,6 @@
 //Author: Jakob Pipping
 //Contributors:
 
-//Changelog:
-// + added		removeChild(Node*)
-// + added		orphan()
-// + added		~Node()
-
 #ifndef INC_NODE_H
 #define INC_NODE_H
 
@@ -60,6 +55,7 @@ namespace Angler
 		bool getChanged();
 
 		void pause(bool paused);
+		bool getPaused();
 
 	protected:
 		Node *mParent;
