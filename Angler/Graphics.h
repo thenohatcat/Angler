@@ -111,6 +111,9 @@ namespace Angler
 			void addLayer(int numElements);
 			GraphicsLayer* getLayer(int i);
 
+			void clearLayers();
+			void removeLayer(int layer);
+
 			//Renders to the screen
 			void display();
 

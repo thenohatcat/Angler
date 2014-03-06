@@ -113,25 +113,29 @@ sf::Vector2f CollisionNode::getBoundingLR()
 
 void CollisionNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
-	mDrawChildren(context, graphics, time, deltaTime);
+	if (mVisible)
+		mDrawChildren(context, graphics, time, deltaTime);
 }
 
 void CollisionNode::update(Game* context, float time, float deltaTime, bool changed)
 {
-	mChanged |= changed;
-
-	if (mChanged)
+	if (!mPaused)
 	{
-		mTransformedPoints.clear();
-		Transformation::transform(this, mPoints, &mTransformedPoints);
+		mChanged |= changed;
 
-		getBoundingPoints(&mTransformedPoints, &mUL, &mLR);
-		mBounding.clear();
-		mBounding.push_back(sf::Vector2f(mLR.x, mUL.y));
-		mBounding.push_back(mUL);
-		mBounding.push_back(sf::Vector2f(mUL.x, mLR.y));
-		mBounding.push_back(mLR);
+		if (mChanged)
+		{
+			mTransformedPoints.clear();
+			Transformation::transform(this, mPoints, &mTransformedPoints);
+
+			getBoundingPoints(&mTransformedPoints, &mUL, &mLR);
+			mBounding.clear();
+			mBounding.push_back(sf::Vector2f(mLR.x, mUL.y));
+			mBounding.push_back(mUL);
+			mBounding.push_back(sf::Vector2f(mUL.x, mLR.y));
+			mBounding.push_back(mLR);
+		}
+
+		mUpdateChildren(context, time, deltaTime);
 	}
-
-	mUpdateChildren(context, time, deltaTime);
 }

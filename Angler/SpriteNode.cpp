@@ -53,10 +53,13 @@ SpriteNode::~SpriteNode()
 
 void SpriteNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
-	graphics->draw(mLayer, sf::Vector2f(mOX, mOY), sf::Vector2f(mCropOriginX, mCropOriginY),
-		sf::Vector2f(mCropWidth, mCropHeight));
+	if (mVisible)
+	{
+		graphics->draw(mLayer, sf::Vector2f(mOX, mOY), sf::Vector2f(mCropOriginX, mCropOriginY),
+			sf::Vector2f(mCropWidth, mCropHeight));
 
-	mDrawChildren(context, graphics, time, deltaTime);
+		mDrawChildren(context, graphics, time, deltaTime);
+	}
 }
 
 void SpriteNode::setCropOrigin(float x, float y)

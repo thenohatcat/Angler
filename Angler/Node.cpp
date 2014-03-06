@@ -14,13 +14,13 @@ using namespace Angler;
 using namespace Angler::Exceptions;
 
 Node::Node(unsigned long id)
-	: mParent(0), mChildren(), mID(id), mChanged(true), mPaused(false)
+	: mParent(0), mChildren(), mID(id), mChanged(true), mPaused(false), mVisible(true)
 {
 
 }
 
 Node::Node(unsigned long id, Node *parent)
-	: mParent(0), mChildren(), mID(id), mChanged(true), mPaused(false)
+	: mParent(0), mChildren(), mID(id), mChanged(true), mPaused(false), mVisible(true)
 {
 	parent->addChild(this);
 }
@@ -99,7 +99,8 @@ void Node::clearChildren()
 
 void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
-	mDrawChildren(context, graphics, time, deltaTime);
+	if (mVisible)
+		mDrawChildren(context, graphics, time, deltaTime);
 }
 
 void Node::update(Game* context, float time, float deltaTime, bool changed)
@@ -166,4 +167,27 @@ void Node::pause(bool paused)
 bool Node::getPaused()
 {
 	return mPaused;
+}
+
+void Node::show(bool show)
+{
+	mVisible = show;
+}
+
+bool Node::getVisible()
+{
+	return mVisible;
+}
+
+void Node::enable(bool enabled)
+{
+	pause(!enabled);
+	show(enabled);
+
+	mEnable(enabled);
+}
+
+void Node::mEnable(bool enabled)
+{
+
 }

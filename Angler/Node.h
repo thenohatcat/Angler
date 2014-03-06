@@ -57,8 +57,16 @@ namespace Angler
 		void pause(bool paused);
 		bool getPaused();
 
+		void enable(bool enabled);
+		bool getEnabled();
+
+		void show(bool show);
+		bool getVisible();
+
 	protected:
 		Node *mParent;
+
+		virtual void mEnable(bool enabled);
 
 		//Draws/updates all children in the vector
 		void mDrawChildren(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
@@ -69,6 +77,10 @@ namespace Angler
 		bool mChanged;
 		
 		bool mPaused;
+
+		bool mEnabled;
+
+		bool mVisible;
 
 	private:
 		NodeVector mChildren;

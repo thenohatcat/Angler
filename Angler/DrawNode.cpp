@@ -42,9 +42,12 @@ DrawNode::~DrawNode()
 
 void DrawNode::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
 {
-	graphics->draw(mLayer, mOX, mOY);
+	if (mVisible)
+	{
+		graphics->draw(mLayer, mOX, mOY);
 
-	mDrawChildren(context, graphics, time, deltaTime);
+		mDrawChildren(context, graphics, time, deltaTime);
+	}
 }
 
 void DrawNode::setOrigin(float x, float y)

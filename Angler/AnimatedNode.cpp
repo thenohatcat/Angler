@@ -42,9 +42,12 @@ AnimatedNode::~AnimatedNode()
 
 void AnimatedNode::update(Game *context, float time, float deltaTime, bool changed)
 {
-	setCropOrigin(mPts.at(mFrame));
+	if (!mPaused)
+	{
+		setCropOrigin(mPts.at(mFrame));
 
-	mFrame = (int)(mTime / mFrameTime) % mPts.size();
+		mFrame = (int)(mTime / mFrameTime) % mPts.size();
 
-	mTime += deltaTime;
+		mTime += deltaTime;
+	}
 }

@@ -49,6 +49,12 @@ namespace Angler
 		//Event handling
 		virtual void throwEvent(int type, ... ) = 0;
 
+		Angler::Graphics::GraphicsEngine *getGraphics();
+
+		Angler::Sound::SoundEngine *getSound();
+
+		Angler::Mechanics::MechanicsEngine *getMechanics();
+
 		//Event IDs
 		typedef enum
 		{

@@ -134,6 +134,21 @@ void Game::run()
 	}
 }
 
+GraphicsEngine *Game::getGraphics()
+{
+	return mGraphics;
+}
+
+SoundEngine *Game::getSound()
+{
+	return mSound;
+}
+
+MechanicsEngine *Game::getMechanics()
+{
+	return mMechanics;
+}
+
 KeyboardState Game::getKeyboardState()
 {
 	return mKeyboard->getState();

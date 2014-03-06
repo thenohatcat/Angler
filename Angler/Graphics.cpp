@@ -212,6 +212,23 @@ GraphicsLayer* GraphicsEngine::getLayer(int i)
 	return mLayers.at(i);
 }
 
+void GraphicsEngine::clearLayers()
+{
+	for (LayerVector::const_iterator i = mLayers.begin(); i < mLayers.end(); )
+	{
+		GraphicsLayer *l = *(i);
+		mLayers.erase(i);
+		delete l;
+	}
+}
+
+void GraphicsEngine::removeLayer(int layer)
+{
+	GraphicsLayer *l = mLayers.at(layer);
+	mLayers.erase(mLayers.begin() + layer);
+	delete l;
+}
+
 void GraphicsEngine::mRender()
 {
 	glEnable(GL_TEXTURE_2D);
