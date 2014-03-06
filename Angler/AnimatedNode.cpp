@@ -49,5 +49,7 @@ void AnimatedNode::update(Game *context, float time, float deltaTime, bool chang
 		mFrame = (int)(mTime / mFrameTime) % mPts.size();
 
 		mTime += deltaTime;
+
+		mUpdateChildren(context, time, deltaTime);
 	}
 }
