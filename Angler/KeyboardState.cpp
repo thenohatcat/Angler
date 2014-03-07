@@ -12,7 +12,7 @@ using namespace Angler::Input;
 
 KeyboardState::KeyboardState()
 	: mAlt(false), mShift(false), mCtrl(false),
-	mOldAlt(false), mOldShift(false), mOldCtrl(false)
+	mOldAlt(false), mOldShift(false), mOldCtrl(false), mNumKeysDown(0), mOldNumKeysDown(0)
 {
 	for (int i = 0; i < sf::Keyboard::Key::KeyCount; i++)
 	{
@@ -22,7 +22,8 @@ KeyboardState::KeyboardState()
 
 KeyboardState::KeyboardState(KeyboardState &state)
 	: mAlt(state.mAlt), mShift(state.mShift), mCtrl(state.mCtrl),
-	mOldAlt(state.mOldAlt), mOldShift(state.mOldShift), mOldCtrl(state.mOldCtrl)
+	mOldAlt(state.mOldAlt), mOldShift(state.mOldShift), mOldCtrl(state.mOldCtrl), 
+	mNumKeysDown(state.mNumKeysDown), mOldNumKeysDown(state.mOldNumKeysDown)
 {
 	for (int i = 0; i < sf::Keyboard::Key::KeyCount; i++)
 	{
@@ -40,6 +41,7 @@ void KeyboardState::pushState()
 	mOldAlt = mAlt;
 	mOldShift = mOldAlt;
 	mOldCtrl = mOldCtrl;
+	mOldNumKeysDown = mNumKeysDown;
 }
 
 bool KeyboardState::isKeyDown(sf::Keyboard::Key key)
@@ -80,4 +82,14 @@ bool KeyboardState::wasShiftDown()
 bool KeyboardState::wasCtrlDown()
 {
 	return mOldCtrl;
+}
+
+int KeyboardState::getIsNumKeysDown()
+{
+	return mNumKeysDown;
+}
+
+int KeyboardState::getWasNumKeysDown()
+{
+	return mOldNumKeysDown;
 }

@@ -35,11 +35,14 @@ namespace Angler
 			//changes in state
 			void pushState();
 
+			int getIsNumKeysDown(), getWasNumKeysDown();
+
 		private:
 			bool mKeys[sf::Keyboard::Key::KeyCount];
 			bool mOldKeys[sf::Keyboard::Key::KeyCount];
 			bool mAlt, mShift, mCtrl;
 			bool mOldAlt, mOldShift, mOldCtrl;
+			int mNumKeysDown, mOldNumKeysDown;
 		};
 
 		class Keyboard

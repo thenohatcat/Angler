@@ -31,6 +31,7 @@ void Keyboard::keyDown(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl)
 	mState.mAlt = alt;
 	mState.mShift = shift;
 	mState.mCtrl = ctrl;
+	mState.mNumKeysDown++;
 }
 
 void Keyboard::keyUp(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl)
@@ -39,4 +40,5 @@ void Keyboard::keyUp(sf::Keyboard::Key key, bool alt, bool shift, bool ctrl)
 	mState.mAlt = alt;
 	mState.mShift = shift;
 	mState.mCtrl = ctrl;
+	mState.mNumKeysDown--;
 }
