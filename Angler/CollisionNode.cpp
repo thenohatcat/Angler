@@ -126,7 +126,7 @@ void CollisionNode::update(Game* context, float time, float deltaTime, bool chan
 		if (mChanged)
 		{
 			mTransformedPoints.clear();
-			Transformation::transform(this, mPoints, &mTransformedPoints);
+			Transformation::transform(this, &mPoints, &mTransformedPoints);
 
 			getBoundingPoints(&mTransformedPoints, &mUL, &mLR);
 			mBounding.clear();
@@ -138,4 +138,25 @@ void CollisionNode::update(Game* context, float time, float deltaTime, bool chan
 
 		mUpdateChildren(context, time, deltaTime);
 	}
+}
+
+void CollisionNode::setCollision(const std::vector<sf::Vector2f> &pts)
+{
+	mPoints.clear();
+	for (unsigned int i = 0; i < pts.size(); i++)
+	{
+		mPoints.push_back(pts.at(i));
+	}
+
+	mTransformedPoints.clear();
+	Transformation::transform(this, &mPoints, &mTransformedPoints);
+
+	getBoundingPoints(&mTransformedPoints, &mUL, &mLR);
+	mBounding.clear();
+	mBounding.push_back(sf::Vector2f(mLR.x, mUL.y));
+	mBounding.push_back(mUL);
+	mBounding.push_back(sf::Vector2f(mUL.x, mLR.y));
+	mBounding.push_back(mLR);
+
+	mChanged = true;
 }

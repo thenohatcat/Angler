@@ -42,6 +42,8 @@ namespace Angler
 			//The transformation itself, to standardize functionality
 			void doTransform();
 
+			void doInverseTransform();
+
 		private:
 			float mX, mY;
 		};

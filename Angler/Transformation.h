@@ -28,13 +28,13 @@ namespace Angler
 
 			//Transform a vector/array of points with this object
 			void transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count);
-			void transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut);
+			void transform(std::vector<sf::Vector2f> *vIn, std::vector<sf::Vector2f> *vOut);
 
 			//Static transformation of a node
 			static void transform(Node *node);
 			//Static transformation of a node on a vector/array of points
 			static void transform(Node *node, sf::Vector2f *vIn, sf::Vector2f *vOit, int count);
-			static void transform(Node *node, std::vector<sf::Vector2f> vIn, 
+			static void transform(Node *node, const std::vector<sf::Vector2f> *vIn, 
 				std::vector<sf::Vector2f> *vOut);
 
 			virtual void draw(Game *context, Graphics::GraphicsEngine *graphics, 
@@ -42,6 +42,7 @@ namespace Angler
 
 			//Virtual function to be used by derived classes
 			virtual void doTransform() = 0;
+			virtual void doInverseTransform() = 0;
 		};
 	}
 }

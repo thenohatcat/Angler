@@ -53,3 +53,8 @@ void AnimatedNode::update(Game *context, float time, float deltaTime, bool chang
 		mUpdateChildren(context, time, deltaTime);
 	}
 }
+
+void AnimatedNode::setFrame(int f)
+{
+	mTime = f * mFrameTime;
+}

@@ -50,3 +50,9 @@ void Rotation::doTransform()
 	//Normal opengl rotation
 	glRotatef(mRotation, 0, 0, 1);
 }
+
+void Rotation::doInverseTransform()
+{
+	//Normal opengl rotation
+	glRotatef(-mRotation, 0, 0, 1);
+}

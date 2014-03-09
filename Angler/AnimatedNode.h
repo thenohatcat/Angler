@@ -2,7 +2,7 @@
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef INC_ANIMATEDENODE_H
+#ifndef INC_ANIMATEDNODE_H
 #define INC_ANIMATEDNODE_H
 
 #ifdef ANGLER_0_1_9
@@ -28,6 +28,8 @@ namespace Angler
 			virtual ~AnimatedNode();
 
 			void update(Game *context, float time, float deltaTime, bool changed = false);
+
+			void setFrame(int f);
 
 		protected:
 			//Current frame

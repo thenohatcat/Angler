@@ -81,3 +81,9 @@ void Scale::doTransform()
 	//Normal opengl scale
 	glScalef(mScaleX, mScaleY, 0);
 }
+
+void Scale::doInverseTransform()
+{
+	//Normal opengl scale
+	glScalef(mScaleX, mScaleY, 0);
+}

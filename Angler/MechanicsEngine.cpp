@@ -39,11 +39,11 @@ void MechanicsEngine::doCollide(Node *node)
 
 	for(unsigned int i = 0; i < nds.size(); i++)
 	{
-		if (typeid(*nds[i]) == typeid(CollisionNode) && ((CollisionNode*)nds[i])->getType() == 0)
+		if (typeid(*nds.at(i)) == typeid(CollisionNode) && ((CollisionNode*)nds.at(i))->getType() == 0)
 			for(unsigned int k = i+1; k < nds.size(); k++)
 			{
-				if (typeid(*nds[k]) == typeid(CollisionNode))
-					if(((CollisionNode*)nds[i])->isColliding((CollisionNode*)nds[k]) == 1)
+				if (typeid(*nds.at(k)) == typeid(CollisionNode))
+					if(((CollisionNode*)nds.at(i))->isColliding((CollisionNode*)nds.at(k)) == 1)
 						mParent->throwEvent(Game::Events::Collide, nds[i], nds[k]);
 			}
 	}

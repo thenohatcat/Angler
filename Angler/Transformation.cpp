@@ -75,16 +75,16 @@ void Transformation::transform(Node *n, sf::Vector2f *vIn, sf::Vector2f *vOut, i
 	glPopMatrix();
 }
 
-void Transformation::transform(Node *n, std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut)
+void Transformation::transform(Node *n, const std::vector<sf::Vector2f> *vIn, std::vector<sf::Vector2f> *vOut)
 {
-	sf::Vector2f *vInA = new sf::Vector2f[vIn.size()];
-	sf::Vector2f *vOutA = new sf::Vector2f[vIn.size()];
-	for (unsigned int i = 0; i < vIn.size(); i++)
+	sf::Vector2f *vInA = new sf::Vector2f[vIn->size()];
+	sf::Vector2f *vOutA = new sf::Vector2f[vIn->size()];
+	for (unsigned int i = 0; i < vIn->size(); i++)
 	{
-		vInA[i] = vIn.at(i);
+		vInA[i] = vIn->at(i);
 	}
-	transform(n, vInA, vOutA, vIn.size());
-	for (unsigned int i = 0; i < vIn.size(); i++)
+	transform(n, vInA, vOutA, vIn->size());
+	for (unsigned int i = 0; i < vIn->size(); i++)
 	{
 		vOut->push_back(vOutA[i]);
 	}
@@ -97,7 +97,7 @@ void Transformation::transform(sf::Vector2f *vIn, sf::Vector2f *vOut, int count)
 	transform(this, vIn, vOut, count);
 }
 
-void Transformation::transform(std::vector<sf::Vector2f> vIn, std::vector<sf::Vector2f> *vOut)
+void Transformation::transform(std::vector<sf::Vector2f> *vIn, std::vector<sf::Vector2f> *vOut)
 {
 	transform(this, vIn, vOut);
 }
@@ -113,6 +113,8 @@ void Transformation::draw(Angler::Game *context, Angler::Graphics::GraphicsEngin
 
 		//Draws all children in the SAME graphics context (before glPopMatrix)
 		mDrawChildren(context, graphics, time, deltaTime);
+
+		//doInverseTransform();
 
 		glPopMatrix();
 	}

@@ -81,3 +81,9 @@ void Translation::doTransform()
 	//Normal opengl transformation
 	glTranslatef(mX, mY, 0);
 }
+
+void Translation::doInverseTransform()
+{
+	//Normal opengl transformation
+	glTranslatef(-mX, -mY, 0);
+}

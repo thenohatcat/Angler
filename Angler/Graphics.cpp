@@ -217,7 +217,7 @@ void GraphicsEngine::clearLayers()
 	for (LayerVector::const_iterator i = mLayers.begin(); i < mLayers.end(); )
 	{
 		GraphicsLayer *l = *(i);
-		mLayers.erase(i);
+		i = mLayers.erase(i);
 		delete l;
 	}
 }

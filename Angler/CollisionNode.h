@@ -46,6 +46,8 @@ namespace Angler
 			//Returns the type of the collison node
 			int getType();
 
+			void setCollision(const std::vector<sf::Vector2f> &pts);
+
 			//Draws the bounding box of the shape
 			virtual void draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, 
 				float time, float deltaTime);

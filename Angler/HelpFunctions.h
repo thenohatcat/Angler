@@ -128,6 +128,9 @@ namespace Angler
 
 			static bool boundingCollides(sf::Vector2f ulA, sf::Vector2f lrA, sf::Vector2f ulB, sf::Vector2f lrB)
 			{
+				if (ulA == lrA || ulB == lrB)
+					return false;
+
 				return (((ulB.x >= ulA.x && ulB.x <= lrA.x) && (ulB.y >= ulA.y && ulB.y <= lrA.y)) ||
 					((lrB.x >= ulA.x && lrB.x <= lrA.x) && (lrB.y >= ulA.y && lrB.y <= lrA.y)));
 			}
@@ -135,6 +138,11 @@ namespace Angler
 			//Gets the "bounding box" corners ("upper left" and "lower right") of a series of points
 			static void getBoundingPoints(std::vector<sf::Vector2f> *p, sf::Vector2f *ul, sf::Vector2f *lr)
 			{
+				if (p->size() == 0)
+				{
+					ul->x = ul->y = lr->x = lr->y;
+					return;
+				}
 				float leb(p->at(0).x), ub(p->at(0).y), rb(p->at(0).x), lob(p->at(0).y);
 
 				for (unsigned int i = 0; i < p->size(); i++)
