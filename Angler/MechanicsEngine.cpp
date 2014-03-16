@@ -1,9 +1,9 @@
-//Version: 0.1.9
+//Version: 0.1.11
 //Author: Marcus Persson
 //Contributors: Jakob Pipping
 
-#ifndef ANGLER_0_1_9
-#error MechanicsEngine.cpp: Wrong version 0.1.9
+#ifndef ANGLER_0_1_11
+#error MechanicsEngine.cpp: Wrong version 0.1.11
 #endif
 
 

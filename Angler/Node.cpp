@@ -1,9 +1,9 @@
-//Version: 0.1.9
+//Version: 0.1.11
 //Author: Jakob Pipping
 //Contributors:
 
-#ifndef ANGLER_0_1_9
-#error Node.cpp: Wrong Version 0.1.9
+#ifndef ANGLER_0_1_11
+#error Node.cpp: Wrong Version 0.1.11
 #endif
 
 #include "Node.h"

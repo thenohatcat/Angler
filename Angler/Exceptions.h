@@ -1,11 +1,11 @@
-//Version: 0.1.9
+//Version: 0.1.11
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_EXCEPTIONS_H
 #define INC_EXCEPTIONS_H
 
-#ifdef ANGLER_0_1_9
+#ifdef ANGLER_0_1_11
 
 #include <exception>
 
@@ -75,7 +75,7 @@ namespace Angler
 }
 
 #else
-#error Exceptions.h: Wrong version 0.1.9
+#error Exceptions.h: Wrong version 0.1.11
 #endif
 
 #endif

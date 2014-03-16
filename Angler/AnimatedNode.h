@@ -1,11 +1,11 @@
-//Version: 0.1.9
+//Version: 0.1.11
 //Author: Jakob Pipping
 //Contributors: 
 
 #ifndef INC_ANIMATEDNODE_H
 #define INC_ANIMATEDNODE_H
 
-#ifdef ANGLER_0_1_9
+#ifdef ANGLER_0_1_11
 
 #include "SpriteNode.h"
 
@@ -45,7 +45,7 @@ namespace Angler
 }
 
 #else
-#error AnimatedNode.h: Wrong Version 0.1.9
+#error AnimatedNode.h: Wrong Version 0.1.11
 #endif
 
 #endif
