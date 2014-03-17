@@ -55,6 +55,8 @@ namespace Angler
 
 		Angler::Mechanics::MechanicsEngine *getMechanics();
 
+		void setCursorVisible(bool visible);
+
 		//Event IDs
 		typedef enum
 		{

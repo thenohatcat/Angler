@@ -42,6 +42,9 @@ namespace Angler
 		virtual void draw(Game *context, Angler::Graphics::GraphicsEngine *graphics, 
 			float time, float deltaTime);
 
+		virtual void endDraw(Game *context, Angler::Graphics::GraphicsEngine *graphics,
+			float time, float deltaTime);
+
 		virtual void update(Game *context, float time, float deltaTime, bool changed = false);
 
 		Node *getParent();
@@ -70,6 +73,7 @@ namespace Angler
 
 		//Draws/updates all children in the vector
 		void mDrawChildren(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
+		void mEndDrawChildren(Game *context, Angler::Graphics::GraphicsEngine *graphics, float time, float deltaTime);
 		void mUpdateChildren(Game *context, float time, float deltaTime);
 
 		typedef std::vector<Node*> NodeVector;

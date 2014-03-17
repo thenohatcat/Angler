@@ -28,14 +28,14 @@ Rotation::Rotation(unsigned long id, float rotation)
 void Rotation::setRotation(float rotation)
 {
 	//Modulo with 360, to keep the rotation within [0, 360)
-	mRotation = fmod(rotation, 360);
+	mRotation = fmod(rotation, 360.0f);
 	mChanged = true;
 }
 
 void Rotation::rotate(float rotation)
 {
 	//Modulo with 360, to keep the rotation within [0, 360)
-	mRotation = fmod(mRotation + rotation, 360);
+	mRotation = fmod(mRotation + rotation, 360.0f);
 	mChanged = true;
 }
 

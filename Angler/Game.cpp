@@ -178,3 +178,8 @@ void Game::close()
 {
 	mGraphics->close();
 }
+
+void Game::setCursorVisible(bool visible)
+{
+	mGraphics->setCursorVisible(visible);
+}

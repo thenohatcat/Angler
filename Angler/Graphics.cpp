@@ -55,7 +55,7 @@ void GraphicsEngine::createWindow(int width, int height, const char* title, bool
 void GraphicsEngine::crop(int layer, float x, float y, float w, float h)
 {
 	int sh = getHeight();
-	mLayers[layer]->setCrop(x * sh, y * sh, w * sh, h * sh);
+	mLayers[layer]->setCrop((int)(x * sh), (int)(y * sh), (int)(w * sh), (int)(h * sh));
 }
 
 void GraphicsEngine::resetCrop(int layer)
@@ -77,6 +77,8 @@ void GraphicsEngine::begin()
 
 		glClearColor(0, 0, 0, 1);
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -262,4 +264,9 @@ int GraphicsEngine::getHeight()
 void GraphicsEngine::close()
 {
 	mWindow->close();
+}
+
+void GraphicsEngine::setCursorVisible(bool visible)
+{
+	mWindow->setMouseCursorVisible(visible);
 }

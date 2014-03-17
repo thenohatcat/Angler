@@ -62,6 +62,7 @@ void SoundElement::update(float time, float deltaTime)
 		{
 			mSound->setPlayingOffset(sf::seconds(mStart));
 		}
+
 		if (mSound->getPlayingOffset().asSeconds() >= mEnd)
 		{
 			if (mLoop)

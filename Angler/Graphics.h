@@ -127,6 +127,8 @@ namespace Angler
 			//Wrapper for texture loading (currently using SFML)
 			void loadTexture(sf::Texture* texture, const char* fileName);
 
+			void setCursorVisible(bool visible);
+
 		private:
 			Game* mParent;
 			sf::RenderWindow *mWindow;

@@ -103,6 +103,12 @@ void Node::draw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float
 		mDrawChildren(context, graphics, time, deltaTime);
 }
 
+void Node::endDraw(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
+{
+	if (mVisible)
+		mEndDrawChildren(context, graphics, time, deltaTime);
+}
+
 void Node::update(Game* context, float time, float deltaTime, bool changed)
 {
 	if (!mPaused)
@@ -118,6 +124,14 @@ void Node::mDrawChildren(Game* context, Angler::Graphics::GraphicsEngine* graphi
 	for (NodeVector::iterator i = mChildren.begin(); i != mChildren.end(); i++)
 	{
 		(*i)->draw(context, graphics, time, deltaTime);
+	}
+}
+
+void Node::mEndDrawChildren(Game* context, Angler::Graphics::GraphicsEngine* graphics, float time, float deltaTime)
+{
+	for (NodeVector::iterator i = mChildren.begin(); i != mChildren.end(); i++)
+	{
+		(*i)->endDraw(context, graphics, time, deltaTime);
 	}
 }
 
