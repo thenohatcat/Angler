@@ -21,7 +21,7 @@ SoundEngine::SoundEngine(Game *parent)
 bool SoundEngine::playSound(sf::Sound *s, bool hard, float start, float end, bool loop)
 {
 	//Isn't in list
-	if (mGetIndex(s) == mSoundElements.end())
+	if (mGetElementIndex(s) == mSoundElements.end())
 	{
 		mSoundElements.push_back(new SoundElement(s, start, end, loop));
 		return true;
@@ -70,18 +70,18 @@ void SoundEngine::setPosition(sf::Sound *s, float x)
 	s->setPlayingOffset(sf::Time(sf::seconds(x)));
 }
 
-void SoundEngine::crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v)
-{
-	if(s1->getPlayingOffset().asSeconds()>=t && s1->getVolume() > 0)
-	{
-		//updated every second/millisecond of track
-		//Decrement Volume 
-		s1->setVolume(s1->getVolume() - v);
-		//Increment Volume 
-		//Sum total s1+s2 = 100
-		s2->setVolume(s2->getVolume() + v);
-	}
-}
+//void SoundEngine::crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v)
+//{
+//	if(s1->getPlayingOffset().asSeconds()>=t && s1->getVolume() > 0)
+//	{
+//		//updated every second/millisecond of track
+//		//Decrement Volume 
+//		s1->setVolume(s1->getVolume() - v);
+//		//Increment Volume 
+//		//Sum total s1+s2 = 100
+//		s2->setVolume(s2->getVolume() + v);
+//	}
+//}
 
 void SoundEngine::update(float time, float deltaTime)
 {
@@ -105,7 +105,22 @@ void SoundEngine::update(float time, float deltaTime)
 	}
 }
 
-std::list<SoundElement*>::iterator SoundEngine::mGetIndex(sf::Sound *s)
+void SoundEngine::addSoundState(unsigned long id, float volume, float start, float end)
+{
+	mSoundStates.push_back(new SoundState(id, volume, start, end));
+}
+
+void SoundEngine::updateState(sf::Sound *s, unsigned long id)
+{
+	std::list<SoundElement*>::iterator se = mGetElementIndex(s);
+	std::list<SoundState*>::iterator ss = mGetStateIndex(id);
+	if (se != mSoundElements.end() && ss != mSoundStates.end())
+	{
+		(*ss)->update(*se);
+	}
+}
+
+std::list<SoundElement*>::iterator SoundEngine::mGetElementIndex(sf::Sound *s)
 {
 	for (std::list<SoundElement*>::iterator i = mSoundElements.begin(); i != mSoundElements.end(); i++)
 	{
@@ -113,4 +128,14 @@ std::list<SoundElement*>::iterator SoundEngine::mGetIndex(sf::Sound *s)
 			return i;
 	}
 	return mSoundElements.end();
+}
+
+std::list<SoundState*>::iterator SoundEngine::mGetStateIndex(unsigned long id)
+{
+	for (std::list<SoundState*>::iterator i = mSoundStates.begin(); i != mSoundStates.end(); i++)
+	{
+		if ((*i)->getID() == id)
+			return i;
+	}
+	return mSoundStates.end();
 }

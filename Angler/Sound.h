@@ -16,8 +16,11 @@ namespace Angler
 
 	namespace Sound	
 	{
+		class SoundState;
+
 		class SoundElement
 		{
+			friend class SoundState;
 		public:
 			SoundElement(sf::Sound *s, float start, float end,
 				bool loop);
@@ -39,6 +42,23 @@ namespace Angler
 			bool mIsAlive;
 		};
 
+		class SoundState final
+		{
+		public:
+			SoundState(unsigned long id, float volume, float sart, float end);
+
+			unsigned long getID();
+
+			void update(SoundElement* element);
+
+		private:
+			unsigned long mID;
+
+			float mStart, mEnd;
+
+			float mVolume;
+		};
+
 		class SoundEngine final
 		{
 		public:
@@ -54,14 +74,21 @@ namespace Angler
 			int getStatus(sf::Sound *s);
 			float getPosition(sf::Sound *s);
 			void setPosition(sf::Sound *s, float x);
-			void crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v);
+			void updateState(sf::Sound *s, unsigned long stateID);
+
+			void loadStates(std::string file);
+			//void crossfade(sf::Sound *s1, float t, sf::Sound *s2, float v);
 
 			void update(float time, float deltaTime);
+
+			void addSoundState(unsigned long id, float volume, float start, float end);
 
 		private:
 			Game *mParent;
 			std::list<SoundElement*> mSoundElements;
-			std::list<SoundElement*>::iterator mGetIndex(sf::Sound *s);
+			std::list<SoundElement*>::iterator mGetElementIndex(sf::Sound *s);
+			std::list<SoundState*> mSoundStates;
+			std::list<SoundState*>::iterator mGetStateIndex(unsigned long id);
 		};
 
 		//Old sound
