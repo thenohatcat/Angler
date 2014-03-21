@@ -6,6 +6,9 @@
 #error SoundEngine.cpp: Wrong Version 0.1.11
 #endif
 
+#include <fstream>
+#include <sstream>
+
 #include <SFML\Audio.hpp>
 #include "Game.h"
 #include "Sound.h"
@@ -138,4 +141,51 @@ std::list<SoundState*>::iterator SoundEngine::mGetStateIndex(unsigned long id)
 			return i;
 	}
 	return mSoundStates.end();
+}
+
+void SoundEngine::loadStates(std::string file)
+{
+	std::string content = "";
+	std::ifstream fileS(file);
+
+	if (fileS.is_open())
+	{
+		std::string row = "";
+		while (!fileS.eof())
+		{
+			char c;
+			c = fileS.get();
+
+			if (c == '\n' || c == '\r')
+			{
+				size_t t = row.find('#');
+				size_t s = std::string::npos;
+				if (row.find('#') == std::string::npos && row.size() > 0)
+					content += row + '\n';
+				row = "";
+			}
+			else
+			{
+				row += c;
+			}
+		}
+	}
+
+	std::stringstream stream(content);	
+
+	unsigned long id;
+	char dl;
+	float volume;
+	float start;
+	float end;
+	while (!stream.eof())
+	{
+		stream >> std::hex >> id;
+		stream >> dl;
+		stream >> volume;
+		stream >> start;
+		stream >> end;
+
+		addSoundState(id, volume, start, end);
+	}
 }
