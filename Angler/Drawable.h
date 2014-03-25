@@ -1,11 +1,11 @@
-//Version: 0.1.11
+//Version: 0.1.12
 //Author: Jakob Pipping
 //Contributors:
 
 #ifndef INC_DRAWABLE_H
 #define INC_DRAWABLE_H
 
-#ifdef ANGLER_0_1_11
+#ifdef ANGLER_0_1_12
 
 #include "Graphics.h"
 #include "Graphics.h"
@@ -21,7 +21,7 @@ namespace Angler
 }
 
 #else
-#error DrawNode.h: Wrong Version 0.1.11
+#error DrawNode.h: Wrong Version 0.1.12
 #endif
 
 #endif

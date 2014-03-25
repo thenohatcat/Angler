@@ -1,9 +1,9 @@
-//Version: 0.1.11
+//Version: 0.1.12
 //Author: Jakob Pipping
 //Contributors: 
 
-#ifndef ANGLER_0_1_11
-#error AnimatedNode.cpp: Wrong Version 0.1.11
+#ifndef ANGLER_0_1_12
+#error AnimatedNode.cpp: Wrong Version 0.1.12
 #endif
 
 #include "AnimatedNode.h"
