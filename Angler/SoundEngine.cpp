@@ -35,6 +35,13 @@ bool SoundEngine::playSound(sf::Sound *s, bool hard, float start, float end, boo
 	}
 }
 
+bool SoundEngine::playSound(sf::Sound *s, bool hard, unsigned long id, bool loop)
+{
+	SoundState *st = (*mGetStateIndex(id));
+	setVolume(s, st->mVolume);
+	return playSound(s, hard, st->mStart, st->mEnd, loop);
+}
+
 void SoundEngine::pauseSound(sf::Sound *s)
 {
 	s->pause();

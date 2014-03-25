@@ -17,6 +17,7 @@ namespace Angler
 	namespace Sound	
 	{
 		class SoundState;
+		class SoundEngine;
 
 		class SoundElement
 		{
@@ -44,6 +45,8 @@ namespace Angler
 
 		class SoundState final
 		{
+			friend class SoundEngine;
+
 		public:
 			SoundState(unsigned long id, float volume, float sart, float end);
 
@@ -66,6 +69,7 @@ namespace Angler
 
 			bool playSound(sf::Sound *s, bool hard = true, 
 				float start = -1, float end = -1, bool loop = false);
+			bool playSound(sf::Sound *s, bool hard, unsigned long stateID, bool loop = false);
 
 			void stopSound(sf::Sound *s);
 			void pauseSound(sf::Sound *s);
