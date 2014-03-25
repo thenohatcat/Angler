@@ -62,8 +62,10 @@ namespace Angler
 			sf::Vector2f mUL, mLR;
 			std::vector<sf::Vector2f> mBounding;
 
-			//type 0: Collides with everything
+			//type 0: Only Collides with type 0 and type 1
 			//type 1: Only collides with type 0
+			//type 2: Only collides with other type 2 and type 3
+			//type 3: only collides with type 2
 			unsigned short mType;
 		};
 	}

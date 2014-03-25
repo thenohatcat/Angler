@@ -39,7 +39,7 @@ void MechanicsEngine::doCollide(Node *node)
 
 	for(unsigned int i = 0; i < nds.size(); i++)
 	{
-		if (typeid(*nds.at(i)) == typeid(CollisionNode) && ((CollisionNode*)nds.at(i))->getType() == 0)
+		if (typeid(*nds.at(i)) == typeid(CollisionNode) && (((CollisionNode*)nds.at(i))->getType() == 0 || ((CollisionNode*)nds.at(i))->getType() == 2))
 			for(unsigned int k = i+1; k < nds.size(); k++)
 			{
 				if (typeid(*nds.at(k)) == typeid(CollisionNode))

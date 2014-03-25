@@ -72,7 +72,8 @@ int CollisionNode::isColliding(CollisionNode *node)
 	/*if (mTransformedPoints.size() == 0)
 		return 0;*/
 
-	if (mType != 0 && node->mType != 0)
+	if (!(((mType == 0 && (node->mType == 0 || node->mType == 1)) || (node->mType == 0 && (mType == 0 || mType == 1)) ||
+		(mType == 2 && (node->mType == 2 || node->mType == 3)) || (node->mType == 2 && (mType == 2 || mType == 3)))))
 		return 0;
 
 	/*if (!isSameRegion(mRegion, node->mRegion))
